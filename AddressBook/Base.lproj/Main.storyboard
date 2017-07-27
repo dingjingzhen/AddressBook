@@ -326,6 +326,61 @@
             </objects>
             <point key="canvasLocation" x="4185" y="1233"/>
         </scene>
+        <!--Bookshelf View Controller-->
+        <scene sceneID="1xu-xK-bDe">
+            <objects>
+                <viewController storyboardIdentifier="MGBookshelfViewController" id="YAs-Yb-op7" customClass="MGBookshelfViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="bj0-e9-gNb"/>
+                        <viewControllerLayoutGuide type="bottom" id="KHs-vg-ZnX"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="QnR-7a-f1a">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="120" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="jlb-Hu-VeX">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="YAs-Yb-op7" id="0VR-hl-6fR"/>
+                                    <outlet property="delegate" destination="YAs-Yb-op7" id="Gmw-aZ-jZ1"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="KHs-vg-ZnX" firstAttribute="top" secondItem="jlb-Hu-VeX" secondAttribute="bottom" id="EcY-up-JUj"/>
+                            <constraint firstAttribute="trailing" secondItem="jlb-Hu-VeX" secondAttribute="trailing" id="YRh-QV-Nwr"/>
+                            <constraint firstItem="jlb-Hu-VeX" firstAttribute="leading" secondItem="QnR-7a-f1a" secondAttribute="leading" id="hpK-rj-OAd"/>
+                            <constraint firstItem="jlb-Hu-VeX" firstAttribute="top" secondItem="QnR-7a-f1a" secondAttribute="top" id="yON-Ss-FxD"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="bookTableView" destination="jlb-Hu-VeX" id="1Zw-pb-H9D"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KxJ-PQ-b46" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5407.1999999999998" y="1265.217391304348"/>
+        </scene>
+        <!--Child View Controller-->
+        <scene sceneID="9dl-CZ-Yzb">
+            <objects>
+                <viewController id="j8e-ne-atU" customClass="MGChildViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="z9c-pm-cYt"/>
+                        <viewControllerLayoutGuide type="bottom" id="BTP-8u-HGh"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="we0-uR-n2b">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zfP-Cf-A5o" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4388" y="2047"/>
+        </scene>
         <!--资讯-->
         <scene sceneID="t6I-va-zCc">
             <objects>
@@ -371,7 +426,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2hr-Dd-ScA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4681" y="263"/>
+            <point key="canvasLocation" x="4244" y="420"/>
         </scene>
     </scenes>
     <resources>

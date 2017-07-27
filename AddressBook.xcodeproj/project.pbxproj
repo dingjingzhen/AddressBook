@@ -13,6 +13,9 @@
 		1856795E1F289A48005FC304 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1856795D1F289A48005FC304 /* Assets.xcassets */; };
 		185679611F28AD2A005FC304 /* MGAddressBookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 185679601F28AD2A005FC304 /* MGAddressBookViewController.m */; };
 		185679AC1F28BADF005FC304 /* MGChildViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 185679AB1F28BADF005FC304 /* MGChildViewController.m */; };
+		185679AF1F2989D2005FC304 /* MGBookshelfViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 185679AE1F2989D2005FC304 /* MGBookshelfViewController.m */; };
+		185679B31F298A2E005FC304 /* MGBookShelfTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 185679B11F298A2E005FC304 /* MGBookShelfTableViewCell.m */; };
+		185679B41F298A2E005FC304 /* MGBookShelfTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 185679B21F298A2E005FC304 /* MGBookShelfTableViewCell.xib */; };
 		18AAEDD71F258CB6002B92F3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 18AAEDD61F258CB6002B92F3 /* main.m */; };
 		18AAEDDA1F258CB6002B92F3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 18AAEDD91F258CB6002B92F3 /* AppDelegate.m */; };
 		18AAEDDD1F258CB6002B92F3 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18AAEDDC1F258CB6002B92F3 /* ViewController.m */; };
@@ -52,6 +55,11 @@
 		185679601F28AD2A005FC304 /* MGAddressBookViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGAddressBookViewController.m; sourceTree = "<group>"; };
 		185679AA1F28BADF005FC304 /* MGChildViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGChildViewController.h; sourceTree = "<group>"; };
 		185679AB1F28BADF005FC304 /* MGChildViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGChildViewController.m; sourceTree = "<group>"; };
+		185679AD1F2989D2005FC304 /* MGBookshelfViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGBookshelfViewController.h; sourceTree = "<group>"; };
+		185679AE1F2989D2005FC304 /* MGBookshelfViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGBookshelfViewController.m; sourceTree = "<group>"; };
+		185679B01F298A2E005FC304 /* MGBookShelfTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGBookShelfTableViewCell.h; sourceTree = "<group>"; };
+		185679B11F298A2E005FC304 /* MGBookShelfTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGBookShelfTableViewCell.m; sourceTree = "<group>"; };
+		185679B21F298A2E005FC304 /* MGBookShelfTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MGBookShelfTableViewCell.xib; sourceTree = "<group>"; };
 		18AAEDD21F258CB6002B92F3 /* AddressBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AddressBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18AAEDD61F258CB6002B92F3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		18AAEDD81F258CB6002B92F3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -114,6 +122,9 @@
 				185679531F28818E005FC304 /* MGMineTableViewCell.h */,
 				185679541F28818E005FC304 /* MGMineTableViewCell.m */,
 				185679581F288CE5005FC304 /* MGMineTableViewCell.xib */,
+				185679B01F298A2E005FC304 /* MGBookShelfTableViewCell.h */,
+				185679B11F298A2E005FC304 /* MGBookShelfTableViewCell.m */,
+				185679B21F298A2E005FC304 /* MGBookShelfTableViewCell.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -195,6 +206,8 @@
 				185679601F28AD2A005FC304 /* MGAddressBookViewController.m */,
 				185679AA1F28BADF005FC304 /* MGChildViewController.h */,
 				185679AB1F28BADF005FC304 /* MGChildViewController.m */,
+				185679AD1F2989D2005FC304 /* MGBookshelfViewController.h */,
+				185679AE1F2989D2005FC304 /* MGBookshelfViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -321,6 +334,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				185679B41F298A2E005FC304 /* MGBookShelfTableViewCell.xib in Resources */,
 				185679591F288CE5005FC304 /* MGMineTableViewCell.xib in Resources */,
 				18AAEDE51F258CB7002B92F3 /* LaunchScreen.storyboard in Resources */,
 				1856795E1F289A48005FC304 /* Assets.xcassets in Resources */,
@@ -397,6 +411,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				185679AF1F2989D2005FC304 /* MGBookshelfViewController.m in Sources */,
+				185679B31F298A2E005FC304 /* MGBookShelfTableViewCell.m in Sources */,
 				18AAEDDD1F258CB6002B92F3 /* ViewController.m in Sources */,
 				185679AC1F28BADF005FC304 /* MGChildViewController.m in Sources */,
 				18ADDC2C1F28443700C57C3F /* MGMineViewController.m in Sources */,

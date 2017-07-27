@@ -10,6 +10,7 @@
 #import "MGMineTableViewCell.h"
 #import "MGMessageViewController.h"
 #import "MGAddressBookViewController.h"
+#import "MGBookshelfViewController.h"
 
 @interface MGMineViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UILabel *userName;
@@ -49,7 +50,7 @@
     self.navigationItem.backBarButtonItem = backButtonItem;
     //    self.navigationController.navigationBarHidden = YES;
     [self getData];
-//    [self.navigationController setNavigationBarHidden:YES];
+    //    [self.navigationController setNavigationBarHidden:YES];
 }
 
 
@@ -85,12 +86,19 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
     
-    MGAddressBookViewController *addressbookVC = [storyboard instantiateViewControllerWithIdentifier:@"MGAddressBookViewController"];
-    self.hidesBottomBarWhenPushed = YES;
-//    self.navigationItem.backBarButtonItem.title = @"返回";
-
-    [self.navigationController pushViewController:addressbookVC animated:YES];
-    self.hidesBottomBarWhenPushed = NO;
+    if (indexPath.row == 2) {
+        MGBookshelfViewController *bookshelfVC = [storyboard instantiateViewControllerWithIdentifier:@"MGBookshelfViewController"];
+        self.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:bookshelfVC animated:YES];
+        self.hidesBottomBarWhenPushed = NO;
+    }else{
+        MGAddressBookViewController *addressbookVC = [storyboard instantiateViewControllerWithIdentifier:@"MGAddressBookViewController"];
+        self.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:addressbookVC animated:YES];
+        self.hidesBottomBarWhenPushed = NO;
+        
+    }
+    
 }
 
 
@@ -98,7 +106,7 @@
 - (IBAction)getMessage:(UIButton *)sender {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
     MGMessageViewController *messageVC = [storyboard instantiateViewControllerWithIdentifier:@"MGMessageViewController"];
-//    self.navigationController.navigationBarHidden = NO;
+    //    self.navigationController.navigationBarHidden = NO;
     self.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:messageVC animated:YES];
     self.hidesBottomBarWhenPushed = NO;
@@ -108,7 +116,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-//    self.navigationController.navigationBarHidden = YES;
+    //    self.navigationController.navigationBarHidden = YES;
     [self.navigationController setNavigationBarHidden:YES];
 }
 
@@ -117,6 +125,8 @@
     [super viewWillDisappear:animated];
     [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
+
+
 
 
 @end
