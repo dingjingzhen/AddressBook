@@ -35,7 +35,7 @@
 @implementation MGMineViewController
 //数据
 -(void)getData{
-    self.cellImage = [NSArray arrayWithObjects:@"信息",@"二维码",@"信息",@"二维码",@"信息",@"二维码",@"信息",@"二维码",@"信息",@"二维码", nil];
+    self.cellImage = [NSArray arrayWithObjects:@"最近阅读",@"通讯录",@"书库",@"书签",@"排行",@"二维码",@"切换",@"咪咕阅读",@"使用帮助",@"信息", nil];
     self.cellTitle = [NSArray arrayWithObjects:@"最近阅读",@"通讯录",@"书库",@"我的书签",@"阅读排行",@"二维码",@"切换集团客户",@"咪咕阅读",@"使用帮助",@"关于", nil];
     self.cellDetailTitle = [NSArray arrayWithObjects:@"",@"",@"",@"",@"",@"",@"",@"",@"",@"3.1.0", nil];
     
