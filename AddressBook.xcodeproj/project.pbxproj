@@ -7,14 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		185679561F28818E005FC304 /* MGMineTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 185679541F28818E005FC304 /* MGMineTableViewCell.m */; };
+		185679591F288CE5005FC304 /* MGMineTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 185679581F288CE5005FC304 /* MGMineTableViewCell.xib */; };
+		1856795C1F2891B6005FC304 /* MGMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1856795B1F2891B6005FC304 /* MGMessageViewController.m */; };
+		1856795E1F289A48005FC304 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1856795D1F289A48005FC304 /* Assets.xcassets */; };
+		185679611F28AD2A005FC304 /* MGAddressBookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 185679601F28AD2A005FC304 /* MGAddressBookViewController.m */; };
+		185679AC1F28BADF005FC304 /* MGChildViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 185679AB1F28BADF005FC304 /* MGChildViewController.m */; };
 		18AAEDD71F258CB6002B92F3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 18AAEDD61F258CB6002B92F3 /* main.m */; };
 		18AAEDDA1F258CB6002B92F3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 18AAEDD91F258CB6002B92F3 /* AppDelegate.m */; };
 		18AAEDDD1F258CB6002B92F3 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18AAEDDC1F258CB6002B92F3 /* ViewController.m */; };
 		18AAEDE01F258CB7002B92F3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18AAEDDE1F258CB7002B92F3 /* Main.storyboard */; };
-		18AAEDE21F258CB7002B92F3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18AAEDE11F258CB7002B92F3 /* Assets.xcassets */; };
 		18AAEDE51F258CB7002B92F3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18AAEDE31F258CB7002B92F3 /* LaunchScreen.storyboard */; };
 		18AAEDF01F258CB7002B92F3 /* AddressBookTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 18AAEDEF1F258CB7002B92F3 /* AddressBookTests.m */; };
 		18AAEDFB1F258CB7002B92F3 /* AddressBookUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 18AAEDFA1F258CB7002B92F3 /* AddressBookUITests.m */; };
+		18ADDC2C1F28443700C57C3F /* MGMineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18ADDC2B1F28443700C57C3F /* MGMineViewController.m */; };
+		C1AC4015B3D14DA58FE45A92 /* libPods-AddressBook.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 354E935022C098308223073B /* libPods-AddressBook.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +42,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		185679531F28818E005FC304 /* MGMineTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGMineTableViewCell.h; sourceTree = "<group>"; };
+		185679541F28818E005FC304 /* MGMineTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGMineTableViewCell.m; sourceTree = "<group>"; };
+		185679581F288CE5005FC304 /* MGMineTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MGMineTableViewCell.xib; sourceTree = "<group>"; };
+		1856795A1F2891B6005FC304 /* MGMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGMessageViewController.h; sourceTree = "<group>"; };
+		1856795B1F2891B6005FC304 /* MGMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGMessageViewController.m; sourceTree = "<group>"; };
+		1856795D1F289A48005FC304 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		1856795F1F28AD2A005FC304 /* MGAddressBookViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGAddressBookViewController.h; sourceTree = "<group>"; };
+		185679601F28AD2A005FC304 /* MGAddressBookViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGAddressBookViewController.m; sourceTree = "<group>"; };
+		185679AA1F28BADF005FC304 /* MGChildViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGChildViewController.h; sourceTree = "<group>"; };
+		185679AB1F28BADF005FC304 /* MGChildViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGChildViewController.m; sourceTree = "<group>"; };
 		18AAEDD21F258CB6002B92F3 /* AddressBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AddressBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18AAEDD61F258CB6002B92F3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		18AAEDD81F258CB6002B92F3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -42,7 +59,6 @@
 		18AAEDDB1F258CB6002B92F3 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		18AAEDDC1F258CB6002B92F3 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		18AAEDDF1F258CB7002B92F3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		18AAEDE11F258CB7002B92F3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		18AAEDE41F258CB7002B92F3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		18AAEDE61F258CB7002B92F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		18AAEDEB1F258CB7002B92F3 /* AddressBookTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AddressBookTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -51,6 +67,11 @@
 		18AAEDF61F258CB7002B92F3 /* AddressBookUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AddressBookUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		18AAEDFA1F258CB7002B92F3 /* AddressBookUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddressBookUITests.m; sourceTree = "<group>"; };
 		18AAEDFC1F258CB7002B92F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		18ADDC2A1F28443700C57C3F /* MGMineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGMineViewController.h; sourceTree = "<group>"; };
+		18ADDC2B1F28443700C57C3F /* MGMineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGMineViewController.m; sourceTree = "<group>"; };
+		354E935022C098308223073B /* libPods-AddressBook.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AddressBook.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		38828997B62F2218A32A0BE3 /* Pods-AddressBook.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AddressBook.release.xcconfig"; path = "Pods/Target Support Files/Pods-AddressBook/Pods-AddressBook.release.xcconfig"; sourceTree = "<group>"; };
+		59D776BFA89EF9374F0C9E5D /* Pods-AddressBook.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AddressBook.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AddressBook/Pods-AddressBook.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +79,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C1AC4015B3D14DA58FE45A92 /* libPods-AddressBook.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +100,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		04EA88525820226D1EE288BB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				354E935022C098308223073B /* libPods-AddressBook.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		185679521F288150005FC304 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				185679531F28818E005FC304 /* MGMineTableViewCell.h */,
+				185679541F28818E005FC304 /* MGMineTableViewCell.m */,
+				185679581F288CE5005FC304 /* MGMineTableViewCell.xib */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
 		18AAEDC91F258CB6002B92F3 = {
 			isa = PBXGroup;
 			children = (
@@ -85,6 +125,8 @@
 				18AAEDEE1F258CB7002B92F3 /* AddressBookTests */,
 				18AAEDF91F258CB7002B92F3 /* AddressBookUITests */,
 				18AAEDD31F258CB6002B92F3 /* Products */,
+				3067CCD5C70A6933084C2B91 /* Pods */,
+				04EA88525820226D1EE288BB /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -101,12 +143,14 @@
 		18AAEDD41F258CB6002B92F3 /* AddressBook */ = {
 			isa = PBXGroup;
 			children = (
+				185679521F288150005FC304 /* View */,
+				18ADDC291F2843F700C57C3F /* Controller */,
 				18AAEDD81F258CB6002B92F3 /* AppDelegate.h */,
 				18AAEDD91F258CB6002B92F3 /* AppDelegate.m */,
 				18AAEDDB1F258CB6002B92F3 /* ViewController.h */,
 				18AAEDDC1F258CB6002B92F3 /* ViewController.m */,
 				18AAEDDE1F258CB7002B92F3 /* Main.storyboard */,
-				18AAEDE11F258CB7002B92F3 /* Assets.xcassets */,
+				1856795D1F289A48005FC304 /* Assets.xcassets */,
 				18AAEDE31F258CB7002B92F3 /* LaunchScreen.storyboard */,
 				18AAEDE61F258CB7002B92F3 /* Info.plist */,
 				18AAEDD51F258CB6002B92F3 /* Supporting Files */,
@@ -140,6 +184,30 @@
 			path = AddressBookUITests;
 			sourceTree = "<group>";
 		};
+		18ADDC291F2843F700C57C3F /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				18ADDC2A1F28443700C57C3F /* MGMineViewController.h */,
+				18ADDC2B1F28443700C57C3F /* MGMineViewController.m */,
+				1856795A1F2891B6005FC304 /* MGMessageViewController.h */,
+				1856795B1F2891B6005FC304 /* MGMessageViewController.m */,
+				1856795F1F28AD2A005FC304 /* MGAddressBookViewController.h */,
+				185679601F28AD2A005FC304 /* MGAddressBookViewController.m */,
+				185679AA1F28BADF005FC304 /* MGChildViewController.h */,
+				185679AB1F28BADF005FC304 /* MGChildViewController.m */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		3067CCD5C70A6933084C2B91 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				59D776BFA89EF9374F0C9E5D /* Pods-AddressBook.debug.xcconfig */,
+				38828997B62F2218A32A0BE3 /* Pods-AddressBook.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -147,9 +215,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 18AAEDFF1F258CB7002B92F3 /* Build configuration list for PBXNativeTarget "AddressBook" */;
 			buildPhases = (
+				124D054DD51B30C055B567F9 /* [CP] Check Pods Manifest.lock */,
 				18AAEDCE1F258CB6002B92F3 /* Sources */,
 				18AAEDCF1F258CB6002B92F3 /* Frameworks */,
 				18AAEDD01F258CB6002B92F3 /* Resources */,
+				C0389D12BFFC96FA1D3B82F9 /* [CP] Embed Pods Frameworks */,
+				D18FB6159E0A5E8BB0B5A42E /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -202,6 +273,7 @@
 		18AAEDCA1F258CB6002B92F3 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = MG;
 				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = Apple;
 				TargetAttributes = {
@@ -249,8 +321,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				185679591F288CE5005FC304 /* MGMineTableViewCell.xib in Resources */,
 				18AAEDE51F258CB7002B92F3 /* LaunchScreen.storyboard in Resources */,
-				18AAEDE21F258CB7002B92F3 /* Assets.xcassets in Resources */,
+				1856795E1F289A48005FC304 /* Assets.xcassets in Resources */,
 				18AAEDE01F258CB7002B92F3 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -271,14 +344,67 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		124D054DD51B30C055B567F9 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		C0389D12BFFC96FA1D3B82F9 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AddressBook/Pods-AddressBook-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D18FB6159E0A5E8BB0B5A42E /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AddressBook/Pods-AddressBook-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		18AAEDCE1F258CB6002B92F3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				18AAEDDD1F258CB6002B92F3 /* ViewController.m in Sources */,
+				185679AC1F28BADF005FC304 /* MGChildViewController.m in Sources */,
+				18ADDC2C1F28443700C57C3F /* MGMineViewController.m in Sources */,
+				1856795C1F2891B6005FC304 /* MGMessageViewController.m in Sources */,
+				185679611F28AD2A005FC304 /* MGAddressBookViewController.m in Sources */,
 				18AAEDDA1F258CB6002B92F3 /* AppDelegate.m in Sources */,
 				18AAEDD71F258CB6002B92F3 /* main.m in Sources */,
+				185679561F28818E005FC304 /* MGMineTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -427,6 +553,7 @@
 		};
 		18AAEE001F258CB7002B92F3 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 59D776BFA89EF9374F0C9E5D /* Pods-AddressBook.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 9XC34F9334;
@@ -439,6 +566,7 @@
 		};
 		18AAEE011F258CB7002B92F3 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 38828997B62F2218A32A0BE3 /* Pods-AddressBook.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 9XC34F9334;
@@ -518,6 +646,7 @@
 				18AAEE011F258CB7002B92F3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		18AAEE021F258CB7002B92F3 /* Build configuration list for PBXNativeTarget "AddressBookTests" */ = {
 			isa = XCConfigurationList;
@@ -526,6 +655,7 @@
 				18AAEE041F258CB7002B92F3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		18AAEE051F258CB7002B92F3 /* Build configuration list for PBXNativeTarget "AddressBookUITests" */ = {
 			isa = XCConfigurationList;
@@ -534,6 +664,7 @@
 				18AAEE071F258CB7002B92F3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
