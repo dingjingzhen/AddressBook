@@ -24,6 +24,7 @@
 		18AAEDF01F258CB7002B92F3 /* AddressBookTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 18AAEDEF1F258CB7002B92F3 /* AddressBookTests.m */; };
 		18AAEDFB1F258CB7002B92F3 /* AddressBookUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 18AAEDFA1F258CB7002B92F3 /* AddressBookUITests.m */; };
 		18ADDC2C1F28443700C57C3F /* MGMineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18ADDC2B1F28443700C57C3F /* MGMineViewController.m */; };
+		18C941421F2ACA350002EFC2 /* MGAddressBookFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C941411F2ACA350002EFC2 /* MGAddressBookFooterView.m */; };
 		C1AC4015B3D14DA58FE45A92 /* libPods-AddressBook.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 354E935022C098308223073B /* libPods-AddressBook.a */; };
 /* End PBXBuildFile section */
 
@@ -77,6 +78,8 @@
 		18AAEDFC1F258CB7002B92F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		18ADDC2A1F28443700C57C3F /* MGMineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGMineViewController.h; sourceTree = "<group>"; };
 		18ADDC2B1F28443700C57C3F /* MGMineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGMineViewController.m; sourceTree = "<group>"; };
+		18C941401F2ACA350002EFC2 /* MGAddressBookFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGAddressBookFooterView.h; sourceTree = "<group>"; };
+		18C941411F2ACA350002EFC2 /* MGAddressBookFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGAddressBookFooterView.m; sourceTree = "<group>"; };
 		354E935022C098308223073B /* libPods-AddressBook.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AddressBook.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		38828997B62F2218A32A0BE3 /* Pods-AddressBook.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AddressBook.release.xcconfig"; path = "Pods/Target Support Files/Pods-AddressBook/Pods-AddressBook.release.xcconfig"; sourceTree = "<group>"; };
 		59D776BFA89EF9374F0C9E5D /* Pods-AddressBook.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AddressBook.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AddressBook/Pods-AddressBook.debug.xcconfig"; sourceTree = "<group>"; };
@@ -125,6 +128,8 @@
 				185679B01F298A2E005FC304 /* MGBookShelfTableViewCell.h */,
 				185679B11F298A2E005FC304 /* MGBookShelfTableViewCell.m */,
 				185679B21F298A2E005FC304 /* MGBookShelfTableViewCell.xib */,
+				18C941401F2ACA350002EFC2 /* MGAddressBookFooterView.h */,
+				18C941411F2ACA350002EFC2 /* MGAddressBookFooterView.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -416,6 +421,7 @@
 				18AAEDDD1F258CB6002B92F3 /* ViewController.m in Sources */,
 				185679AC1F28BADF005FC304 /* MGChildViewController.m in Sources */,
 				18ADDC2C1F28443700C57C3F /* MGMineViewController.m in Sources */,
+				18C941421F2ACA350002EFC2 /* MGAddressBookFooterView.m in Sources */,
 				1856795C1F2891B6005FC304 /* MGMessageViewController.m in Sources */,
 				185679611F28AD2A005FC304 /* MGAddressBookViewController.m in Sources */,
 				18AAEDDA1F258CB6002B92F3 /* AppDelegate.m in Sources */,
