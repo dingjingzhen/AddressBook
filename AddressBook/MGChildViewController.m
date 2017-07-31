@@ -8,11 +8,22 @@
 
 #import "MGChildViewController.h"
 #import "MGAddressBookFooterView.h"
+#import <AFNetworking.h>
+#import <UIImageView+WebCache.h>
+#import "MGContact.h"
+#import "MGDepartment.h"
+#import "UIButton+MGBlock.h"
+#import <objc/runtime.h>
 
 @interface MGChildViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic,strong) UITableView *tableView;
-@property (nonatomic,strong) NSMutableArray *nomalContact;
-@property (nonatomic,strong) NSMutableArray *companyContact;
+
+@property (nonatomic,strong) NSMutableArray *nomalContactArray;
+
+@property (nonatomic,strong) NSMutableArray *contactArray;
+
+@property (nonatomic,strong) NSMutableArray *groupArray;
+
 @property(nonatomic, strong)NSMutableArray *selectedArray;//是否被点击
 
 @end
@@ -20,16 +31,106 @@
 @implementation MGChildViewController
 
 -(void)initData{
-    _nomalContact = [NSMutableArray arrayWithObjects:@"姜春雨",@"贾慧云",@"陈艺清", nil];
+    NSDictionary *parameters1 = @{@"contactId": @"597d517f7f2bf60245e2c136"};
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    // 申明请求的数据是json类型
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    //获取常用联系人
     
-    _companyContact = [NSMutableArray arrayWithObjects:@"公司领导",@"应用开发部",@"技术支撑部", nil];
-    _selectedArray = [NSMutableArray arrayWithObjects:@"0",@"0",@"0", nil];//用于判断展开还是缩回当前section的cell
+    if ([self.title isEqualToString:@"常用联系人"]) {
+        [manager GET:@"http://121.40.229.114/Contacts/contact/common" parameters:parameters1 progress:^(NSProgress * _Nonnull downloadProgress) {
+            manager.requestSerializer.timeoutInterval = 2;
+        } success:^(NSURLSessionDataTask * _Nonnull task, id _Nullable responseObject) {
+            NSArray *resultArr = [responseObject objectForKey:@"contact_list"];
+            self.nomalContactArray = [NSMutableArray array];
+            
+            for (NSDictionary *dic in resultArr) {
+                MGContact *contact = [MGContact contactWithDict:dic];
+                if (contact) {
+                    [self.nomalContactArray addObject:contact];
+                    //                [self.contactImageArray  addObject:contact.contactAvatar];
+                    //                [self.contactidArray addObject:contact.contactId];
+                }
+            }
+            
+            [self.tableView reloadData];
+        }failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            NSLog(@"%@",error); //打印错误信息
+        }];
+        
+        
+
+        
+        
+
+    }else{
+        //获取部门信息
+        [manager GET:@"http://121.40.229.114/Contacts/group/all" parameters:nil progress:^(NSProgress * _Nonnull downloadProgress) {
+            manager.requestSerializer.timeoutInterval = 2;
+        } success:^(NSURLSessionDataTask * _Nonnull task, id _Nullable responseObject) {
+            NSArray *resultArr = [responseObject objectForKey:@"group_list"];
+            
+            self.groupArray = [NSMutableArray array];
+            self.selectedArray = [NSMutableArray array];
+            for (NSDictionary *dic in resultArr) {
+                [self.selectedArray  addObject:@"0"];
+                MGDepartment *group = [MGDepartment groupWithDict:dic];
+                if (group) {
+                    [self.groupArray addObject:group];
+                    //                [self.groupidArray addObject:group.groupId];
+                }
+            }
+            [self.tableView reloadData];
+        }failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            NSLog(@"%@",error); //打印错误信息
+        }];
+
+    }
+    
+    }
+
+-(void)groupCelltag:(NSInteger)tag getDifferentgroup:(NSString *)groupId{
+    NSDictionary *parameters = @{@"groupId": groupId};
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    // 申明请求的数据是json类型
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    //获取常用联系人
+    [manager GET:@"http://121.40.229.114/Contacts/contact/group" parameters:parameters progress:^(NSProgress * _Nonnull downloadProgress) {
+        manager.requestSerializer.timeoutInterval = 2;
+    } success:^(NSURLSessionDataTask * _Nonnull task, id _Nullable responseObject) {
+        NSArray *resultArr = [responseObject objectForKey:@"contact_list"];
+        self.contactArray = [NSMutableArray array];
+
+        for (NSDictionary *dic in resultArr) {
+            MGContact *contact = [MGContact contactWithDict:dic];
+            if (contact) {
+                [self.contactArray addObject:contact];
+            }
+        }
+//        [self.tableView reloadData];
+        if ([_selectedArray[tag - 1000] isEqualToString:@"0"]) {
+            [_selectedArray replaceObjectAtIndex:tag - 1000 withObject:@"1"];
+            [_tableView reloadSections:[NSIndexSet indexSetWithIndex:tag - 1000] withRowAnimation:UITableViewRowAnimationFade];
+        }
+        else
+        {
+            [_selectedArray replaceObjectAtIndex:tag - 1000 withObject:@"0"];
+            [_tableView reloadSections:[NSIndexSet indexSetWithIndex:tag - 1000] withRowAnimation:UITableViewRowAnimationFade];
+        }
+        
+        
+    }failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@",error); //打印错误信息
+    }];
+
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initData];
-    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height) style:UITableViewStylePlain];
+    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - 35 -70) style:UITableViewStylePlain];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.tableFooterView=[[UIView alloc]init];//去除下方空白cell
@@ -41,7 +142,7 @@
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     NSInteger num;
     if ([self.title  isEqualToString: @"企业通讯录"]) {
-        num = [_companyContact count];
+        num = [_groupArray count];
     }
     else{
         num = 1;
@@ -50,12 +151,12 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if ([self.title  isEqualToString: @"常用联系人"]) {
-        return  [_nomalContact count];
+        return  [_nomalContactArray count];
     }
     else{
         
         if ([_selectedArray[section] isEqualToString:@"1"]) {
-            return  [_companyContact count];
+            return  [_contactArray count];
         }
         return 0;
     }
@@ -71,11 +172,21 @@
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.imageView.image = [UIImage imageNamed:@"head"];
+    
     if ([self.title  isEqualToString: @"常用联系人"]) {
-        cell.textLabel.text = _nomalContact[indexPath.row];
+        MGContact *contact = _nomalContactArray[indexPath.row];
+        
+        cell.textLabel.text = contact.contactName;
+//        cell.imageView.image = [UIImage imageNamed:_contactImageArray[indexPath.row]];
+        NSString *imagePath = contact.contactAvatar;
+        NSURL *imageUrl = [NSURL URLWithString:imagePath];
+        
+        [cell.imageView sd_setImageWithURL:imageUrl placeholderImage:[UIImage imageNamed:@"head"] options:SDWebImageRetryFailed];
     }
     else{
-        cell.textLabel.text = _companyContact[indexPath.row];
+        MGContact *groupContact = _contactArray[indexPath.row];
+        cell.textLabel.text = groupContact.contactName;
+        cell.imageView.image = [UIImage imageNamed:@"head"];
     }
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     [cell setEditing:YES];
@@ -92,9 +203,17 @@
         if (!headView) {
             headView = [[MGAddressBookFooterView alloc]initWithReuseIdentifier:headId size:CGSizeMake(CGRectGetWidth([UIScreen mainScreen].bounds), 50)];
         }
+        MGDepartment *group = _groupArray[section];
         headView.headImage.image = [UIImage imageNamed:@"head"];
-        headView.departmentName.text = _companyContact[section];
+        headView.departmentName.text = group.groupName;
         headView.topButton.tag = section + 1000;
+        
+        objc_setAssociatedObject(headView.topButton, "groupId", group.groupId, OBJC_ASSOCIATION_RETAIN_NONATOMIC);   //实际上就是KVC
+//        objc_setAssociatedObject(headView.topButton, "secondObject", otherObject, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+        
+//        [headView.topButton handleControlEvent:UIControlEventTouchUpInside withBlock:^{
+//            [self groupCelltag:headView.topButton.tag getDifferentgroup:group.groupId];
+//        }];
         [headView.topButton addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
         return headView;
     }else{
@@ -117,16 +236,17 @@
 }
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return YES;
+    //只有常用联系人能进行删除操作
+    if ([self.title isEqualToString:@"常用联系人"])  {
+        return YES;
+
+    }else{
+        return NO;
+    }
 }
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // 删除模型
-    if ([self.title isEqualToString:@"常用联系人"]) {
-        [self.nomalContact removeObjectAtIndex:indexPath.row];
-    }else{
-        [self.companyContact removeObjectAtIndex:indexPath.row];
-    }
+    [self.nomalContactArray removeObjectAtIndex:indexPath.row];
     // 刷新
     [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
 }
@@ -139,22 +259,48 @@
 
 //展开收缩cell
 -(void)buttonAction:(UIButton*)sender{
-    if ([_selectedArray[sender.tag - 1000] isEqualToString:@"0"]) {
+    
+    id groupId = objc_getAssociatedObject(sender, "groupId");
+    NSString *str = groupId;
+   
+    
+//    NSString *strUrl = [@"http://121.40.229.114/Contacts/contact/group?groupId=" stringByAppendingString:str];
+//    NSLog(@"%@",strUrl);
+//    NSURL *URL = [NSURL URLWithString:strUrl];
+    NSDictionary *parameters = @{@"groupId":str};
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    // 申明请求的数据是json类型
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    //获取常用联系人
+    [manager GET:@"http://121.40.229.114/Contacts/contact/group" parameters:parameters progress:^(NSProgress * _Nonnull downloadProgress) {
+        manager.requestSerializer.timeoutInterval = 2;
+    } success:^(NSURLSessionDataTask * _Nonnull task, id _Nullable responseObject) {
+        NSArray *resultArr = [responseObject objectForKey:@"contact_list"];
+        self.contactArray = [NSMutableArray array];
         
-        //        for (NSInteger i = 0; i < _selectedArray.count; i++) {
-        //            [_selectedArray replaceObjectAtIndex:i withObject:@"0"];
-        //            [_tableView reloadSections:[NSIndexSet indexSetWithIndex:i] withRowAnimation:UITableViewRowAnimationFade];
-        //        }
-        //
+        for (NSDictionary *dic in resultArr) {
+            MGContact *contact = [MGContact contactWithDict:dic];
+            if (contact) {
+                [self.contactArray addObject:contact];
+            }
+        }
+        //        [self.tableView reloadData];
+        if ([_selectedArray[sender.tag - 1000] isEqualToString:@"0"]) {
+            [_selectedArray replaceObjectAtIndex:sender.tag - 1000 withObject:@"1"];
+            [_tableView reloadSections:[NSIndexSet indexSetWithIndex:sender.tag - 1000] withRowAnimation:UITableViewRowAnimationFade];
+        }
+        else
+        {
+            [_selectedArray replaceObjectAtIndex:sender.tag - 1000 withObject:@"0"];
+            [_tableView reloadSections:[NSIndexSet indexSetWithIndex:sender.tag - 1000] withRowAnimation:UITableViewRowAnimationFade];
+        }
+        NSLog(@"%@",resultArr);
         
-        [_selectedArray replaceObjectAtIndex:sender.tag - 1000 withObject:@"1"];
-        [_tableView reloadSections:[NSIndexSet indexSetWithIndex:sender.tag - 1000] withRowAnimation:UITableViewRowAnimationFade];
-    }
-    else
-    {
-        [_selectedArray replaceObjectAtIndex:sender.tag - 1000 withObject:@"0"];
-        [_tableView reloadSections:[NSIndexSet indexSetWithIndex:sender.tag - 1000] withRowAnimation:UITableViewRowAnimationFade];
-    }
+        
+    }failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"%@",error); //打印错误信息
+    }];
     
 }
 

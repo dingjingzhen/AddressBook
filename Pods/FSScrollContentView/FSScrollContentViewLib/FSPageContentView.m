@@ -57,6 +57,7 @@ static NSString *collectionCellIdentifier = @"collectionCellIdentifier";
         collectionView.pagingEnabled = YES;
         collectionView.bounces = NO;
         collectionView.delegate = self;
+        collectionView.backgroundColor = [UIColor whiteColor];
         collectionView.dataSource = self;
         [collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:collectionCellIdentifier];
         [self addSubview:collectionView];

@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		182326E61F2EBD740005B679 /* MGMessageChildViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 182326E51F2EBD740005B679 /* MGMessageChildViewController.m */; };
+		182326EA1F2EC7630005B679 /* MGUpvoteTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 182326E81F2EC7630005B679 /* MGUpvoteTableViewCell.m */; };
+		182326EB1F2EC7630005B679 /* MGUpvoteTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 182326E91F2EC7630005B679 /* MGUpvoteTableViewCell.xib */; };
+		182326EE1F2ED6FC0005B679 /* MGLeaderboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 182326ED1F2ED6FC0005B679 /* MGLeaderboardViewController.m */; };
+		182326F21F2F170E0005B679 /* MGContact.m in Sources */ = {isa = PBXBuildFile; fileRef = 182326F11F2F170E0005B679 /* MGContact.m */; };
+		182326F51F2F2A640005B679 /* MGDepartment.m in Sources */ = {isa = PBXBuildFile; fileRef = 182326F41F2F2A640005B679 /* MGDepartment.m */; };
+		182326F81F2F42850005B679 /* UIButton+MGBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 182326F71F2F42850005B679 /* UIButton+MGBlock.m */; };
 		185679561F28818E005FC304 /* MGMineTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 185679541F28818E005FC304 /* MGMineTableViewCell.m */; };
 		185679591F288CE5005FC304 /* MGMineTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 185679581F288CE5005FC304 /* MGMineTableViewCell.xib */; };
 		1856795C1F2891B6005FC304 /* MGMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1856795B1F2891B6005FC304 /* MGMessageViewController.m */; };
@@ -46,6 +53,19 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		182326E41F2EBD740005B679 /* MGMessageChildViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGMessageChildViewController.h; sourceTree = "<group>"; };
+		182326E51F2EBD740005B679 /* MGMessageChildViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGMessageChildViewController.m; sourceTree = "<group>"; };
+		182326E71F2EC7630005B679 /* MGUpvoteTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGUpvoteTableViewCell.h; sourceTree = "<group>"; };
+		182326E81F2EC7630005B679 /* MGUpvoteTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGUpvoteTableViewCell.m; sourceTree = "<group>"; };
+		182326E91F2EC7630005B679 /* MGUpvoteTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MGUpvoteTableViewCell.xib; sourceTree = "<group>"; };
+		182326EC1F2ED6FC0005B679 /* MGLeaderboardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGLeaderboardViewController.h; sourceTree = "<group>"; };
+		182326ED1F2ED6FC0005B679 /* MGLeaderboardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGLeaderboardViewController.m; sourceTree = "<group>"; };
+		182326F01F2F170E0005B679 /* MGContact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGContact.h; sourceTree = "<group>"; };
+		182326F11F2F170E0005B679 /* MGContact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGContact.m; sourceTree = "<group>"; };
+		182326F31F2F2A640005B679 /* MGDepartment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGDepartment.h; sourceTree = "<group>"; };
+		182326F41F2F2A640005B679 /* MGDepartment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGDepartment.m; sourceTree = "<group>"; };
+		182326F61F2F42850005B679 /* UIButton+MGBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+MGBlock.h"; sourceTree = "<group>"; };
+		182326F71F2F42850005B679 /* UIButton+MGBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+MGBlock.m"; sourceTree = "<group>"; };
 		185679531F28818E005FC304 /* MGMineTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGMineTableViewCell.h; sourceTree = "<group>"; };
 		185679541F28818E005FC304 /* MGMineTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGMineTableViewCell.m; sourceTree = "<group>"; };
 		185679581F288CE5005FC304 /* MGMineTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MGMineTableViewCell.xib; sourceTree = "<group>"; };
@@ -119,6 +139,19 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		182326EF1F2F16F80005B679 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				182326F01F2F170E0005B679 /* MGContact.h */,
+				182326F11F2F170E0005B679 /* MGContact.m */,
+				182326F31F2F2A640005B679 /* MGDepartment.h */,
+				182326F41F2F2A640005B679 /* MGDepartment.m */,
+				182326F61F2F42850005B679 /* UIButton+MGBlock.h */,
+				182326F71F2F42850005B679 /* UIButton+MGBlock.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		185679521F288150005FC304 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -130,6 +163,9 @@
 				185679B21F298A2E005FC304 /* MGBookShelfTableViewCell.xib */,
 				18C941401F2ACA350002EFC2 /* MGAddressBookFooterView.h */,
 				18C941411F2ACA350002EFC2 /* MGAddressBookFooterView.m */,
+				182326E71F2EC7630005B679 /* MGUpvoteTableViewCell.h */,
+				182326E81F2EC7630005B679 /* MGUpvoteTableViewCell.m */,
+				182326E91F2EC7630005B679 /* MGUpvoteTableViewCell.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -159,6 +195,7 @@
 		18AAEDD41F258CB6002B92F3 /* AddressBook */ = {
 			isa = PBXGroup;
 			children = (
+				182326EF1F2F16F80005B679 /* Model */,
 				185679521F288150005FC304 /* View */,
 				18ADDC291F2843F700C57C3F /* Controller */,
 				18AAEDD81F258CB6002B92F3 /* AppDelegate.h */,
@@ -203,10 +240,14 @@
 		18ADDC291F2843F700C57C3F /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				182326EC1F2ED6FC0005B679 /* MGLeaderboardViewController.h */,
+				182326ED1F2ED6FC0005B679 /* MGLeaderboardViewController.m */,
 				18ADDC2A1F28443700C57C3F /* MGMineViewController.h */,
 				18ADDC2B1F28443700C57C3F /* MGMineViewController.m */,
 				1856795A1F2891B6005FC304 /* MGMessageViewController.h */,
 				1856795B1F2891B6005FC304 /* MGMessageViewController.m */,
+				182326E41F2EBD740005B679 /* MGMessageChildViewController.h */,
+				182326E51F2EBD740005B679 /* MGMessageChildViewController.m */,
 				1856795F1F28AD2A005FC304 /* MGAddressBookViewController.h */,
 				185679601F28AD2A005FC304 /* MGAddressBookViewController.m */,
 				185679AA1F28BADF005FC304 /* MGChildViewController.h */,
@@ -343,6 +384,7 @@
 				185679591F288CE5005FC304 /* MGMineTableViewCell.xib in Resources */,
 				18AAEDE51F258CB7002B92F3 /* LaunchScreen.storyboard in Resources */,
 				1856795E1F289A48005FC304 /* Assets.xcassets in Resources */,
+				182326EB1F2EC7630005B679 /* MGUpvoteTableViewCell.xib in Resources */,
 				18AAEDE01F258CB7002B92F3 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -417,14 +459,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				185679AF1F2989D2005FC304 /* MGBookshelfViewController.m in Sources */,
+				182326F51F2F2A640005B679 /* MGDepartment.m in Sources */,
+				182326F21F2F170E0005B679 /* MGContact.m in Sources */,
 				185679B31F298A2E005FC304 /* MGBookShelfTableViewCell.m in Sources */,
 				18AAEDDD1F258CB6002B92F3 /* ViewController.m in Sources */,
 				185679AC1F28BADF005FC304 /* MGChildViewController.m in Sources */,
 				18ADDC2C1F28443700C57C3F /* MGMineViewController.m in Sources */,
+				182326E61F2EBD740005B679 /* MGMessageChildViewController.m in Sources */,
 				18C941421F2ACA350002EFC2 /* MGAddressBookFooterView.m in Sources */,
 				1856795C1F2891B6005FC304 /* MGMessageViewController.m in Sources */,
+				182326EE1F2ED6FC0005B679 /* MGLeaderboardViewController.m in Sources */,
 				185679611F28AD2A005FC304 /* MGAddressBookViewController.m in Sources */,
+				182326EA1F2EC7630005B679 /* MGUpvoteTableViewCell.m in Sources */,
 				18AAEDDA1F258CB6002B92F3 /* AppDelegate.m in Sources */,
+				182326F81F2F42850005B679 /* UIButton+MGBlock.m in Sources */,
 				18AAEDD71F258CB6002B92F3 /* main.m in Sources */,
 				185679561F28818E005FC304 /* MGMineTableViewCell.m in Sources */,
 			);
