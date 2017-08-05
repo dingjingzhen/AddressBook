@@ -19,6 +19,9 @@
         contact.contactName = dictionary[@"contact_name"];
         contact.contactScore = dictionary[@"contact_score"];
         contact.contactGroupid = dictionary[@"group_id"];
+        contact.contactRank = dictionary[@"rank"];
+        contact.groupName = dictionary[@"group_name"];
+        
         return contact;
     }
     return nil;

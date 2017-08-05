@@ -11,8 +11,11 @@
 @interface MGAddressBookFooterView : UITableViewHeaderFooterView
 
 @property (nonatomic,strong) UIImageView *headImage;
+@property (nonatomic,strong) UIView *headView;
+@property (nonatomic,strong) UILabel *headLabel;
 @property (nonatomic,strong) UILabel *departmentName;
 @property (nonatomic,strong) UIButton *topButton;
+
 
 - (instancetype)initWithReuseIdentifier:(NSString *)reuseIdentifier  size:(CGSize)size;
 

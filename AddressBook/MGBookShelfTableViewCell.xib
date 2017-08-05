@@ -79,6 +79,12 @@
                     <constraint firstItem="t3e-Wl-kbt" firstAttribute="leading" secondItem="JEs-0T-wOk" secondAttribute="trailing" constant="8" id="yU0-QN-JAp"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="bookAuthor" destination="PZe-Wy-kGC" id="qzR-hg-qVd"/>
+                <outlet property="bookDescription" destination="3wb-Q0-0kL" id="PjM-8g-5YD"/>
+                <outlet property="bookLogo" destination="JEs-0T-wOk" id="GU6-Pi-irg"/>
+                <outlet property="bookName" destination="t3e-Wl-kbt" id="JCt-jb-vp4"/>
+            </connections>
             <point key="canvasLocation" x="58.5" y="90"/>
         </tableViewCell>
     </objects>

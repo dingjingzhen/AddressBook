@@ -14,17 +14,33 @@
     if (self = [super initWithReuseIdentifier:reuseIdentifier]) {
         
         self.contentView.backgroundColor = [UIColor whiteColor];
-        _headImage = [[UIImageView alloc]initWithFrame:CGRectMake(5, 5, 40, 40)];
+        _headImage = [[UIImageView alloc]initWithFrame:CGRectMake(9, 9, 32, 32)];
         _headImage.layer.masksToBounds = YES;
-        _headImage.layer.cornerRadius = 7;
-        
+        _headImage.layer.cornerRadius = 16;
+        _headImage.hidden = YES;
+        _headImage.image = [UIImage imageNamed:@"gongsi"];
         [self.contentView addSubview:_headImage];
         
-        _departmentName = [[UILabel alloc]initWithFrame:CGRectMake(60, 10, 200, 30)];
+        _headView = [[UIView alloc]initWithFrame:CGRectMake(9, 9, 32, 32)];
+        _headView.layer.masksToBounds = YES;
+        _headView.layer.cornerRadius = 16;
+        
+        [self.contentView addSubview:_headView];
+        
+        _headLabel = [[UILabel alloc]initWithFrame:CGRectMake(5, 5, 22, 22)];
+        [_headLabel setFont:[UIFont boldSystemFontOfSize:17]];
+//        _headLabel 
+        [_headLabel setTextColor:[UIColor whiteColor]];
+        _headLabel.textAlignment = NSTextAlignmentCenter;
+        [_headView addSubview:_headLabel];
+        
+        _departmentName = [[UILabel alloc]initWithFrame:CGRectMake(56, 10, 200, 30)];
+        [_departmentName setFont:[UIFont systemFontOfSize:16]];
+        [_departmentName setTextColor:[UIColor colorWithRed:70/255 green:76/255 blue:86/255 alpha:1]];
         [self.contentView addSubview:_departmentName];
         
         //在最上层添加一个透明的按钮
-        _topButton = [[UIButton alloc]initWithFrame:CGRectMake(5, 0, size.width-10, 50)];
+        _topButton = [[UIButton alloc]initWithFrame:CGRectMake(9, 0, size.width-18, 50)];
         _topButton.backgroundColor = [UIColor clearColor];
         [self.contentView addSubview:_topButton];
         

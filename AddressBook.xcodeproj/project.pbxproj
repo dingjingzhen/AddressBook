@@ -14,6 +14,15 @@
 		182326F21F2F170E0005B679 /* MGContact.m in Sources */ = {isa = PBXBuildFile; fileRef = 182326F11F2F170E0005B679 /* MGContact.m */; };
 		182326F51F2F2A640005B679 /* MGDepartment.m in Sources */ = {isa = PBXBuildFile; fileRef = 182326F41F2F2A640005B679 /* MGDepartment.m */; };
 		182326F81F2F42850005B679 /* UIButton+MGBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 182326F71F2F42850005B679 /* UIButton+MGBlock.m */; };
+		182326FC1F3021F70005B679 /* MGMessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 182326FA1F3021F70005B679 /* MGMessageTableViewCell.m */; };
+		182326FD1F3021F70005B679 /* MGMessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 182326FB1F3021F70005B679 /* MGMessageTableViewCell.xib */; };
+		182327001F3062920005B679 /* MGBook.m in Sources */ = {isa = PBXBuildFile; fileRef = 182326FF1F3062920005B679 /* MGBook.m */; };
+		182327031F3074390005B679 /* MGMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 182327021F3074390005B679 /* MGMessage.m */; };
+		182327451F307D410005B679 /* MGDetailMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 182327441F307D410005B679 /* MGDetailMessageViewController.m */; };
+		1823274C1F3082B40005B679 /* MGDetailMessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1823274A1F3082B30005B679 /* MGDetailMessageTableViewCell.m */; };
+		1823274D1F3082B40005B679 /* MGDetailMessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1823274B1F3082B30005B679 /* MGDetailMessageTableViewCell.xib */; };
+		182327541F317B0E0005B679 /* MGRankTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 182327521F317B0E0005B679 /* MGRankTableViewCell.m */; };
+		182327551F317B0E0005B679 /* MGRankTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 182327531F317B0E0005B679 /* MGRankTableViewCell.xib */; };
 		185679561F28818E005FC304 /* MGMineTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 185679541F28818E005FC304 /* MGMineTableViewCell.m */; };
 		185679591F288CE5005FC304 /* MGMineTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 185679581F288CE5005FC304 /* MGMineTableViewCell.xib */; };
 		1856795C1F2891B6005FC304 /* MGMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1856795B1F2891B6005FC304 /* MGMessageViewController.m */; };
@@ -23,6 +32,12 @@
 		185679AF1F2989D2005FC304 /* MGBookshelfViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 185679AE1F2989D2005FC304 /* MGBookshelfViewController.m */; };
 		185679B31F298A2E005FC304 /* MGBookShelfTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 185679B11F298A2E005FC304 /* MGBookShelfTableViewCell.m */; };
 		185679B41F298A2E005FC304 /* MGBookShelfTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 185679B21F298A2E005FC304 /* MGBookShelfTableViewCell.xib */; };
+		18584D7B1F33076800B120DF /* MGAddressBookHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18584D7A1F33076800B120DF /* MGAddressBookHeaderView.m */; };
+		18584D7E1F330F5B00B120DF /* MGMineNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18584D7D1F330F5B00B120DF /* MGMineNavigationController.m */; };
+		18584D861F33135F00B120DF /* MGGroupCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18584D841F33135F00B120DF /* MGGroupCell.m */; };
+		18584D871F33135F00B120DF /* MGGroupCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18584D851F33135F00B120DF /* MGGroupCell.xib */; };
+		18584D8D1F3400BD00B120DF /* MGIndexViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18584D8C1F3400BD00B120DF /* MGIndexViewController.m */; };
+		18584D8F1F34663A00B120DF /* WKWebViewText.html in Resources */ = {isa = PBXBuildFile; fileRef = 18584D8E1F34663A00B120DF /* WKWebViewText.html */; };
 		18AAEDD71F258CB6002B92F3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 18AAEDD61F258CB6002B92F3 /* main.m */; };
 		18AAEDDA1F258CB6002B92F3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 18AAEDD91F258CB6002B92F3 /* AppDelegate.m */; };
 		18AAEDDD1F258CB6002B92F3 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18AAEDDC1F258CB6002B92F3 /* ViewController.m */; };
@@ -66,6 +81,21 @@
 		182326F41F2F2A640005B679 /* MGDepartment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGDepartment.m; sourceTree = "<group>"; };
 		182326F61F2F42850005B679 /* UIButton+MGBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+MGBlock.h"; sourceTree = "<group>"; };
 		182326F71F2F42850005B679 /* UIButton+MGBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+MGBlock.m"; sourceTree = "<group>"; };
+		182326F91F3021F70005B679 /* MGMessageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGMessageTableViewCell.h; sourceTree = "<group>"; };
+		182326FA1F3021F70005B679 /* MGMessageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGMessageTableViewCell.m; sourceTree = "<group>"; };
+		182326FB1F3021F70005B679 /* MGMessageTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MGMessageTableViewCell.xib; sourceTree = "<group>"; };
+		182326FE1F3062920005B679 /* MGBook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGBook.h; sourceTree = "<group>"; };
+		182326FF1F3062920005B679 /* MGBook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGBook.m; sourceTree = "<group>"; };
+		182327011F3074390005B679 /* MGMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGMessage.h; sourceTree = "<group>"; };
+		182327021F3074390005B679 /* MGMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGMessage.m; sourceTree = "<group>"; };
+		182327431F307D410005B679 /* MGDetailMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGDetailMessageViewController.h; sourceTree = "<group>"; };
+		182327441F307D410005B679 /* MGDetailMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGDetailMessageViewController.m; sourceTree = "<group>"; };
+		182327491F3082B30005B679 /* MGDetailMessageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGDetailMessageTableViewCell.h; sourceTree = "<group>"; };
+		1823274A1F3082B30005B679 /* MGDetailMessageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGDetailMessageTableViewCell.m; sourceTree = "<group>"; };
+		1823274B1F3082B30005B679 /* MGDetailMessageTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MGDetailMessageTableViewCell.xib; sourceTree = "<group>"; };
+		182327511F317B0E0005B679 /* MGRankTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGRankTableViewCell.h; sourceTree = "<group>"; };
+		182327521F317B0E0005B679 /* MGRankTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGRankTableViewCell.m; sourceTree = "<group>"; };
+		182327531F317B0E0005B679 /* MGRankTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MGRankTableViewCell.xib; sourceTree = "<group>"; };
 		185679531F28818E005FC304 /* MGMineTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGMineTableViewCell.h; sourceTree = "<group>"; };
 		185679541F28818E005FC304 /* MGMineTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGMineTableViewCell.m; sourceTree = "<group>"; };
 		185679581F288CE5005FC304 /* MGMineTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MGMineTableViewCell.xib; sourceTree = "<group>"; };
@@ -81,6 +111,16 @@
 		185679B01F298A2E005FC304 /* MGBookShelfTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGBookShelfTableViewCell.h; sourceTree = "<group>"; };
 		185679B11F298A2E005FC304 /* MGBookShelfTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGBookShelfTableViewCell.m; sourceTree = "<group>"; };
 		185679B21F298A2E005FC304 /* MGBookShelfTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MGBookShelfTableViewCell.xib; sourceTree = "<group>"; };
+		18584D791F33076800B120DF /* MGAddressBookHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGAddressBookHeaderView.h; sourceTree = "<group>"; };
+		18584D7A1F33076800B120DF /* MGAddressBookHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGAddressBookHeaderView.m; sourceTree = "<group>"; };
+		18584D7C1F330F5B00B120DF /* MGMineNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGMineNavigationController.h; sourceTree = "<group>"; };
+		18584D7D1F330F5B00B120DF /* MGMineNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGMineNavigationController.m; sourceTree = "<group>"; };
+		18584D831F33135F00B120DF /* MGGroupCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGGroupCell.h; sourceTree = "<group>"; };
+		18584D841F33135F00B120DF /* MGGroupCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGGroupCell.m; sourceTree = "<group>"; };
+		18584D851F33135F00B120DF /* MGGroupCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MGGroupCell.xib; sourceTree = "<group>"; };
+		18584D8B1F3400BD00B120DF /* MGIndexViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGIndexViewController.h; sourceTree = "<group>"; };
+		18584D8C1F3400BD00B120DF /* MGIndexViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGIndexViewController.m; sourceTree = "<group>"; };
+		18584D8E1F34663A00B120DF /* WKWebViewText.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = WKWebViewText.html; sourceTree = "<group>"; };
 		18AAEDD21F258CB6002B92F3 /* AddressBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AddressBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18AAEDD61F258CB6002B92F3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		18AAEDD81F258CB6002B92F3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -148,6 +188,10 @@
 				182326F41F2F2A640005B679 /* MGDepartment.m */,
 				182326F61F2F42850005B679 /* UIButton+MGBlock.h */,
 				182326F71F2F42850005B679 /* UIButton+MGBlock.m */,
+				182326FE1F3062920005B679 /* MGBook.h */,
+				182326FF1F3062920005B679 /* MGBook.m */,
+				182327011F3074390005B679 /* MGMessage.h */,
+				182327021F3074390005B679 /* MGMessage.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -155,6 +199,8 @@
 		185679521F288150005FC304 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				18584D791F33076800B120DF /* MGAddressBookHeaderView.h */,
+				18584D7A1F33076800B120DF /* MGAddressBookHeaderView.m */,
 				185679531F28818E005FC304 /* MGMineTableViewCell.h */,
 				185679541F28818E005FC304 /* MGMineTableViewCell.m */,
 				185679581F288CE5005FC304 /* MGMineTableViewCell.xib */,
@@ -166,6 +212,18 @@
 				182326E71F2EC7630005B679 /* MGUpvoteTableViewCell.h */,
 				182326E81F2EC7630005B679 /* MGUpvoteTableViewCell.m */,
 				182326E91F2EC7630005B679 /* MGUpvoteTableViewCell.xib */,
+				182326F91F3021F70005B679 /* MGMessageTableViewCell.h */,
+				182326FA1F3021F70005B679 /* MGMessageTableViewCell.m */,
+				182326FB1F3021F70005B679 /* MGMessageTableViewCell.xib */,
+				182327491F3082B30005B679 /* MGDetailMessageTableViewCell.h */,
+				1823274A1F3082B30005B679 /* MGDetailMessageTableViewCell.m */,
+				1823274B1F3082B30005B679 /* MGDetailMessageTableViewCell.xib */,
+				182327511F317B0E0005B679 /* MGRankTableViewCell.h */,
+				182327521F317B0E0005B679 /* MGRankTableViewCell.m */,
+				182327531F317B0E0005B679 /* MGRankTableViewCell.xib */,
+				18584D831F33135F00B120DF /* MGGroupCell.h */,
+				18584D841F33135F00B120DF /* MGGroupCell.m */,
+				18584D851F33135F00B120DF /* MGGroupCell.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -173,6 +231,7 @@
 		18AAEDC91F258CB6002B92F3 = {
 			isa = PBXGroup;
 			children = (
+				18584D8E1F34663A00B120DF /* WKWebViewText.html */,
 				18AAEDD41F258CB6002B92F3 /* AddressBook */,
 				18AAEDEE1F258CB7002B92F3 /* AddressBookTests */,
 				18AAEDF91F258CB7002B92F3 /* AddressBookUITests */,
@@ -254,6 +313,12 @@
 				185679AB1F28BADF005FC304 /* MGChildViewController.m */,
 				185679AD1F2989D2005FC304 /* MGBookshelfViewController.h */,
 				185679AE1F2989D2005FC304 /* MGBookshelfViewController.m */,
+				182327431F307D410005B679 /* MGDetailMessageViewController.h */,
+				182327441F307D410005B679 /* MGDetailMessageViewController.m */,
+				18584D7C1F330F5B00B120DF /* MGMineNavigationController.h */,
+				18584D7D1F330F5B00B120DF /* MGMineNavigationController.m */,
+				18584D8B1F3400BD00B120DF /* MGIndexViewController.h */,
+				18584D8C1F3400BD00B120DF /* MGIndexViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -380,11 +445,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1823274D1F3082B40005B679 /* MGDetailMessageTableViewCell.xib in Resources */,
 				185679B41F298A2E005FC304 /* MGBookShelfTableViewCell.xib in Resources */,
 				185679591F288CE5005FC304 /* MGMineTableViewCell.xib in Resources */,
+				18584D8F1F34663A00B120DF /* WKWebViewText.html in Resources */,
 				18AAEDE51F258CB7002B92F3 /* LaunchScreen.storyboard in Resources */,
 				1856795E1F289A48005FC304 /* Assets.xcassets in Resources */,
+				182327551F317B0E0005B679 /* MGRankTableViewCell.xib in Resources */,
 				182326EB1F2EC7630005B679 /* MGUpvoteTableViewCell.xib in Resources */,
+				18584D871F33135F00B120DF /* MGGroupCell.xib in Resources */,
+				182326FD1F3021F70005B679 /* MGMessageTableViewCell.xib in Resources */,
 				18AAEDE01F258CB7002B92F3 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -459,22 +529,32 @@
 			buildActionMask = 2147483647;
 			files = (
 				185679AF1F2989D2005FC304 /* MGBookshelfViewController.m in Sources */,
+				182327451F307D410005B679 /* MGDetailMessageViewController.m in Sources */,
 				182326F51F2F2A640005B679 /* MGDepartment.m in Sources */,
 				182326F21F2F170E0005B679 /* MGContact.m in Sources */,
 				185679B31F298A2E005FC304 /* MGBookShelfTableViewCell.m in Sources */,
+				18584D7B1F33076800B120DF /* MGAddressBookHeaderView.m in Sources */,
+				182327001F3062920005B679 /* MGBook.m in Sources */,
+				1823274C1F3082B40005B679 /* MGDetailMessageTableViewCell.m in Sources */,
 				18AAEDDD1F258CB6002B92F3 /* ViewController.m in Sources */,
+				18584D8D1F3400BD00B120DF /* MGIndexViewController.m in Sources */,
 				185679AC1F28BADF005FC304 /* MGChildViewController.m in Sources */,
 				18ADDC2C1F28443700C57C3F /* MGMineViewController.m in Sources */,
 				182326E61F2EBD740005B679 /* MGMessageChildViewController.m in Sources */,
 				18C941421F2ACA350002EFC2 /* MGAddressBookFooterView.m in Sources */,
 				1856795C1F2891B6005FC304 /* MGMessageViewController.m in Sources */,
 				182326EE1F2ED6FC0005B679 /* MGLeaderboardViewController.m in Sources */,
+				18584D861F33135F00B120DF /* MGGroupCell.m in Sources */,
 				185679611F28AD2A005FC304 /* MGAddressBookViewController.m in Sources */,
 				182326EA1F2EC7630005B679 /* MGUpvoteTableViewCell.m in Sources */,
+				182327541F317B0E0005B679 /* MGRankTableViewCell.m in Sources */,
 				18AAEDDA1F258CB6002B92F3 /* AppDelegate.m in Sources */,
+				182327031F3074390005B679 /* MGMessage.m in Sources */,
 				182326F81F2F42850005B679 /* UIButton+MGBlock.m in Sources */,
 				18AAEDD71F258CB6002B92F3 /* main.m in Sources */,
 				185679561F28818E005FC304 /* MGMineTableViewCell.m in Sources */,
+				18584D7E1F330F5B00B120DF /* MGMineNavigationController.m in Sources */,
+				182326FC1F3021F70005B679 /* MGMessageTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

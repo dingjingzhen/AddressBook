@@ -16,9 +16,14 @@
 
 @property (nonatomic, copy) NSString *contactAvatar;
 
-@property (nonatomic,strong) NSString *contactScore;
+@property (nonatomic,copy) id contactScore;
 
-@property (nonatomic,strong) NSString *contactGroupid;
+@property (nonatomic,copy) NSString *contactGroupid;
+
+@property (nonatomic,copy) NSString *groupName;
+
+@property (nonatomic,copy) id contactRank;
+
 + (instancetype)contactWithDict:(NSDictionary *)dictionary;
 
 @end

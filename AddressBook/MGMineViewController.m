@@ -11,6 +11,7 @@
 #import "MGMessageViewController.h"
 #import "MGAddressBookViewController.h"
 #import "MGBookshelfViewController.h"
+#import <UIImageView+WebCache.h>
 
 @interface MGMineViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UILabel *userName;
@@ -22,22 +23,30 @@
 
 @property (nonatomic,strong) NSArray *cellImage;//图标Array
 @property (nonatomic,strong) NSArray *cellTitle;//title Array
+
 @property (nonatomic,strong) NSArray *cellDetailTitle;//第三个section图标Array
-//@property (nonatomic,strong) NSArray *fourthSectionImage;//第四个section图标Array
-//@property (nonatomic,strong) NSArray *fifthSectionImage;//第五个section图标Array
-//@property (nonatomic,strong) NSArray *firstSectionTitle;//第一个section title Array
-//@property (nonatomic,strong) NSArray *secondSectionTitle;//第二个section title Array
-//@property (nonatomic,strong) NSArray *thirdSectionTitle;//第三个section title Array
-//@property (nonatomic,strong) NSArray *fourthSectionTitle;//第四个section title Array
-//@property (nonatomic,strong) NSArray *fifthSectionTitle;//第五个section title Array
+
 @end
 
 @implementation MGMineViewController
 //数据
 -(void)getData{
-    self.cellImage = [NSArray arrayWithObjects:@"最近阅读",@"通讯录",@"书库",@"书签",@"排行",@"二维码",@"切换",@"咪咕阅读",@"使用帮助",@"信息", nil];
-    self.cellTitle = [NSArray arrayWithObjects:@"最近阅读",@"通讯录",@"书库",@"我的书签",@"阅读排行",@"二维码",@"切换集团客户",@"咪咕阅读",@"使用帮助",@"关于", nil];
-    self.cellDetailTitle = [NSArray arrayWithObjects:@"",@"",@"",@"",@"",@"",@"",@"",@"",@"3.1.0", nil];
+    self.cellImage1 = [NSArray arrayWithObjects:@"排行",@"time",@"最近阅读",@"书签", nil];
+    self.cellTitle1 = [NSArray arrayWithObjects:@"阅读排行",@"学习时长",@"最近阅读",@"我的书签", nil];
+    
+    self.cellImage2 = [NSArray arrayWithObjects:@"书库",@"learn", nil];
+    self.cellTitle2 = [NSArray arrayWithObjects:@"书库",@"在学课程", nil];
+    
+    self.cellImage3 = [NSArray arrayWithObjects:@"通讯录", nil];
+    self.cellTitle3 = [NSArray arrayWithObjects:@"通讯录", nil];
+    
+    self.cellImage4 = [NSArray arrayWithObjects:@"二维码",@"咪咕阅读",@"xuetang", nil];
+    self.cellTitle4 = [NSArray arrayWithObjects:@"二维码",@"咪咕阅读",@"咪咕学堂", nil];
+    
+    self.cellImage5 = [NSArray arrayWithObjects:@"使用帮助",@"信息", nil];
+    self.cellTitle5 = [NSArray arrayWithObjects:@"使用帮助",@"关于", nil];
+    
+    
     
     [self.tableView reloadData];
     
@@ -46,18 +55,49 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     UIBarButtonItem * backButtonItem = [[UIBarButtonItem alloc] init];
-    backButtonItem.title = @"返回";
+    backButtonItem.title = @"";
     self.navigationItem.backBarButtonItem = backButtonItem;
+    
+//    self.navigationController.navigationBar.tintColor = [UIColor redColor];
     //    self.navigationController.navigationBarHidden = YES;
     [self getData];
-    //    [self.navigationController setNavigationBarHidden:YES];
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSString *userName = [userDefaults stringForKey:@"contactName"];
+    NSString *accountName = [userDefaults stringForKey:@"contact_account_name"];
+    NSString *image = [userDefaults stringForKey:@"contactAvatar"];
+    
+    NSString *groupName = [userDefaults stringForKey:@"groupName"];
+    self.userName.text = userName;
+    self.userTelephone.text = groupName;
+    
+    NSString *imagePath = image;
+    NSURL *imageUrl = [NSURL URLWithString:imagePath];
+    [self.headImage sd_setImageWithURL:imageUrl];
+    
+    
 }
 
 
 #pragma mark --UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return [self.cellTitle count];
-}
+//    NSInteger *num;
+    if (section == 0) {
+        return [self.cellTitle1 count];
+    }else{
+        if (section == 1) {
+            return [self.cellTitle2 count];
+        }else{
+            if (section == 2) {
+                return [self.cellTitle3 count];
+            }else{
+                if (section == 3) {
+                    return [self.cellTitle4 count];
+                }
+            }
+        }
+    }
+    return [self.cellImage5 count];
+   }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *ID = @"MGMineTableViewCell";
@@ -69,17 +109,52 @@
         cell = [nibs lastObject];
         
     }
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.cellImage.image = [UIImage imageNamed:_cellImage[indexPath.row]];
-    cell.cellTitle.text = _cellTitle[indexPath.row];
-    cell.detailTitle.text = _cellDetailTitle[indexPath.row];
+    
+    
+    if (indexPath.section == 0) {
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.cellImage.image = [UIImage imageNamed:_cellImage1[indexPath.row]];
+        cell.cellTitle.text = _cellTitle1[indexPath.row];
+//        cell.detailTitle.text = _cellDetailTitle[indexPath.row];
+    }else{
+        if (indexPath.section == 1) {
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.cellImage.image = [UIImage imageNamed:_cellImage2[indexPath.row]];
+            cell.cellTitle.text = _cellTitle2[indexPath.row];
+//            cell.detailTitle.text = _cellDetailTitle[indexPath.row];
+        }else{
+            if (indexPath.section == 2) {
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                cell.cellImage.image = [UIImage imageNamed:_cellImage3[indexPath.row]];
+                cell.cellTitle.text = _cellTitle3[indexPath.row];
+//                cell.detailTitle.text = _cellDetailTitle[indexPath.row];
+            }else{
+                if (indexPath.section == 3) {
+                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                    cell.cellImage.image = [UIImage imageNamed:_cellImage4[indexPath.row]];
+                    cell.cellTitle.text = _cellTitle4[indexPath.row];
+//                    cell.detailTitle.text = _cellDetailTitle[indexPath.row];
+                }else{
+                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                    cell.cellImage.image = [UIImage imageNamed:_cellImage5[indexPath.row]];
+                    cell.cellTitle.text = _cellTitle5[indexPath.row];
+//                    cell.detailTitle.text = _cellDetailTitle[indexPath.row];
+                }
+            }
+        }
+    }
     return cell;
 }
 
-
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    if (section == 0) {
+        return 0;
+    }
+    return 10;
+}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 1;
+    return 5;
 }
 
 #pragma mark --UITableViewDelegate
@@ -89,6 +164,7 @@
     if (indexPath.row == 2) {
         MGBookshelfViewController *bookshelfVC = [storyboard instantiateViewControllerWithIdentifier:@"MGBookshelfViewController"];
         self.hidesBottomBarWhenPushed = YES;
+        bookshelfVC.navigationItem.title = @"我的书库";
         [self.navigationController pushViewController:bookshelfVC animated:YES];
         self.hidesBottomBarWhenPushed = NO;
     }else{

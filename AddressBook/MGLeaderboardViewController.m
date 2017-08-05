@@ -40,6 +40,10 @@
     self.titleView = [[FSSegmentTitleView alloc]initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), 35) titles:@[@"部门排行榜",@"企业排行榜"] delegate:self indicatorType:FSIndicatorTypeEqualTitle];
     self.titleView.titleSelectFont = [UIFont systemFontOfSize:17];
     self.titleView.selectIndex = 0;
+//    self.titleView.titleSelectFont = [UIFont systemFontOfSize:17];
+    self.titleView.indicatorColor = [UIColor colorWithRed:18/255.0 green:191/255.0 blue:195/255.0 alpha:1];
+    self.titleView.titleNormalColor = [UIColor colorWithRed:70/255.0 green:76/255.0 blue:86/255.0 alpha:1];
+    self.titleView.titleSelectColor = [UIColor colorWithRed:18/255.0 green:191/255.0 blue:195/255.0 alpha:1];
     [self.contentView addSubview:_titleView];
     
     NSMutableArray *childVCs = [[NSMutableArray alloc]init];

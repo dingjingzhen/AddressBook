@@ -9,6 +9,11 @@
 #import "MGAddressBookViewController.h"
 #import "MGChildViewController.h"
 #import <FSScrollContentView.h>
+#import <AFNetworking.h>
+#import "MGContact.h"
+#import "MGMessageTableViewCell.h"
+#import <UIImageView+WebCache.h>
+
 #define naviHeight  (self.navigationController.navigationBar.frame.size.height)+([[UIApplication sharedApplication] statusBarFrame].size.height)
 
 
@@ -20,7 +25,8 @@
 @property (nonatomic,strong) UIView *contentView;//用来存放titleview和pageContentView，便于隐藏等操作
 @property (nonatomic,assign) BOOL showSearchbar;//用来判断是否显示searchbar
 @property (nonatomic,strong) UITableView *searchTableView;//用了显示搜索到的数据
-
+//@property (weak, nonatomic) IBOutlet UILabel *promptLab;
+@property (nonatomic,strong) UILabel *promptLab;
 @end
 
 @implementation MGAddressBookViewController
@@ -53,22 +59,36 @@
 
 - (void)viewDidLoad {
     
-    _testArray = [NSMutableArray arrayWithObjects:@"姜春雨",@"贾慧云",@"陈艺清",@"姜春雨",@"贾慧云",@"陈艺清",@"姜春雨",@"贾慧云",@"陈艺清",@"姜春雨",@"贾慧云",@"陈艺清",@"姜春雨",@"贾慧云",@"陈艺清",@"姜春雨",@"贾慧云",@"陈艺清",@"姜春雨",@"贾慧云",@"陈艺清", nil];
-    
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.title = @"通讯录";
+ [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:17],NSForegroundColorAttributeName:[UIColor colorWithRed:50/255.0 green:50/255.0 blue:50/255.0 alpha:1]}];
     
+    self.promptLab = [[UILabel alloc]initWithFrame:CGRectMake(10, 120, self.view.bounds.size.width-20, 35)];
+    self.promptLab.text = @"该用户不存在";
+    self.promptLab.textColor = [UIColor grayColor];
+    self.promptLab.textAlignment = NSTextAlignmentCenter;
+    [self.promptLab setFont:[UIFont systemFontOfSize:16]];
+    [self.view addSubview:self.promptLab];
+    
+    
+//    self.promptLab.hidden = YES;
     self.contentView = [[UIView alloc]initWithFrame:CGRectMake(0, 64, self.view.bounds.size.width, self.view.bounds.size.height - 64)];
-    self.contentView.backgroundColor = [UIColor whiteColor];
+    self.contentView.backgroundColor = [UIColor colorWithRed:242/255.0 green:242/255.0 blue:242/255.0 alpha:242/255.0];
     [self.view addSubview:self.contentView];
     
-    self.titleView = [[FSSegmentTitleView alloc]initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), 35) titles:@[@"常用联系人",@"企业通讯录"] delegate:self indicatorType:FSIndicatorTypeEqualTitle];
+    self.titleView = [[FSSegmentTitleView alloc]initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), 45) titles:@[@"常用联系人",@"企业通讯录"] delegate:self indicatorType:FSIndicatorTypeDefault];
     self.titleView.titleSelectFont = [UIFont systemFontOfSize:17];
+    self.titleView.indicatorColor = [UIColor colorWithRed:18/255.0 green:191/255.0 blue:195/255.0 alpha:1];
+    self.titleView.backgroundColor = [UIColor whiteColor];
     self.titleView.selectIndex = 0;
+    self.titleView.titleNormalColor = [UIColor colorWithRed:70/255.0 green:76/255.0 blue:86/255.0 alpha:1];
+    self.titleView.titleSelectColor = [UIColor colorWithRed:18/255.0 green:191/255.0 blue:195/255.0 alpha:1];
+    
     [self.contentView addSubview:_titleView];
     [self searchTableView];
     [self searchBar];
+//    self.contentView.hidden = YES;
     
     NSMutableArray *childVCs = [[NSMutableArray alloc]init];
     for (NSString *title in @[@"常用联系人",@"企业通讯录"]) {
@@ -76,7 +96,7 @@
         vc.title = title;
         [childVCs addObject:vc];
     }
-    self.pageContentView = [[FSPageContentView alloc]initWithFrame:CGRectMake(0,38, CGRectGetWidth(self.view.bounds), self.contentView.bounds.size.height - 38) childVCs:childVCs parentVC:self delegate:self];
+    self.pageContentView = [[FSPageContentView alloc]initWithFrame:CGRectMake(0,45, CGRectGetWidth(self.view.bounds), self.contentView.bounds.size.height - 45) childVCs:childVCs parentVC:self delegate:self];
     self.pageContentView.contentViewCurrentIndex = 0;
     self.pageContentView.backgroundColor = [UIColor whiteColor];
     self.pageContentView.contentViewCanScroll = NO;//设置滑动属性
@@ -108,8 +128,46 @@
 
 #pragma mark -- UISearchBarDelegate
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
-    _contentView.hidden = YES;
-    _searchTableView.hidden = NO;
+    
+    if (![searchText  isEqual: @""]) {
+        //  执行搜索操作
+        NSDictionary *parameters = @{@"key": searchText};
+        AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+        manager.responseSerializer = [AFJSONResponseSerializer serializer];
+        // 申明请求的数据是json类型
+        manager.requestSerializer = [AFJSONRequestSerializer serializer];
+        //获取常用联系人
+            [manager GET:@"http://121.40.229.114/Contacts/contact/search" parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id _Nullable responseObject) {
+                NSArray *resultArr = [responseObject objectForKey:@"contact_list"];
+                self.testArray = [NSMutableArray array];
+                NSInteger arrCount = [resultArr count];
+                if (arrCount == 0) {
+                    _promptLab.hidden = NO;
+                    _contentView.hidden = YES;
+                    _searchTableView.hidden = YES;
+                }else{
+                    _promptLab.hidden = YES;
+                    _contentView.hidden = YES;
+                    _searchTableView.hidden = NO;
+                }
+
+                for (NSDictionary *dic in resultArr) {
+                    MGContact *contact = [MGContact contactWithDict:dic];
+                    if (contact) {
+                        [self.testArray addObject:contact];
+                    }
+                }
+
+                [self.searchTableView reloadData];
+            }failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                NSLog(@"%@",error); //打印错误信息
+            }];
+    }else{
+        _contentView.hidden = NO;
+        _searchTableView.hidden = YES;
+    }
+    
+    
 }
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
     [_searchBar resignFirstResponder];
@@ -121,13 +179,20 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    static NSString *identifierId = @"searchcellID";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifierId];
+    static NSString *identifierId = @"MGMessageTableViewCell";
+    MGMessageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifierId];
     if (!cell) {
-        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifierId];
+        NSArray *nibs = [[NSBundle mainBundle]loadNibNamed:@"MGMessageTableViewCell" owner:nil options:nil];
+        cell = [nibs lastObject];
     }
-    cell.imageView.image = [UIImage imageNamed:@"head"];
-    cell.textLabel.text = _testArray[indexPath.row];
+    
+    MGContact *contact = _testArray[indexPath.row];
+    
+    cell.nameLab.text= contact.contactName;
+    NSString *imagePath = contact.contactAvatar;
+    NSURL *imageUrl = [NSURL URLWithString:imagePath];
+    
+    [cell.avatarImageView sd_setImageWithURL:imageUrl placeholderImage:[UIImage imageNamed:@"head"] options:SDWebImageRetryFailed];
     return cell;
 }
 

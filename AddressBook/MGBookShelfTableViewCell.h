@@ -9,5 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface MGBookShelfTableViewCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UIImageView *bookLogo;
+@property (weak, nonatomic) IBOutlet UILabel *bookName;
+@property (weak, nonatomic) IBOutlet UILabel *bookAuthor;
+@property (weak, nonatomic) IBOutlet UILabel *bookDescription;
 
 @end
