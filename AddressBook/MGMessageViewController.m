@@ -13,6 +13,9 @@
 #import <UIImageView+WebCache.h>
 #import "MGMessage.h"
 #import "MGDetailMessageViewController.h"
+#import "MGDetailMessageController.h"
+#import <MJRefresh.h>
+#import <MBProgressHUD.h>
 
 #define naviHeight  (self.navigationController.navigationBar.frame.size.height)+([[UIApplication sharedApplication] statusBarFrame].size.height)
 
@@ -29,6 +32,8 @@
 @implementation MGMessageViewController
 
 -(void)initData{
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+
     _messageCentertime = [NSMutableArray arrayWithObjects:@"7月29日", nil];
     _messageCenter = [NSMutableArray arrayWithObjects:@"消息中心", nil];
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
@@ -56,8 +61,12 @@
         }
         
         [self.messageTableview reloadData];
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+
     }failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"%@",error); //打印错误信息
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+
     }];
 
 }
@@ -66,15 +75,22 @@
 - (void)viewDidLoad {
     [self initData];
     
-    UIBarButtonItem * backButtonItem = [[UIBarButtonItem alloc] init];
-    backButtonItem.title = @"返回";
-    self.navigationItem.backBarButtonItem = backButtonItem;
+    UIBarButtonItem *leftBtn = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"back"] style:UIBarButtonItemStylePlain target:self action:@selector(back)];
+    self.navigationItem.leftBarButtonItem = leftBtn;
+
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.title = @"消息";
     self.messageTableview.tableFooterView = [[UITableViewHeaderFooterView alloc]init];
-    self.messageTableview.rowHeight = 50;
+    self.messageTableview.rowHeight = 85;
+    self.messageTableview.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        [self initData];
+        // 结束刷新
+        [self.messageTableview.mj_header endRefreshing];
+    }];
 }
-
+-(void)back{
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
 #pragma mark --UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -102,12 +118,12 @@
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     if (indexPath.section == 0) {
-        cell.headImage.image = [UIImage imageNamed:@"migu"];
-        cell.nameLab.text = _messageCenter[indexPath.row];
-        cell.timeLab.text = _messageCentertime[indexPath.row];
-        cell.actionLab.text = @"";
-        cell.commentLab.text = @"你的排行榜更新啦！";
-        cell.commentLab.textColor = [UIColor grayColor];
+
+        cell.messageCenter.text = @"消息中心";
+        cell.numberLab.text = @"3";
+        cell.headImage.image = [UIImage imageNamed:@"message1"];
+
+        cell.commentLab.text = @"";
     }else{
         
         MGMessage *message = self.messageArray[indexPath.row];
@@ -116,11 +132,12 @@
         NSURL *imageUrl = [NSURL URLWithString:imagePath];
         [cell.headImage sd_setImageWithURL:imageUrl placeholderImage:[UIImage imageNamed:@"head"] options:SDWebImageCacheMemoryOnly];
         cell.nameLab.text = message.userName;
-        NSString *time = [self format:message.messageTime];
-        cell.timeLab.text = time;
-        cell.actionLab.text = @"";
         cell.commentLab.text = message.messageText;
-        cell.commentLab.textColor = [UIColor lightGrayColor];
+        if ((indexPath.row != 0)&&(indexPath.row!=1)) {
+            cell.numberView.hidden = YES;
+        }else{
+            cell.numberView.hidden = NO;
+        }
     }
     
         return cell;
@@ -139,20 +156,20 @@
         
     }else{
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] ;
-        MGDetailMessageViewController * DVC = [storyboard instantiateViewControllerWithIdentifier:@"MGDetailMessageViewController"];
+        MGDetailMessageController * DVC = [storyboard instantiateViewControllerWithIdentifier:@"MGDetailMessageController"];
         self.hidesBottomBarWhenPushed = YES;
         MGMessage *message = self.messageArray[indexPath.row];
-        DVC.fromUserId = message.userId;
+        DVC.userId = message.userId;
         DVC.navigationItem.title = message.userName;
         [self.navigationController pushViewController:DVC animated:YES];
        
     }
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    if (section == 0) {
-        return 3;
-    }
-    return 7;
+//    if (section == 0) {
+//        return 3;
+//    }
+    return 0;
 }
 
 

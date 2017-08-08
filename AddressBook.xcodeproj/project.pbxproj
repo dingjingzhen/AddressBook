@@ -20,7 +20,6 @@
 		182327031F3074390005B679 /* MGMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 182327021F3074390005B679 /* MGMessage.m */; };
 		182327451F307D410005B679 /* MGDetailMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 182327441F307D410005B679 /* MGDetailMessageViewController.m */; };
 		1823274C1F3082B40005B679 /* MGDetailMessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1823274A1F3082B30005B679 /* MGDetailMessageTableViewCell.m */; };
-		1823274D1F3082B40005B679 /* MGDetailMessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1823274B1F3082B30005B679 /* MGDetailMessageTableViewCell.xib */; };
 		182327541F317B0E0005B679 /* MGRankTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 182327521F317B0E0005B679 /* MGRankTableViewCell.m */; };
 		182327551F317B0E0005B679 /* MGRankTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 182327531F317B0E0005B679 /* MGRankTableViewCell.xib */; };
 		185679561F28818E005FC304 /* MGMineTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 185679541F28818E005FC304 /* MGMineTableViewCell.m */; };
@@ -37,7 +36,6 @@
 		18584D861F33135F00B120DF /* MGGroupCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18584D841F33135F00B120DF /* MGGroupCell.m */; };
 		18584D871F33135F00B120DF /* MGGroupCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18584D851F33135F00B120DF /* MGGroupCell.xib */; };
 		18584D8D1F3400BD00B120DF /* MGIndexViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18584D8C1F3400BD00B120DF /* MGIndexViewController.m */; };
-		18584D8F1F34663A00B120DF /* WKWebViewText.html in Resources */ = {isa = PBXBuildFile; fileRef = 18584D8E1F34663A00B120DF /* WKWebViewText.html */; };
 		18AAEDD71F258CB6002B92F3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 18AAEDD61F258CB6002B92F3 /* main.m */; };
 		18AAEDDA1F258CB6002B92F3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 18AAEDD91F258CB6002B92F3 /* AppDelegate.m */; };
 		18AAEDDD1F258CB6002B92F3 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18AAEDDC1F258CB6002B92F3 /* ViewController.m */; };
@@ -46,6 +44,12 @@
 		18AAEDF01F258CB7002B92F3 /* AddressBookTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 18AAEDEF1F258CB7002B92F3 /* AddressBookTests.m */; };
 		18AAEDFB1F258CB7002B92F3 /* AddressBookUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 18AAEDFA1F258CB7002B92F3 /* AddressBookUITests.m */; };
 		18ADDC2C1F28443700C57C3F /* MGMineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18ADDC2B1F28443700C57C3F /* MGMineViewController.m */; };
+		18C1C60F1F384B8A00B1EE89 /* MGShareBookCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C1C60D1F384B8A00B1EE89 /* MGShareBookCell.m */; };
+		18C1C6101F384B8A00B1EE89 /* MGShareBookCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18C1C60E1F384B8A00B1EE89 /* MGShareBookCell.xib */; };
+		18C1C6511F386F2900B1EE89 /* MGDetailMessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18C1C6501F386F2900B1EE89 /* MGDetailMessageTableViewCell.xib */; };
+		18C1C6661F3958C700B1EE89 /* MGChatModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C1C6651F3958C700B1EE89 /* MGChatModel.m */; };
+		18C1C66C1F39A3D300B1EE89 /* MGTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C1C66B1F39A3D300B1EE89 /* MGTextView.m */; };
+		18C1C6721F39C34B00B1EE89 /* MGDetailMessageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C1C6711F39C34B00B1EE89 /* MGDetailMessageController.m */; };
 		18C941421F2ACA350002EFC2 /* MGAddressBookFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C941411F2ACA350002EFC2 /* MGAddressBookFooterView.m */; };
 		C1AC4015B3D14DA58FE45A92 /* libPods-AddressBook.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 354E935022C098308223073B /* libPods-AddressBook.a */; };
 /* End PBXBuildFile section */
@@ -92,7 +96,6 @@
 		182327441F307D410005B679 /* MGDetailMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGDetailMessageViewController.m; sourceTree = "<group>"; };
 		182327491F3082B30005B679 /* MGDetailMessageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGDetailMessageTableViewCell.h; sourceTree = "<group>"; };
 		1823274A1F3082B30005B679 /* MGDetailMessageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGDetailMessageTableViewCell.m; sourceTree = "<group>"; };
-		1823274B1F3082B30005B679 /* MGDetailMessageTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MGDetailMessageTableViewCell.xib; sourceTree = "<group>"; };
 		182327511F317B0E0005B679 /* MGRankTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGRankTableViewCell.h; sourceTree = "<group>"; };
 		182327521F317B0E0005B679 /* MGRankTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGRankTableViewCell.m; sourceTree = "<group>"; };
 		182327531F317B0E0005B679 /* MGRankTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MGRankTableViewCell.xib; sourceTree = "<group>"; };
@@ -120,7 +123,6 @@
 		18584D851F33135F00B120DF /* MGGroupCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MGGroupCell.xib; sourceTree = "<group>"; };
 		18584D8B1F3400BD00B120DF /* MGIndexViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGIndexViewController.h; sourceTree = "<group>"; };
 		18584D8C1F3400BD00B120DF /* MGIndexViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGIndexViewController.m; sourceTree = "<group>"; };
-		18584D8E1F34663A00B120DF /* WKWebViewText.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = WKWebViewText.html; sourceTree = "<group>"; };
 		18AAEDD21F258CB6002B92F3 /* AddressBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AddressBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18AAEDD61F258CB6002B92F3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		18AAEDD81F258CB6002B92F3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -138,6 +140,16 @@
 		18AAEDFC1F258CB7002B92F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		18ADDC2A1F28443700C57C3F /* MGMineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGMineViewController.h; sourceTree = "<group>"; };
 		18ADDC2B1F28443700C57C3F /* MGMineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGMineViewController.m; sourceTree = "<group>"; };
+		18C1C60C1F384B8A00B1EE89 /* MGShareBookCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGShareBookCell.h; sourceTree = "<group>"; };
+		18C1C60D1F384B8A00B1EE89 /* MGShareBookCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGShareBookCell.m; sourceTree = "<group>"; };
+		18C1C60E1F384B8A00B1EE89 /* MGShareBookCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MGShareBookCell.xib; sourceTree = "<group>"; };
+		18C1C6501F386F2900B1EE89 /* MGDetailMessageTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MGDetailMessageTableViewCell.xib; sourceTree = "<group>"; };
+		18C1C6641F3958C700B1EE89 /* MGChatModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGChatModel.h; sourceTree = "<group>"; };
+		18C1C6651F3958C700B1EE89 /* MGChatModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGChatModel.m; sourceTree = "<group>"; };
+		18C1C66A1F39A3D300B1EE89 /* MGTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGTextView.h; sourceTree = "<group>"; };
+		18C1C66B1F39A3D300B1EE89 /* MGTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGTextView.m; sourceTree = "<group>"; };
+		18C1C6701F39C34B00B1EE89 /* MGDetailMessageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGDetailMessageController.h; sourceTree = "<group>"; };
+		18C1C6711F39C34B00B1EE89 /* MGDetailMessageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGDetailMessageController.m; sourceTree = "<group>"; };
 		18C941401F2ACA350002EFC2 /* MGAddressBookFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGAddressBookFooterView.h; sourceTree = "<group>"; };
 		18C941411F2ACA350002EFC2 /* MGAddressBookFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGAddressBookFooterView.m; sourceTree = "<group>"; };
 		354E935022C098308223073B /* libPods-AddressBook.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AddressBook.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -182,6 +194,8 @@
 		182326EF1F2F16F80005B679 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				18C1C6641F3958C700B1EE89 /* MGChatModel.h */,
+				18C1C6651F3958C700B1EE89 /* MGChatModel.m */,
 				182326F01F2F170E0005B679 /* MGContact.h */,
 				182326F11F2F170E0005B679 /* MGContact.m */,
 				182326F31F2F2A640005B679 /* MGDepartment.h */,
@@ -217,13 +231,18 @@
 				182326FB1F3021F70005B679 /* MGMessageTableViewCell.xib */,
 				182327491F3082B30005B679 /* MGDetailMessageTableViewCell.h */,
 				1823274A1F3082B30005B679 /* MGDetailMessageTableViewCell.m */,
-				1823274B1F3082B30005B679 /* MGDetailMessageTableViewCell.xib */,
+				18C1C6501F386F2900B1EE89 /* MGDetailMessageTableViewCell.xib */,
 				182327511F317B0E0005B679 /* MGRankTableViewCell.h */,
 				182327521F317B0E0005B679 /* MGRankTableViewCell.m */,
 				182327531F317B0E0005B679 /* MGRankTableViewCell.xib */,
 				18584D831F33135F00B120DF /* MGGroupCell.h */,
 				18584D841F33135F00B120DF /* MGGroupCell.m */,
 				18584D851F33135F00B120DF /* MGGroupCell.xib */,
+				18C1C60C1F384B8A00B1EE89 /* MGShareBookCell.h */,
+				18C1C60D1F384B8A00B1EE89 /* MGShareBookCell.m */,
+				18C1C60E1F384B8A00B1EE89 /* MGShareBookCell.xib */,
+				18C1C66A1F39A3D300B1EE89 /* MGTextView.h */,
+				18C1C66B1F39A3D300B1EE89 /* MGTextView.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -231,7 +250,6 @@
 		18AAEDC91F258CB6002B92F3 = {
 			isa = PBXGroup;
 			children = (
-				18584D8E1F34663A00B120DF /* WKWebViewText.html */,
 				18AAEDD41F258CB6002B92F3 /* AddressBook */,
 				18AAEDEE1F258CB7002B92F3 /* AddressBookTests */,
 				18AAEDF91F258CB7002B92F3 /* AddressBookUITests */,
@@ -305,6 +323,8 @@
 				18ADDC2B1F28443700C57C3F /* MGMineViewController.m */,
 				1856795A1F2891B6005FC304 /* MGMessageViewController.h */,
 				1856795B1F2891B6005FC304 /* MGMessageViewController.m */,
+				182327431F307D410005B679 /* MGDetailMessageViewController.h */,
+				182327441F307D410005B679 /* MGDetailMessageViewController.m */,
 				182326E41F2EBD740005B679 /* MGMessageChildViewController.h */,
 				182326E51F2EBD740005B679 /* MGMessageChildViewController.m */,
 				1856795F1F28AD2A005FC304 /* MGAddressBookViewController.h */,
@@ -313,12 +333,12 @@
 				185679AB1F28BADF005FC304 /* MGChildViewController.m */,
 				185679AD1F2989D2005FC304 /* MGBookshelfViewController.h */,
 				185679AE1F2989D2005FC304 /* MGBookshelfViewController.m */,
-				182327431F307D410005B679 /* MGDetailMessageViewController.h */,
-				182327441F307D410005B679 /* MGDetailMessageViewController.m */,
 				18584D7C1F330F5B00B120DF /* MGMineNavigationController.h */,
 				18584D7D1F330F5B00B120DF /* MGMineNavigationController.m */,
 				18584D8B1F3400BD00B120DF /* MGIndexViewController.h */,
 				18584D8C1F3400BD00B120DF /* MGIndexViewController.m */,
+				18C1C6701F39C34B00B1EE89 /* MGDetailMessageController.h */,
+				18C1C6711F39C34B00B1EE89 /* MGDetailMessageController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -445,15 +465,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1823274D1F3082B40005B679 /* MGDetailMessageTableViewCell.xib in Resources */,
 				185679B41F298A2E005FC304 /* MGBookShelfTableViewCell.xib in Resources */,
 				185679591F288CE5005FC304 /* MGMineTableViewCell.xib in Resources */,
-				18584D8F1F34663A00B120DF /* WKWebViewText.html in Resources */,
 				18AAEDE51F258CB7002B92F3 /* LaunchScreen.storyboard in Resources */,
 				1856795E1F289A48005FC304 /* Assets.xcassets in Resources */,
 				182327551F317B0E0005B679 /* MGRankTableViewCell.xib in Resources */,
 				182326EB1F2EC7630005B679 /* MGUpvoteTableViewCell.xib in Resources */,
+				18C1C6511F386F2900B1EE89 /* MGDetailMessageTableViewCell.xib in Resources */,
 				18584D871F33135F00B120DF /* MGGroupCell.xib in Resources */,
+				18C1C6101F384B8A00B1EE89 /* MGShareBookCell.xib in Resources */,
 				182326FD1F3021F70005B679 /* MGMessageTableViewCell.xib in Resources */,
 				18AAEDE01F258CB7002B92F3 /* Main.storyboard in Resources */,
 			);
@@ -532,6 +552,7 @@
 				182327451F307D410005B679 /* MGDetailMessageViewController.m in Sources */,
 				182326F51F2F2A640005B679 /* MGDepartment.m in Sources */,
 				182326F21F2F170E0005B679 /* MGContact.m in Sources */,
+				18C1C6721F39C34B00B1EE89 /* MGDetailMessageController.m in Sources */,
 				185679B31F298A2E005FC304 /* MGBookShelfTableViewCell.m in Sources */,
 				18584D7B1F33076800B120DF /* MGAddressBookHeaderView.m in Sources */,
 				182327001F3062920005B679 /* MGBook.m in Sources */,
@@ -542,10 +563,12 @@
 				18ADDC2C1F28443700C57C3F /* MGMineViewController.m in Sources */,
 				182326E61F2EBD740005B679 /* MGMessageChildViewController.m in Sources */,
 				18C941421F2ACA350002EFC2 /* MGAddressBookFooterView.m in Sources */,
+				18C1C60F1F384B8A00B1EE89 /* MGShareBookCell.m in Sources */,
 				1856795C1F2891B6005FC304 /* MGMessageViewController.m in Sources */,
 				182326EE1F2ED6FC0005B679 /* MGLeaderboardViewController.m in Sources */,
 				18584D861F33135F00B120DF /* MGGroupCell.m in Sources */,
 				185679611F28AD2A005FC304 /* MGAddressBookViewController.m in Sources */,
+				18C1C6661F3958C700B1EE89 /* MGChatModel.m in Sources */,
 				182326EA1F2EC7630005B679 /* MGUpvoteTableViewCell.m in Sources */,
 				182327541F317B0E0005B679 /* MGRankTableViewCell.m in Sources */,
 				18AAEDDA1F258CB6002B92F3 /* AppDelegate.m in Sources */,
@@ -555,6 +578,7 @@
 				185679561F28818E005FC304 /* MGMineTableViewCell.m in Sources */,
 				18584D7E1F330F5B00B120DF /* MGMineNavigationController.m in Sources */,
 				182326FC1F3021F70005B679 /* MGMessageTableViewCell.m in Sources */,
+				18C1C66C1F39A3D300B1EE89 /* MGTextView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -708,7 +732,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 9XC34F9334;
 				INFOPLIST_FILE = AddressBook/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/AddressBook",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = www.Apple.AddressBook;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -721,7 +750,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 9XC34F9334;
 				INFOPLIST_FILE = AddressBook/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/AddressBook",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = www.Apple.AddressBook;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

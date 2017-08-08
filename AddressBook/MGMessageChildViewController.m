@@ -13,6 +13,7 @@
 #import <UIImageView+WebCache.h>
 #import "MGContact.h"
 #import "MGRankTableViewCell.h"
+#import <MJRefresh.h>
 
 @interface MGMessageChildViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic,strong) UITableView *tableView;
@@ -75,10 +76,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initData];
+    
     self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - 35 -70) style:UITableViewStylePlain];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    self.tableView.rowHeight = 50;
+    self.tableView.rowHeight = 85;
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        [self initData];
+        // 结束刷新
+        [self.tableView.mj_header endRefreshing];
+    }];
     self.tableView.tableFooterView=[[UIView alloc]init];//去除下方空白cell
     [self.view addSubview:self.tableView];
 }
@@ -88,27 +95,42 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 2;
 }
-- (nullable NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
+
+
+-(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     if ([self.title isEqualToString:@"部门排行榜"]) {
-        if (section == 1) {
-            
-            MGContact *contact = self.userInfoArray[0];
-            return contact.groupName;
+        UIView *view  = [[UIView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 20)];
+        view.backgroundColor = [UIColor colorWithRed:242/255.0 green:242/255.0 blue:242/255.0 alpha:242/255.0];
+        UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(14, 2, 200, 16)];
+        label.font = [UIFont systemFontOfSize:12];
+        label.textColor = [UIColor colorWithRed:137/255.0 green:137/255.0 blue:137/255.0 alpha:1];
+        if (section == 0) {
+            label.text = @"个人信息";
         }
-        return nil;
+        else{
+            label.text = @"部门排行榜";
+        }
+        [view addSubview:label];
+        return view;
     }else{
-        if (section == 1) {
-        
-            return @"全公司";
+        UIView *view  = [[UIView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 20)];
+        view.backgroundColor = [UIColor colorWithRed:242/255.0 green:242/255.0 blue:242/255.0 alpha:242/255.0];
+        UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(14, 2, 200, 16)];
+        label.font = [UIFont systemFontOfSize:12];
+        label.textColor = [UIColor colorWithRed:137/255.0 green:137/255.0 blue:137/255.0 alpha:1];
+        if (section == 0) {
+            label.text = @"个人信息";
+        }
+        else{
+            label.text = @"企业排行榜";
+        }
+        [view addSubview:label];
+        return view;
+
     }
-    return nil;
-    }
-    
-    
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    //    if ([self.title  isEqualToString: @"部门排行榜"]) {
     if (section == 1) {
         return  [_contactArray count];
         
@@ -131,40 +153,56 @@
     MGContact *mineInfo = self.userInfoArray[0];
     
     if (indexPath.section == 0) {
+        
+        NSString *rank1 = @"第";
+        NSString *rank2 = [NSString stringWithFormat:@"%@", mineInfo.contactRank];
+        NSString *rank = [rank1 stringByAppendingString:rank2];
+        rank = [rank stringByAppendingString:@"名"];
         cell.contactName.text = mineInfo.contactName;
-        NSString *rank = [NSString stringWithFormat:@"%@", mineInfo.contactRank];
+        
         NSString *score = [NSString stringWithFormat:@"%@", mineInfo.contactScore];
 
         cell.rankLab.text = rank;
-        [cell.rankLab setTextColor:[UIColor redColor]];
         NSString *imagePath = mineInfo.contactAvatar;
         NSURL *imageUrl = [NSURL URLWithString:imagePath];
         [cell.contactAvatar sd_setImageWithURL:imageUrl placeholderImage:[UIImage imageNamed:@"head"] options:SDWebImageLowPriority];
         cell.contactScore.text = score;
         return cell;
     }else{
+        NSString *rank1 = @"第";
         NSString *rank = [NSString stringWithFormat:@"%ld", (long)indexPath.row+1];
+        rank = [rank1 stringByAppendingString:rank];
+        rank = [rank stringByAppendingString:@"名"];
         NSString *score = [NSString stringWithFormat:@"%@", contact.contactScore];
         cell.contactName.text = contact.contactName;
         cell.rankLab.text = rank;
-//        [cell.rankLab setTextColor:[UIColor redColor]];
         NSString *imagePath = contact.contactAvatar;
         NSURL *imageUrl = [NSURL URLWithString:imagePath];
         [cell.contactAvatar sd_setImageWithURL:imageUrl placeholderImage:[UIImage imageNamed:@"head"] options:SDWebImageLowPriority];
         cell.contactScore.text = score;
         
         if (indexPath.row == 0) {
-            [cell.rankLab setFont:[UIFont systemFontOfSize:18]];
-            [cell.rankLab setTextColor:[UIColor redColor]];
+            cell.rankLab.hidden = YES;
+            cell.firstThreeImage.hidden = NO;
+            cell.firstThreeLab.text = @"NO.1";
+            cell.firstThreeImage.image = [UIImage imageNamed:@"pic_no1"];
         }
         if (indexPath.row == 1) {
-            [cell.rankLab setFont:[UIFont systemFontOfSize:17]];
-            [cell.rankLab setTextColor:[UIColor yellowColor]];
+            cell.rankLab.hidden = YES;
+            cell.firstThreeImage.hidden = NO;
+            cell.firstThreeLab.text = @"NO.2";
+            cell.firstThreeImage.image = [UIImage imageNamed:@"pic_no2"];
+
         }
         if (indexPath.row == 2) {
-            [cell.rankLab setFont:[UIFont systemFontOfSize:16]];
-            [cell.rankLab setTextColor:[UIColor greenColor]];
+            cell.rankLab.hidden = YES;
+            cell.firstThreeImage.hidden = NO;
+            cell.firstThreeLab.text = @"NO.3";
+            cell.firstThreeImage.image = [UIImage imageNamed:@"pic_no2"];
+
         }
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+       
         
         return cell;
 
@@ -180,10 +218,8 @@
     NSLog(@"click");
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    if (section == 1) {
-        return 50;
-    }
-    return 0;
+    
+    return 20;
 }
 
 @end

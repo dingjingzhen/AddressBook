@@ -6,16 +6,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "AddressBook/MGIndexViewController.m"
-            timestampString = "523604433.132941"
+            filePath = "AddressBook/MGChatModel.m"
+            timestampString = "523865159.45279"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "149"
-            endingLineNumber = "149"
-            landmarkName = "-userContentController:didReceiveScriptMessage:"
+            startingLineNumber = "18"
+            endingLineNumber = "18"
+            landmarkName = "+messageWithDict:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

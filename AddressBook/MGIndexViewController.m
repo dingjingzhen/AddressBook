@@ -8,12 +8,14 @@
 
 #import "ViewController.h"
 #import <WebKit/WebKit.h>
+#import <MBProgressHUD.h>
 #import "MGIndexViewController.h"
+#import "MGBookshelfViewController.h"
 
 @interface MGIndexViewController ()<WKScriptMessageHandler,WKNavigationDelegate,WKUIDelegate,UIScrollViewDelegate>
 //webView
 @property(nonatomic,strong)WKWebView *webView;
-
+@property (nonatomic,strong) MBProgressHUD *hu;
 @end
 
 @implementation MGIndexViewController
@@ -50,11 +52,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.tabBarController.tabBar.hidden = YES;
     [self creatWebView];
-    
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"后退" style:UIBarButtonItemStyleDone target:self action:@selector(goback)];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"前进" style:UIBarButtonItemStyleDone target:self action:@selector(gofarward)];
+    UIBarButtonItem *leftBtn = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"back"] style:UIBarButtonItemStylePlain target:self action:@selector(goback)];
+    self.navigationItem.leftBarButtonItem = leftBtn;
 }
 
 #pragma mark----- 导航按钮响应事件-----
@@ -68,11 +69,6 @@
     }
 }
 
-- (void)gofarward{
-    if ([self.webView canGoForward]) {
-        [self.webView goForward];
-    }
-}
 
 //创建webView
 - (void)creatWebView{
@@ -90,16 +86,17 @@
     config.userContentController = [WKUserContentController new];
     // 注入JS对象名称senderModel，当JS通过senderModel来调用时，我们可以在WKScriptMessageHandler代理中接收到
     [config.userContentController addScriptMessageHandler:self name:@"senderModel"];
-    self.webView = [[WKWebView alloc]initWithFrame:CGRectMake(0, 64, self.view.frame.size.width, self.view.frame.size.height - 100) configuration:config];
+    self.webView = [[WKWebView alloc]initWithFrame:CGRectMake(0, 64, self.view.frame.size.width, self.view.frame.size.height - 64) configuration:config];
 //    NSString *urlStr =@"http://121.40.229.114/Contacts/page/index.html#/home/597d4b3c7f2bf60245e2c113";
 //    NSURL *url = [NSURL URLWithString:urlStr];
 //    [self.webView loadRequest:[NSURLRequest requestWithURL:url]];
     //    [self.webView loadRequest:[NSURLRequest requestWithURL:path]];
-    
+    NSString *urlStr = @"http://121.40.229.114/Contacts/page/index.html#/home/";
+    urlStr = [urlStr stringByAppendingString:self.userId];
     // 设置访问的URL
-    NSURL *url = [NSURL URLWithString:@"http://121.40.229.114/Contacts/page/index.html#/home/597d4b3c7f2bf60245e2c113"];
+    NSURL *url = [NSURL URLWithString:urlStr];
     // 根据URL创建请求
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:60];
     // WKWebView加载请求
     [self.webView loadRequest:request];
     
@@ -138,14 +135,6 @@
 
 #pragma mark - WKScriptMessageHandler
 
-//- (void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message
-//{
-//    if ([message.name isEqualToString:@"senderModel"]) {
-//        //TODO
-//    }
-//}
-
-
 - (void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message{
     //这里可以通过name处理多组交互
     if ([message.name isEqualToString:@"senderModel"]) {
@@ -153,7 +142,23 @@
         NSLog(@"%@",message.body);
         if ([message.body isKindOfClass:[NSString class]]) {
             if ([message.body isEqualToString:@"pushNextVC"]) {
-                [self.navigationController pushViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"MGBookshelfViewController"] animated:YES];
+                
+                UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+                MGBookshelfViewController *bVC = [storyboard instantiateViewControllerWithIdentifier:@"MGBookshelfViewController"];
+                bVC.mineOrhe = @"mine";
+                bVC.contactId = self.userId;
+                bVC.navigationItem.title = @"我的书库";
+//                BVC.contactId = self.userId;
+                [self.navigationController pushViewController:bVC animated:YES];
+                
+            }else if ([message.body isEqualToString:@"bookShelf"]) {
+                
+                UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+                MGBookshelfViewController *bVC = [storyboard instantiateViewControllerWithIdentifier:@"MGBookshelfViewController"];
+                bVC.mineOrhe = @"his";
+                bVC.contactId = self.userId;
+                bVC.navigationItem.title = @"Ta的分享";
+                [self.navigationController pushViewController:bVC animated:YES];
                 
             }
         }
@@ -163,23 +168,6 @@
 }
 
 #pragma mark = WKNavigationDelegate
-//在发送请求之前，决定是否跳转
-- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler{
-    NSString *hostname = navigationAction.request.URL.host.lowercaseString;
-    NSLog(@"%@",hostname);
-    if (navigationAction.navigationType == WKNavigationTypeLinkActivated
-        && ![hostname containsString:@".baidu.com"]) {
-        // 对于跨域，需要手动跳转
-        [[UIApplication sharedApplication] openURL:navigationAction.request.URL];
-        
-        // 不允许web内跳转
-        decisionHandler(WKNavigationActionPolicyCancel);
-    } else {
-        decisionHandler(WKNavigationActionPolicyAllow);
-    }
-    
-    
-}
 //在响应完成时，调用的方法。如果设置为不允许响应，web内容就不会传过来
 
 - (void)webView:(WKWebView *)webView decidePolicyForNavigationResponse:(WKNavigationResponse *)navigationResponse decisionHandler:(void (^)(WKNavigationResponsePolicy))decisionHandler{
@@ -192,7 +180,8 @@
 
 //开始加载时调用
 - (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation{
-    
+    _hu = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+    [_hu setMode:MBProgressHUDModeIndeterminate];
 }
 //当内容开始返回时调用
 - (void)webView:(WKWebView *)webView didCommitNavigation:(WKNavigation *)navigation{
@@ -201,54 +190,14 @@
 //页面加载完成之后调用
 - (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation{
     NSLog(@"title:%@",webView.title);
+     [_hu hideAnimated:YES];
 }
 // 页面加载失败时调用
 - (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(WKNavigation *)navigation
 {
+    [_hu hideAnimated:YES];
     
 }
-
-#pragma mark WKUIDelegate
-
-//alert 警告框
-- (void)webView:(WKWebView *)webView runJavaScriptAlertPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(void))completionHandler{
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"警告" message:@"调用alert提示框" preferredStyle:UIAlertControllerStyleAlert];
-    [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        completionHandler();
-    }]];
-    [self presentViewController:alert animated:YES completion:nil];
-    NSLog(@"alert message:%@",message);
-    
-}
-
-//confirm 确认框
-- (void)webView:(WKWebView *)webView runJavaScriptConfirmPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(BOOL))completionHandler{
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"确认框" message:@"调用confirm提示框" preferredStyle:UIAlertControllerStyleAlert];
-    [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        completionHandler(YES);
-    }]];
-    [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-        completionHandler(NO);
-    }]];
-    [self presentViewController:alert animated:YES completion:NULL];
-    
-    NSLog(@"confirm message:%@", message);
-    
-}
-
-- (void)webView:(WKWebView *)webView runJavaScriptTextInputPanelWithPrompt:(NSString *)prompt defaultText:(nullable NSString *)defaultText initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(NSString * __nullable result))completionHandler {
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"输入框" message:@"调用输入框" preferredStyle:UIAlertControllerStyleAlert];
-    [alert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
-        textField.textColor = [UIColor blackColor];
-    }];
-    
-    [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        completionHandler([[alert.textFields lastObject] text]);
-    }]];
-    
-    [self presentViewController:alert animated:YES completion:NULL];
-}
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -258,7 +207,5 @@
 -(void)viewDidAppear:(BOOL)animated{
     self.tabBarController.tabBar.hidden = YES;
     self.hidesBottomBarWhenPushed = YES;}
-//- (nullable UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView{
-//    return nil;
-//}
+
 @end

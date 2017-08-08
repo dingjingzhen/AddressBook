@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface MGBookshelfViewController : UIViewController
+@property (nonatomic,copy) NSString *contactId;
+@property (nonatomic,copy) NSString *mineOrhe;
 
 @end

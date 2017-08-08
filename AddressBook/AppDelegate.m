@@ -16,7 +16,9 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    [[UINavigationBar appearance] setTintColor:[UIColor colorWithRed:70/255.0 green:76/255.0 blue:86/255.0 alpha:0.6]];
+    [[UINavigationBar appearance] setTintColor:[UIColor colorWithRed:50/255.0 green:50/255.0 blue:50/255.0 alpha:1]];
+    
+    [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:248/255.0 green:248/255.0 blue:249/255.0 alpha:1]];
 //    [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:70/255.0 green:76/255.0 blue:86/255.0 alpha:1]];
 //    [[UINavigationBar appearance] set];
     //存储用户的信息到nsuserdefault
@@ -24,10 +26,10 @@
     [userDefaults setObject:@"597d4b3c7f2bf60245e2c113" forKey:@"contactId"];
     [userDefaults setObject:@"应用开发部" forKey:@"groupName"];
     [userDefaults setObject:@"周杰伦" forKey:@"contactName"];
-    [userDefaults setObject:@"597d44097f2bf60245e2c0d2" forKey:@"groupId"];
+    [userDefaults setObject:@"5982c05eded72d600238a059" forKey:@"groupId"];
     [userDefaults setObject:@"Jay Chou" forKey:@"contact_account_name"];
     [userDefaults setObject:@"http://imgcache.qq.com/music/photo/mid_singer_150/P/4/0025NhlN2yWrP4.jpg" forKey:@"contactAvatar"];
-//
+////
 //    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
 //    [userDefaults setObject:@"597d517f7f2bf60245e2c136" forKey:@"contactId"];
 //    [userDefaults setObject:@"应用开发部" forKey:@"groupName"];
@@ -35,7 +37,13 @@
 //    [userDefaults setObject:@"5982c05eded72d600238a059" forKey:@"groupId"];
 //    [userDefaults setObject:@"Bad Boy" forKey:@"contact_account_name"];
 //    [userDefaults setObject:@"https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=2487013681,3283313649&fm=117&gp=0.jpg" forKey:@"contactAvatar"];
-
+//    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+//    [userDefaults setObject:@"597d4b3c7f2bf60245e2c11d" forKey:@"contactId"];
+//    [userDefaults setObject:@"财务部" forKey:@"groupName"];
+//    [userDefaults setObject:@"邓紫棋" forKey:@"contactName"];
+//    [userDefaults setObject:@"5982c05eded72d600238a053" forKey:@"groupId"];
+//    [userDefaults setObject:@"Gloria Tang Tsz-Kei" forKey:@"contact_account_name"];
+//    [userDefaults setObject:@"http://imgcache.qq.com/music/photo/mid_singer_150/F/N/001fNHEf1SFEFN.jpg" forKey:@"contactAvatar"];
     
     return YES;
 }

@@ -13,6 +13,8 @@
 #import "MGContact.h"
 #import "MGMessageTableViewCell.h"
 #import <UIImageView+WebCache.h>
+#import "MGIndexViewController.h"
+#import <MBProgressHUD.h>
 
 #define naviHeight  (self.navigationController.navigationBar.frame.size.height)+([[UIApplication sharedApplication] statusBarFrame].size.height)
 
@@ -41,7 +43,7 @@
         _searchBar.delegate = self;
         _showSearchbar = NO;
         [_searchBar setSearchBarStyle:UISearchBarStyleMinimal];
-         [self.view addSubview:_searchBar];
+        [self.view addSubview:_searchBar];
     }
     return _searchBar;
 }
@@ -59,10 +61,16 @@
 
 - (void)viewDidLoad {
     
+    self.navigationItem.hidesBackButton = true;
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    
+    UIBarButtonItem * backButtonItem = [[UIBarButtonItem alloc] init];
+    backButtonItem.title = @"";
+    self.navigationItem.backBarButtonItem = backButtonItem;
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.title = @"通讯录";
- [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:17],NSForegroundColorAttributeName:[UIColor colorWithRed:50/255.0 green:50/255.0 blue:50/255.0 alpha:1]}];
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:17],NSForegroundColorAttributeName:[UIColor colorWithRed:50/255.0 green:50/255.0 blue:50/255.0 alpha:1]}];
     
     self.promptLab = [[UILabel alloc]initWithFrame:CGRectMake(10, 120, self.view.bounds.size.width-20, 35)];
     self.promptLab.text = @"该用户不存在";
@@ -72,7 +80,7 @@
     [self.view addSubview:self.promptLab];
     
     
-//    self.promptLab.hidden = YES;
+    //    self.promptLab.hidden = YES;
     self.contentView = [[UIView alloc]initWithFrame:CGRectMake(0, 64, self.view.bounds.size.width, self.view.bounds.size.height - 64)];
     self.contentView.backgroundColor = [UIColor colorWithRed:242/255.0 green:242/255.0 blue:242/255.0 alpha:242/255.0];
     [self.view addSubview:self.contentView];
@@ -88,7 +96,7 @@
     [self.contentView addSubview:_titleView];
     [self searchTableView];
     [self searchBar];
-//    self.contentView.hidden = YES;
+    //    self.contentView.hidden = YES;
     
     NSMutableArray *childVCs = [[NSMutableArray alloc]init];
     for (NSString *title in @[@"常用联系人",@"企业通讯录"]) {
@@ -101,12 +109,29 @@
     self.pageContentView.backgroundColor = [UIColor whiteColor];
     self.pageContentView.contentViewCanScroll = NO;//设置滑动属性
     [self.contentView addSubview:_pageContentView];
-
+    
     //搜索按钮
     UIBarButtonItem *searchBtn = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(search)];
     self.navigationItem.rightBarButtonItem = searchBtn;
+    //返回按钮
+    UIBarButtonItem *leftBtn = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"back"] style:UIBarButtonItemStylePlain target:self action:@selector(back)];
+    self.navigationItem.leftBarButtonItem = leftBtn;
+    
+    
 }
 
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [self.view endEditing:YES];
+    return YES;
+}
+
+
+
+
+-(void)back{
+    [self.navigationController popViewControllerAnimated:YES];
+}
 -(void)search{
     [UIView animateWithDuration:0.4 animations:^{
         if (_showSearchbar == YES) {
@@ -123,7 +148,10 @@
         }
     } completion:^(BOOL finished) {
     }];
-
+    
+}
+-(void)turnBack{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark -- UISearchBarDelegate
@@ -131,37 +159,41 @@
     
     if (![searchText  isEqual: @""]) {
         //  执行搜索操作
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         NSDictionary *parameters = @{@"key": searchText};
         AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
         manager.responseSerializer = [AFJSONResponseSerializer serializer];
         // 申明请求的数据是json类型
         manager.requestSerializer = [AFJSONRequestSerializer serializer];
         //获取常用联系人
-            [manager GET:@"http://121.40.229.114/Contacts/contact/search" parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id _Nullable responseObject) {
-                NSArray *resultArr = [responseObject objectForKey:@"contact_list"];
-                self.testArray = [NSMutableArray array];
-                NSInteger arrCount = [resultArr count];
-                if (arrCount == 0) {
-                    _promptLab.hidden = NO;
-                    _contentView.hidden = YES;
-                    _searchTableView.hidden = YES;
-                }else{
-                    _promptLab.hidden = YES;
-                    _contentView.hidden = YES;
-                    _searchTableView.hidden = NO;
-                }
-
+        [manager GET:@"http://121.40.229.114/Contacts/contact/search" parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id _Nullable responseObject) {
+            NSArray *resultArr = [responseObject objectForKey:@"contact_list"];
+            self.testArray = [NSMutableArray array];
+            NSInteger arrCount = [resultArr count];
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
+            if (arrCount == 0) {
+                _promptLab.hidden = NO;
+                [MBProgressHUD hideHUDForView:self.view animated:YES];
+                _contentView.hidden = YES;
+                _searchTableView.hidden = YES;
+            }else{
+                _promptLab.hidden = YES;
+                _contentView.hidden = YES;
+                _searchTableView.hidden = NO;
                 for (NSDictionary *dic in resultArr) {
                     MGContact *contact = [MGContact contactWithDict:dic];
                     if (contact) {
                         [self.testArray addObject:contact];
                     }
                 }
-
+                [MBProgressHUD hideHUDForView:self.view animated:YES];
                 [self.searchTableView reloadData];
-            }failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-                NSLog(@"%@",error); //打印错误信息
-            }];
+            }
+            
+            
+        }failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            [MBProgressHUD hideHUDForView:self.view animated:YES];                NSLog(@"%@",error); //打印错误信息
+        }];
     }else{
         _contentView.hidden = NO;
         _searchTableView.hidden = YES;
@@ -198,7 +230,14 @@
 
 #pragma mark -- UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
+    MGContact *contact = _testArray[indexPath.row];
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+    MGIndexViewController *indexVC = [storyboard instantiateViewControllerWithIdentifier:@"MGIndexViewController"];
+    self.hidesBottomBarWhenPushed = YES;
+    indexVC.userId = contact.contactId;
+    indexVC.navigationItem.title = contact.contactName;
+    [self.navigationController pushViewController:indexVC animated:YES];
+    self.hidesBottomBarWhenPushed = NO;
 }
 
 

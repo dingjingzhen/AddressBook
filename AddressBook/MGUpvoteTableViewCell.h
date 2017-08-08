@@ -9,10 +9,13 @@
 #import <UIKit/UIKit.h>
 
 @interface MGUpvoteTableViewCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UIView *numberView;
+@property (weak, nonatomic) IBOutlet UILabel *numberLab;
+@property (weak, nonatomic) IBOutlet UITextField *commentLab;
 @property (weak, nonatomic) IBOutlet UIImageView *headImage;
 @property (weak, nonatomic) IBOutlet UILabel *nameLab;
-@property (weak, nonatomic) IBOutlet UILabel *commentLab;
-@property (weak, nonatomic) IBOutlet UILabel *timeLab;
-@property (weak, nonatomic) IBOutlet UILabel *actionLab;
+
+@property (weak, nonatomic) IBOutlet UILabel *messageCenter;
+
 
 @end

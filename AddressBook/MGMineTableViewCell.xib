@@ -35,7 +35,7 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="向右箭头" translatesAutoresizingMaskIntoConstraints="NO" id="c5D-af-Rg5">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="right" translatesAutoresizingMaskIntoConstraints="NO" id="c5D-af-Rg5">
                         <rect key="frame" x="344" y="15" width="15" height="15"/>
                         <constraints>
                             <constraint firstAttribute="height" relation="lessThanOrEqual" constant="15" id="ONX-pp-Peg"/>
@@ -79,6 +79,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="向右箭头" width="200" height="200"/>
+        <image name="right" width="200" height="200"/>
     </resources>
 </document>

@@ -7,10 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "MGChatModel.h"
 @interface MGDetailMessageTableViewCell : UITableViewCell
-@property (weak, nonatomic) IBOutlet UIView *labelView;
 
-@property (weak, nonatomic) IBOutlet UILabel *messaLab;
+@property (nonatomic,strong) UIImageView *headImageView; // 用户头像
+@property (nonatomic,strong) UIImageView *backView; // 气泡
+@property (nonatomic,strong) UILabel *contentLabel; // 气泡内文本
 
+- (void)refreshCell:(MGChatModel *)model; // 安装我们的cell
 @end

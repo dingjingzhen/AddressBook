@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface MGRankTableViewCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UILabel *firstThreeLab;
+@property (weak, nonatomic) IBOutlet UIImageView *firstThreeImage;
 @property (weak, nonatomic) IBOutlet UILabel *rankLab;
 @property (weak, nonatomic) IBOutlet UIImageView *contactAvatar;
 @property (weak, nonatomic) IBOutlet UILabel *contactName;

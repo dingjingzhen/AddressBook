@@ -15,6 +15,8 @@
 @interface MGBookshelfViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *bookTableView;
 @property (nonatomic,strong) NSMutableArray *bookArray;
+//@property (nonatomic,weak) UILabel *promptLab;
+@property (weak, nonatomic) IBOutlet UILabel *promptLab;
 
 @end
 
@@ -23,14 +25,23 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self getBookdata];
+    UIBarButtonItem *leftBtn = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"back"] style:UIBarButtonItemStylePlain target:self action:@selector(back)];
+    self.navigationItem.leftBarButtonItem = leftBtn;
     self.bookTableView.tableFooterView = [[UITableViewHeaderFooterView alloc]init];
 }
-
+-(void)back{
+    [self.navigationController popViewControllerAnimated:YES];
+}
 //获取用户书库信息
 -(void)getBookdata{
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    NSString *userId = [userDefaults stringForKey:@"contactId"];
+    NSString *userId ;
+    if ([self.mineOrhe isEqualToString: @"mine"]) {
+        userId = [userDefaults stringForKey:@"contactId"];
+    }else if([self.mineOrhe isEqualToString: @"his"]){
+        userId = self.contactId;
+    }
     
     NSDictionary *parameters1 = @{@"userId": userId,@"count":@"10"};
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
@@ -53,6 +64,15 @@
                 }
             }
             
+            if (([resultArr count] == 0)&&([self.mineOrhe isEqualToString: @"his"])) {
+                self.promptLab.hidden = NO;
+                self.promptLab.text = @"该用户从来没有分享过任何书籍";
+                self.bookTableView.hidden = YES;
+            }else if (([resultArr count] == 0)&&([self.mineOrhe isEqualToString: @"mine"])) {
+                self.promptLab.hidden = NO;
+                self.promptLab.text = @"你的书库是空的，赶紧去书城添加吧！";
+                self.bookTableView.hidden = YES;
+            }
             [self.bookTableView reloadData];
         }failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             NSLog(@"%@",error); //打印错误信息
@@ -88,10 +108,50 @@
 
 #pragma mark -- UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    UIAlertView *alertview = [[UIAlertView alloc] initWithTitle:nil message:@"分享成功！" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-    [alertview show];
+    //我的书库，点击进行分享
+    if ([self.mineOrhe  isEqualToString: @"mine"]) {
     
-    [self.navigationController popViewControllerAnimated:YES];
+//        fromUserId=发起人id&toUserId=接收人id&text=消息内容
+        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+        NSString *userId = [userDefaults stringForKey:@"contactId"];
+
+        MGBook *book = self.bookArray[indexPath.row];
+     
+        
+        NSDictionary *parameters1 = @{@"fromUserId": userId,@"toUserId":self.contactId,@"bookId":book.bookId};
+        AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+        manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+        //        manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
+        //manager.requestSerializer = [AFJSONRequestSerializer serializer];
+        
+        
+        
+        
+        [manager POST:@"http://121.40.229.114/Contacts/share/add" parameters:parameters1 progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            UIAlertView *alertview = [[UIAlertView alloc] initWithTitle:nil message:@"分享成功！" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+            [alertview show];
+            [self.navigationController popViewControllerAnimated:YES];
+
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            NSString *errorStr = [NSString stringWithFormat:@"%@",error];
+            
+            UIAlertView *alertview = [[UIAlertView alloc] initWithTitle:nil message:errorStr delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+            [alertview show];
+            
+        }];
+//
+        
+        
+    
+        
+//    [self.navigationController popViewControllerAnimated:YES];
+    }else {
+        
+    }
+    
+    
+    
+   
 }
 
 @end

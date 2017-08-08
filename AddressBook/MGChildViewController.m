@@ -40,6 +40,7 @@
 @implementation MGChildViewController
 //常用联系人
 -(void)initData1{
+   
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSString *userId = [userDefaults stringForKey:@"contactId"];
     
@@ -61,8 +62,10 @@
                     [self.nomalContactArray addObject:contact];
                 }
             }
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
             [self.tableView reloadData];
         }failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+           [MBProgressHUD hideHUDForView:self.view animated:YES];
             NSLog(@"%@",error); //打印错误信息
         }];
   
@@ -71,7 +74,6 @@
 
 //企业联系人
 -(void)initData2{
-    
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     // 申明请求的数据是json类型
@@ -92,8 +94,10 @@
                     [self.groupArray addObject:group];
                 }
             }
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
             [self.tableView reloadData];
         }failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
             NSLog(@"%@",error); //打印错误信息
         }];
         
@@ -101,11 +105,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+     
     [self initData1];
     [self initData2];
-    UIBarButtonItem * backButtonItem = [[UIBarButtonItem alloc] init];
-    backButtonItem.title = @"";
-    self.navigationItem.backBarButtonItem = backButtonItem;
+
     self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - 35 -70) style:UITableViewStylePlain];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -193,6 +196,7 @@
         cell.nameLab.text = groupContact.contactName;
         NSString *imagePath = groupContact.contactAvatar;
         NSURL *imageUrl = [NSURL URLWithString:imagePath];
+        cell.nameLab.textColor = [UIColor colorWithRed:70/255.0 green:76/255.0 blue:86/255.0 alpha:1];
         [cell.avatarImageView sd_setImageWithURL:imageUrl placeholderImage:[UIImage imageNamed:@"head"] options:SDWebImageRetryFailed];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         [cell setEditing:YES];
@@ -215,6 +219,7 @@
             }
      
             MGDepartment *group = _groupArray[section];
+//            [self getDataofSection:group.groupId];
             headView.departmentName.text = group.groupName;
             headView.departmentName.textColor = [UIColor colorWithRed:70/255.0 green:76/255.0 blue:86/255.0 alpha:1];
             headView.topButton.tag = section + 1000;
@@ -394,8 +399,13 @@
     return @"添加为常用";
 }
 
+
+
 //展开收缩cell
 -(void)buttonAction:(UIButton*)sender{
+    
+    if ([_selectedArray[sender.tag - 1000] isEqualToString:@"0"]) {
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     id groupId = objc_getAssociatedObject(sender, "groupId");
     NSString *str = groupId;
     NSDictionary *parameters = @{@"groupId":str};
@@ -416,19 +426,20 @@
             }
         }
         [self.contactDictionary setObject:contactArray forKey:groupId];
-        if ([_selectedArray[sender.tag - 1000] isEqualToString:@"0"]) {
+        
             [_selectedArray replaceObjectAtIndex:sender.tag - 1000 withObject:@"1"];
             [_tableView reloadSections:[NSIndexSet indexSetWithIndex:sender.tag - 1000] withRowAnimation:UITableViewRowAnimationFade];
-        }
-        else
-        {
-            [_selectedArray replaceObjectAtIndex:sender.tag - 1000 withObject:@"0"];
-            [_tableView reloadSections:[NSIndexSet indexSetWithIndex:sender.tag - 1000] withRowAnimation:UITableViewRowAnimationFade];
-        }
+         [MBProgressHUD hideHUDForView:self.view animated:YES];
+        
     }failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
         NSLog(@"%@",error); //打印错误信息
     }];
-    
+    }else
+    {
+        [_selectedArray replaceObjectAtIndex:sender.tag - 1000 withObject:@"0"];
+        [_tableView reloadSections:[NSIndexSet indexSetWithIndex:sender.tag - 1000] withRowAnimation:UITableViewRowAnimationFade];
+    }
 }
 -(UIColor *)randomColor:(NSInteger)section{
     
