@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+@protocol moveTagDelegate <NSObject>
 
+-(void)moveTag;
+@end
 @interface MGLeaderboardViewController : UIViewController
-
+@property(nonatomic)id<moveTagDelegate>delegate;
 @end

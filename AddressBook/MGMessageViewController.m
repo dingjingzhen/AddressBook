@@ -20,7 +20,7 @@
 #define naviHeight  (self.navigationController.navigationBar.frame.size.height)+([[UIApplication sharedApplication] statusBarFrame].size.height)
 
 
-@interface MGMessageViewController ()
+@interface MGMessageViewController ()<moveTagDelegate,moveTagsDelegate>
 @property (nonatomic,strong) NSMutableArray *messageArray;
 @property (nonatomic,strong) NSMutableArray *messageCenter;
 @property (nonatomic,strong) NSMutableArray *messageCentertime;
@@ -109,6 +109,11 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *ID = @"MGUpvoteTableViewCell";
     MGUpvoteTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
+    
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSString *tag1 = [userDefaults stringForKey:@"tag1"];
+    NSString *tag2 = [userDefaults stringForKey:@"tag2"];
+    NSString *tag3 = [userDefaults stringForKey:@"tag3"];
     if (!cell)
     {
         NSArray *nibs = [[NSBundle mainBundle]loadNibNamed:ID owner:nil options:nil];
@@ -118,11 +123,15 @@
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     if (indexPath.section == 0) {
-
         cell.messageCenter.text = @"消息中心";
-        cell.numberLab.text = @"3";
+        if (![tag1  isEqual: @"0"]) {
+            cell.numberLab.text = tag1;
+        }else{
+            cell.numberView.hidden = YES;
+        }
+        
+        
         cell.headImage.image = [UIImage imageNamed:@"message1"];
-
         cell.commentLab.text = @"";
     }else{
         
@@ -133,13 +142,32 @@
         [cell.headImage sd_setImageWithURL:imageUrl placeholderImage:[UIImage imageNamed:@"head"] options:SDWebImageCacheMemoryOnly];
         cell.nameLab.text = message.userName;
         cell.commentLab.text = message.messageText;
-        if ((indexPath.row != 0)&&(indexPath.row!=1)) {
-            cell.numberView.hidden = YES;
+//        if ((indexPath.row != 0)&&(indexPath.row!=1)) {
+//            cell.numberView.hidden = YES;
+//        }else{
+//            cell.numberView.hidden = NO;
+//        }
+//        if (indexPath.row == 0) {
+//            cell.numberLab.text = @"3";
+//        }
+        if (indexPath.row == 0) {
+            if (![tag2 isEqual:@"0"]) {
+                cell.numberLab.text = tag2;
+            }else{
+                cell.numberView.hidden = YES;
+            }
         }else{
-            cell.numberView.hidden = NO;
+            if (indexPath.row == 1) {
+            if (![tag3 isEqual:@"0"]) {
+                cell.numberLab.text = tag3;
+            }else{
+                cell.numberView.hidden = YES;
+            }
+            }else{
+                cell.numberView.hidden = YES;
+            }
         }
     }
-    
         return cell;
 
 }
@@ -152,6 +180,7 @@
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] ;
         MGLeaderboardViewController * LVC = [storyboard instantiateViewControllerWithIdentifier:@"MGLeaderboardViewController"];
         self.hidesBottomBarWhenPushed = YES;
+        LVC.delegate = self;
         [self.navigationController pushViewController:LVC animated:YES];
         
     }else{
@@ -160,6 +189,9 @@
         self.hidesBottomBarWhenPushed = YES;
         MGMessage *message = self.messageArray[indexPath.row];
         DVC.userId = message.userId;
+        DVC.row = indexPath.row;
+        DVC.section = indexPath.section;
+        DVC.delegate = self;
         DVC.navigationItem.title = message.userName;
         [self.navigationController pushViewController:DVC animated:YES];
        
@@ -172,8 +204,15 @@
     return 0;
 }
 
+-(void)moveTags{
+//    self.row = row;
+    [self.messageTableview reloadData];
+}
 
-
+-(void)moveTag{
+    //    self.row = row;
+    [self.messageTableview reloadData];
+}
 
 
 

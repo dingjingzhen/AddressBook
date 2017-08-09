@@ -43,7 +43,20 @@
 //#pragma mark----- 导航按钮响应事件-----
 //
 - (void)goback{
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+   
+        if (self.row == 0) {
+            [userDefaults setObject:@"0" forKey:@"tag2"];
+
+        }else{
+            if (self.row == 1) {
+                [userDefaults setObject:@"0" forKey:@"tag3"];
+
+            }
+        }
     
+    
+    [self.delegate moveTags];
         [self.navigationController popViewControllerAnimated:YES];
     
 }

@@ -8,6 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol moveTagsDelegate <NSObject>
+
+-(void)moveTags;
+@end
+
+
 @interface MGDetailMessageController : UIViewController
 @property (nonatomic,copy) NSString *userId;
+@property (nonatomic,assign) NSInteger row;
+@property (nonatomic,assign) NSInteger section;
+@property(nonatomic)id<moveTagsDelegate>delegate;
 @end

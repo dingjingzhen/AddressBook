@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface MGMessageViewController : UIViewController
-
+@property (nonatomic,assign) NSInteger row;
 @end

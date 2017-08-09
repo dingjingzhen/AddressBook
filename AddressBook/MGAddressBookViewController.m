@@ -61,6 +61,12 @@
 
 - (void)viewDidLoad {
     
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:@"1" forKey:@"tag1"];
+    [userDefaults setObject:@"3" forKey:@"tag2"];
+    [userDefaults setObject:@"1" forKey:@"tag3"];
+    
+    
     self.navigationItem.hidesBackButton = true;
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
@@ -250,6 +256,11 @@
 - (void)FSContenViewDidEndDecelerating:(FSPageContentView *)contentView startIndex:(NSInteger)startIndex endIndex:(NSInteger)endIndex
 {
     self.titleView.selectIndex = endIndex;
+}
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.tabBarController.tabBar.hidden = YES;
 }
 
 

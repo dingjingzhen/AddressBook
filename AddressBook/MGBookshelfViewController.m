@@ -37,7 +37,7 @@
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSString *userId ;
-    if ([self.mineOrhe isEqualToString: @"mine"]) {
+    if ([self.mineOrhe isEqualToString: @"mine"]||[self.mineOrhe isEqualToString: @"my"]) {
         userId = [userDefaults stringForKey:@"contactId"];
     }else if([self.mineOrhe isEqualToString: @"his"]){
         userId = self.contactId;

@@ -137,6 +137,8 @@ static NSString *identify = @"MGDetailMessageTableViewCell";
     }
 }
 -(void)back{
+    
+    [self.delegate moveTag:1];
     [self.navigationController popViewControllerAnimated:YES];
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section

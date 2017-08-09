@@ -99,6 +99,10 @@
 
 -(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     if ([self.title isEqualToString:@"部门排行榜"]) {
+        
+        
+        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+        NSString *groupName = [userDefaults stringForKey:@"groupName"];
         UIView *view  = [[UIView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 20)];
         view.backgroundColor = [UIColor colorWithRed:242/255.0 green:242/255.0 blue:242/255.0 alpha:242/255.0];
         UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(14, 2, 200, 16)];
@@ -108,7 +112,7 @@
             label.text = @"个人信息";
         }
         else{
-            label.text = @"部门排行榜";
+            label.text = groupName;
         }
         [view addSubview:label];
         return view;

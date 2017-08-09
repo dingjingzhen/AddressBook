@@ -7,7 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+@protocol RefreshDelegate <NSObject>
+
+-(void)moveTag:(NSInteger )row;
+@end
 
 @interface MGDetailMessageViewController : UIViewController
 @property (nonatomic,copy) NSString *fromUserId;
+@property (nonatomic,assign) NSInteger row;
+@property(nonatomic)id<RefreshDelegate>delegate;
 @end

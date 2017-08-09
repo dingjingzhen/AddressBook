@@ -66,6 +66,10 @@
 }
 
 -(void)back{
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:@"0" forKey:@"tag1"];
+    [self.delegate moveTag];
+
     [self.navigationController popViewControllerAnimated:YES];
 }
 

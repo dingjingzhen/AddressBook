@@ -54,6 +54,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.tabBarController.tabBar.hidden = NO;
     [self getData];
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSString *userName = [userDefaults stringForKey:@"contactName"];
@@ -155,7 +156,7 @@
         MGBookshelfViewController *bookshelfVC = [storyboard instantiateViewControllerWithIdentifier:@"MGBookshelfViewController"];
         self.hidesBottomBarWhenPushed = YES;
         bookshelfVC.navigationItem.title = @"我的书库";
-        bookshelfVC.mineOrhe = @"mine";
+        bookshelfVC.mineOrhe = @"my";
         [self.navigationController pushViewController:bookshelfVC animated:YES];
         self.hidesBottomBarWhenPushed = NO;
     }else{
@@ -178,6 +179,7 @@
     [self.navigationController pushViewController:messageVC animated:YES];
     self.hidesBottomBarWhenPushed = NO;
     
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -185,6 +187,7 @@
     [super viewWillAppear:animated];
     //    self.navigationController.navigationBarHidden = YES;
     [self.navigationController setNavigationBarHidden:YES];
+    self.tabBarController.tabBar.hidden = NO;
 }
 
 - (void)viewWillDisappear:(BOOL)animated
