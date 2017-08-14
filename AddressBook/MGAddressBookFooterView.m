@@ -21,7 +21,7 @@
         _headImage.image = [UIImage imageNamed:@"gongsi"];
         [self.contentView addSubview:_headImage];
         
-        _headView = [[UIView alloc]initWithFrame:CGRectMake(9, 9, 32, 32)];
+        _headView = [[UIView alloc]initWithFrame:CGRectMake(20, 9, 32, 32)];
         _headView.layer.masksToBounds = YES;
         _headView.layer.cornerRadius = 16;
         
@@ -33,8 +33,10 @@
         [_headLabel setTextColor:[UIColor whiteColor]];
         _headLabel.textAlignment = NSTextAlignmentCenter;
         [_headView addSubview:_headLabel];
-        
-        _departmentName = [[UILabel alloc]initWithFrame:CGRectMake(56, 10, 200, 30)];
+        //用来标识section的展开和关闭
+        _upOrdown = [[UIImageView alloc]initWithFrame:CGRectMake(size.width-34, (size.height-7)/2, 14, 7)];
+        [self.contentView addSubview:_upOrdown];
+        _departmentName = [[UILabel alloc]initWithFrame:CGRectMake(67, 10, 200, 30)];
         [_departmentName setFont:[UIFont systemFontOfSize:16]];
         [_departmentName setTextColor:[UIColor colorWithRed:70/255 green:76/255 blue:86/255 alpha:1]];
         [self.contentView addSubview:_departmentName];

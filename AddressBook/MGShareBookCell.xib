@@ -51,20 +51,20 @@
                             <constraint firstAttribute="height" constant="1" id="5B7-qi-4n3"/>
                         </constraints>
                     </view>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gKJ-Ag-dUu">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="migubook" translatesAutoresizingMaskIntoConstraints="NO" id="gKJ-Ag-dUu">
                         <rect key="frame" x="7" y="100" width="20" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="ILb-OP-8UL"/>
                             <constraint firstAttribute="width" constant="20" id="UYS-0S-HFm"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TCp-yb-EZB">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="咪咕阅读" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TCp-yb-EZB">
                         <rect key="frame" x="35" y="100" width="238" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="ceA-b0-DmR"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <nil key="textColor"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                        <color key="textColor" red="0.7019608021" green="0.7019608021" blue="0.7019608021" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
@@ -89,7 +89,15 @@
                     <constraint firstAttribute="trailing" secondItem="TCp-yb-EZB" secondAttribute="trailing" constant="8" id="vAE-Pc-dAM"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="bookDescription" destination="Qyg-iA-fLi" id="Kfy-sH-z3z"/>
+                <outlet property="bookLogo" destination="HaZ-YU-h51" id="yoZ-3z-z2s"/>
+                <outlet property="bookTitel" destination="8gD-1r-Oba" id="ibR-1g-g38"/>
+            </connections>
             <point key="canvasLocation" x="5.5" y="86.5"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="migubook" width="147" height="150"/>
+    </resources>
 </document>

@@ -9,7 +9,9 @@
 #import "MGLeaderboardViewController.h"
 #import "MGChildViewController.h"
 #import "MGMessageChildViewController.h"
+#import <SwipeBack/SwipeBack.h>
 #import <FSScrollContentView.h>
+
 #define naviHeight  (self.navigationController.navigationBar.frame.size.height)+([[UIApplication sharedApplication] statusBarFrame].size.height)
 
 
@@ -35,13 +37,14 @@
     //返回按钮
     UIBarButtonItem *leftBtn = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"back"] style:UIBarButtonItemStylePlain target:self action:@selector(back)];
     self.navigationItem.leftBarButtonItem = leftBtn;
-
-    self.contentView = [[UIView alloc]initWithFrame:CGRectMake(0, 64, self.view.bounds.size.width, self.view.bounds.size.height - 64)];
+    
+    self.contentView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
     self.contentView.backgroundColor = [UIColor colorWithRed:242/255.0 green:242/255.0 blue:242/255.0 alpha:242/255.0];
     [self.view addSubview:self.contentView];
     
     self.titleView = [[FSSegmentTitleView alloc]initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), 45) titles:@[@"部门排行榜",@"企业排行榜"] delegate:self indicatorType:FSIndicatorTypeDefault];
-    self.titleView.titleSelectFont = [UIFont systemFontOfSize:17];
+    self.titleView.titleFont =[UIFont systemFontOfSize:16];
+    self.titleView.titleSelectFont = [UIFont systemFontOfSize:16];
     self.titleView.indicatorColor = [UIColor colorWithRed:18/255.0 green:191/255.0 blue:195/255.0 alpha:1];
     self.titleView.backgroundColor = [UIColor whiteColor];
     self.titleView.selectIndex = 0;
@@ -61,15 +64,12 @@
     self.pageContentView.backgroundColor = [UIColor whiteColor];
     self.pageContentView.contentViewCanScroll = YES;//设置滑动属性
     [self.contentView addSubview:_pageContentView];
-    
-    
 }
 
 -(void)back{
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     [userDefaults setObject:@"0" forKey:@"tag1"];
     [self.delegate moveTag];
-
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -87,6 +87,9 @@
     self.titleView.selectIndex = endIndex;
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    self.navigationController.swipeBackEnabled = YES;
+}
 
 @end
 

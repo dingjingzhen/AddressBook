@@ -11,6 +11,9 @@
 #import <AFNetworking.h>
 #import <UIImageView+WebCache.h>
 #import "MGBook.h"
+
+#define naviHeight  (self.navigationController.navigationBar.frame.size.height)+([[UIApplication sharedApplication] statusBarFrame].size.height)
+
 @interface MGTaboneViewController ()
 @property (weak, nonatomic) IBOutlet UICollectionView *bookCollectionView;
 @property (nonatomic,strong) NSMutableArray *bookArray;
@@ -25,10 +28,10 @@
     //初始化
     UICollectionViewFlowLayout *flowLayout=[[UICollectionViewFlowLayout alloc] init];
     [flowLayout setScrollDirection:UICollectionViewScrollDirectionVertical];
-
-    [self.self.bookCollectionView registerNib:[UINib nibWithNibName:@"MGCollectionViewCell"bundle:nil]forCellWithReuseIdentifier:@"MGCollectionViewCell"];
     
-    self.bookCollectionView.alwaysBounceHorizontal = YES;
+    [self.bookCollectionView registerNib:[UINib nibWithNibName:@"MGCollectionViewCell"bundle:nil]forCellWithReuseIdentifier:@"MGCollectionViewCell"];
+    
+    self.bookCollectionView.bounces = YES;
     
     [self.view addSubview:self.bookCollectionView];
 }
@@ -39,7 +42,7 @@
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSString *userId ;
     userId = [userDefaults stringForKey:@"contactId"];
-   
+    
     
     NSDictionary *parameters1 = @{@"userId": userId,@"count":@"100"};
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
@@ -62,7 +65,7 @@
             }
         }
         
-      
+        
         [self.bookCollectionView reloadData];
     }failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"error:%@",error); //打印错误信息
@@ -106,10 +109,10 @@
     NSURL *imageUrl = [NSURL URLWithString:imagePath];
     [imageView sd_setImageWithURL:imageUrl];
     
-//    [imageView setImage:[UIImage imageNamed:@"head"]];
-//    [label setText:[self.dataArray objectAtIndex:indexPath.row]];
+    //    [imageView setImage:[UIImage imageNamed:@"head"]];
+    //    [label setText:[self.dataArray objectAtIndex:indexPath.row]];
     label.text = book.bookName;
-//    cell.backgroundColor = [UIColor redColor];
+    //    cell.backgroundColor = [UIColor redColor];
     
     return cell;
 }

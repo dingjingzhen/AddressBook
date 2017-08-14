@@ -34,6 +34,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>SwipeBack.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
@@ -42,7 +47,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>2FEB15929EE235D4B4D8F281FEBD60FA</key>
+		<key>1C5E5F5918A22EBA7FD30C135D19E800</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -57,12 +62,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>72FBC02F037D8EB1981DD1CE00865616</key>
+		<key>96A80CB36DEF615D561F44B727953615</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>9E033EDB5EC0819481B0546434FA577B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E404EFEDCC54F44CFD131D3AF2E5ED04</key>
 		<dict>
 			<key>primary</key>
 			<true/>

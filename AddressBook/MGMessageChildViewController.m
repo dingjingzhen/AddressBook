@@ -17,13 +17,8 @@
 
 @interface MGMessageChildViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic,strong) UITableView *tableView;
-//@property (nonatomic,strong) NSMutableArray *headImage;
-//@property (nonatomic,strong) NSMutableArray *timeArray;
 @property (nonatomic,strong) NSMutableArray *contactArray;
 @property (nonatomic,strong) NSMutableArray *userInfoArray;
-//@property (nonatomic,strong) NSMutableArray *companyContact;
-//@property(nonatomic, strong)NSMutableArray *selectedArray;//是否被点击
-
 @end
 
 @implementation MGMessageChildViewController
@@ -57,10 +52,10 @@
                 [self.contactArray addObject:contact];
             }
         }
-            MGContact *contact2 = [MGContact contactWithDict:userInfoDic];
-            if (contact2) {
-                [self.userInfoArray addObject:contact2];
-            }
+        MGContact *contact2 = [MGContact contactWithDict:userInfoDic];
+        if (contact2) {
+            [self.userInfoArray addObject:contact2];
+        }
         
         
         [self.tableView reloadData];
@@ -81,11 +76,14 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.rowHeight = 85;
+    
+    [self.tableView registerNib:[UINib nibWithNibName:@"MGRankTableViewCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"MGRankTableViewCell"];
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         [self initData];
         // 结束刷新
         [self.tableView.mj_header endRefreshing];
     }];
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.tableFooterView=[[UIView alloc]init];//去除下方空白cell
     [self.view addSubview:self.tableView];
 }
@@ -105,7 +103,7 @@
         NSString *groupName = [userDefaults stringForKey:@"groupName"];
         UIView *view  = [[UIView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 20)];
         view.backgroundColor = [UIColor colorWithRed:242/255.0 green:242/255.0 blue:242/255.0 alpha:242/255.0];
-        UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(14, 2, 200, 16)];
+        UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(20, 2, 200, 16)];
         label.font = [UIFont systemFontOfSize:12];
         label.textColor = [UIColor colorWithRed:137/255.0 green:137/255.0 blue:137/255.0 alpha:1];
         if (section == 0) {
@@ -119,7 +117,7 @@
     }else{
         UIView *view  = [[UIView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 20)];
         view.backgroundColor = [UIColor colorWithRed:242/255.0 green:242/255.0 blue:242/255.0 alpha:242/255.0];
-        UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(14, 2, 200, 16)];
+        UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(20, 2, 200, 16)];
         label.font = [UIFont systemFontOfSize:12];
         label.textColor = [UIColor colorWithRed:137/255.0 green:137/255.0 blue:137/255.0 alpha:1];
         if (section == 0) {
@@ -130,7 +128,7 @@
         }
         [view addSubview:label];
         return view;
-
+        
     }
 }
 
@@ -140,32 +138,31 @@
         
     }
     return 1;
-
+    
+}
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    cell.separatorInset = UIEdgeInsetsMake(0, 20, 0, 20);
+    //UIEdgeInsetsMake(CGFloat top, CGFloat left, CGFloat bottom, CGFloat right)
+    //左右分别缩进20pt
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *ID = @"MGRankTableViewCell";
     
     MGRankTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
-    if (!cell)
-    {
-        NSArray *nibs = [[NSBundle mainBundle]loadNibNamed:ID owner:nil options:nil];
-        cell = [nibs lastObject];
-    }
+   
     
     MGContact *contact = self.contactArray[indexPath.row];
     MGContact *mineInfo = self.userInfoArray[0];
     
     if (indexPath.section == 0) {
         
-        NSString *rank1 = @"第";
-        NSString *rank2 = [NSString stringWithFormat:@"%@", mineInfo.contactRank];
-        NSString *rank = [rank1 stringByAppendingString:rank2];
-        rank = [rank stringByAppendingString:@"名"];
+        NSString *rank = [NSString stringWithFormat:@"第%@名", mineInfo.contactRank];
         cell.contactName.text = mineInfo.contactName;
         
         NSString *score = [NSString stringWithFormat:@"%@", mineInfo.contactScore];
-
+        
         cell.rankLab.text = rank;
         NSString *imagePath = mineInfo.contactAvatar;
         NSURL *imageUrl = [NSURL URLWithString:imagePath];
@@ -173,10 +170,10 @@
         cell.contactScore.text = score;
         return cell;
     }else{
-        NSString *rank1 = @"第";
-        NSString *rank = [NSString stringWithFormat:@"%ld", (long)indexPath.row+1];
-        rank = [rank1 stringByAppendingString:rank];
-        rank = [rank stringByAppendingString:@"名"];
+//        NSString *rank1 = @"第";
+        NSString *rank = [NSString stringWithFormat:@"第%ld名", (long)indexPath.row+1];
+//        rank = [rank1 stringByAppendingString:rank];
+//        rank = [rank stringByAppendingString:@"名"];
         NSString *score = [NSString stringWithFormat:@"%@", contact.contactScore];
         cell.contactName.text = contact.contactName;
         cell.rankLab.text = rank;
@@ -196,20 +193,20 @@
             cell.firstThreeImage.hidden = NO;
             cell.firstThreeLab.text = @"NO.2";
             cell.firstThreeImage.image = [UIImage imageNamed:@"pic_no2"];
-
+            
         }
         if (indexPath.row == 2) {
             cell.rankLab.hidden = YES;
             cell.firstThreeImage.hidden = NO;
             cell.firstThreeLab.text = @"NO.3";
-            cell.firstThreeImage.image = [UIImage imageNamed:@"pic_no2"];
-
+            cell.firstThreeImage.image = [UIImage imageNamed:@"pic_no3"];
+            
         }
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-       
+        
         
         return cell;
-
+        
     }
     
     

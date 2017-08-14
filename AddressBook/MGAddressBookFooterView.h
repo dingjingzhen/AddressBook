@@ -15,7 +15,7 @@
 @property (nonatomic,strong) UILabel *headLabel;
 @property (nonatomic,strong) UILabel *departmentName;
 @property (nonatomic,strong) UIButton *topButton;
-
+@property (nonatomic,strong) UIImageView *upOrdown;
 
 - (instancetype)initWithReuseIdentifier:(NSString *)reuseIdentifier  size:(CGSize)size;
 

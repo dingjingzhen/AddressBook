@@ -24,6 +24,10 @@
 
 @property (nonatomic,copy) id contactRank;
 
+@property (nonatomic, copy) NSString *chinese;
+
+@property (nonatomic, copy) NSString *pinyin;
+
 + (instancetype)contactWithDict:(NSDictionary *)dictionary;
 
 @end

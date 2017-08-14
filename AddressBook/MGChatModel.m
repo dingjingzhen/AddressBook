@@ -16,6 +16,7 @@
         message.msg = dictionary[@"message_text"];
         message.isRight = [dictionary[@"sendByMe"] boolValue];
         message.toAvatar = dictionary[@"to_user_avatar"];
+        message.time = dictionary[@"message_time"];
         message.fromAvatar = dictionary[@"from_user_avatar"];
         return message;
     }

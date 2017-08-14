@@ -13,6 +13,8 @@
 
 @property (nonatomic, copy) NSString *groupName;
 
+@property (nonatomic, copy) NSString *pinyin;
+
 
 + (instancetype)groupWithDict:(NSDictionary *)dictionary;
 @end

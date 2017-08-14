@@ -25,6 +25,8 @@
 		184CD18F1F3AABA500DDD1FA /* MGTaboneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 184CD18E1F3AABA500DDD1FA /* MGTaboneViewController.m */; };
 		184CD1961F3AAFBE00DDD1FA /* MGCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 184CD1941F3AAFBE00DDD1FA /* MGCollectionViewCell.m */; };
 		184CD1971F3AAFBE00DDD1FA /* MGCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 184CD1951F3AAFBE00DDD1FA /* MGCollectionViewCell.xib */; };
+		184CD19D1F3D63DB00DDD1FA /* MGPeople.m in Sources */ = {isa = PBXBuildFile; fileRef = 184CD19C1F3D63DB00DDD1FA /* MGPeople.m */; };
+		184CD1A01F3DB56700DDD1FA /* MGReadBookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 184CD19F1F3DB56700DDD1FA /* MGReadBookViewController.m */; };
 		185679561F28818E005FC304 /* MGMineTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 185679541F28818E005FC304 /* MGMineTableViewCell.m */; };
 		185679591F288CE5005FC304 /* MGMineTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 185679581F288CE5005FC304 /* MGMineTableViewCell.xib */; };
 		1856795C1F2891B6005FC304 /* MGMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1856795B1F2891B6005FC304 /* MGMessageViewController.m */; };
@@ -107,6 +109,10 @@
 		184CD1931F3AAFBE00DDD1FA /* MGCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGCollectionViewCell.h; sourceTree = "<group>"; };
 		184CD1941F3AAFBE00DDD1FA /* MGCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGCollectionViewCell.m; sourceTree = "<group>"; };
 		184CD1951F3AAFBE00DDD1FA /* MGCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MGCollectionViewCell.xib; sourceTree = "<group>"; };
+		184CD19B1F3D63DB00DDD1FA /* MGPeople.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGPeople.h; sourceTree = "<group>"; };
+		184CD19C1F3D63DB00DDD1FA /* MGPeople.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGPeople.m; sourceTree = "<group>"; };
+		184CD19E1F3DB56700DDD1FA /* MGReadBookViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGReadBookViewController.h; sourceTree = "<group>"; };
+		184CD19F1F3DB56700DDD1FA /* MGReadBookViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGReadBookViewController.m; sourceTree = "<group>"; };
 		185679531F28818E005FC304 /* MGMineTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGMineTableViewCell.h; sourceTree = "<group>"; };
 		185679541F28818E005FC304 /* MGMineTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGMineTableViewCell.m; sourceTree = "<group>"; };
 		185679581F288CE5005FC304 /* MGMineTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MGMineTableViewCell.xib; sourceTree = "<group>"; };
@@ -214,6 +220,8 @@
 				182326FF1F3062920005B679 /* MGBook.m */,
 				182327011F3074390005B679 /* MGMessage.h */,
 				182327021F3074390005B679 /* MGMessage.m */,
+				184CD19B1F3D63DB00DDD1FA /* MGPeople.h */,
+				184CD19C1F3D63DB00DDD1FA /* MGPeople.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -352,6 +360,8 @@
 				18C1C6711F39C34B00B1EE89 /* MGDetailMessageController.m */,
 				184CD18D1F3AABA500DDD1FA /* MGTaboneViewController.h */,
 				184CD18E1F3AABA500DDD1FA /* MGTaboneViewController.m */,
+				184CD19E1F3DB56700DDD1FA /* MGReadBookViewController.h */,
+				184CD19F1F3DB56700DDD1FA /* MGReadBookViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -436,8 +446,13 @@
 				TargetAttributes = {
 					18AAEDD11F258CB6002B92F3 = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = 9XC34F9334;
+						DevelopmentTeam = 2DKS3W4WEK;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.NetworkExtensions = {
+								enabled = 0;
+							};
+						};
 					};
 					18AAEDEA1F258CB7002B92F3 = {
 						CreatedOnToolsVersion = 8.3.3;
@@ -562,11 +577,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				184CD19D1F3D63DB00DDD1FA /* MGPeople.m in Sources */,
 				185679AF1F2989D2005FC304 /* MGBookshelfViewController.m in Sources */,
 				182327451F307D410005B679 /* MGDetailMessageViewController.m in Sources */,
 				182326F51F2F2A640005B679 /* MGDepartment.m in Sources */,
 				182326F21F2F170E0005B679 /* MGContact.m in Sources */,
 				18C1C6721F39C34B00B1EE89 /* MGDetailMessageController.m in Sources */,
+				184CD1A01F3DB56700DDD1FA /* MGReadBookViewController.m in Sources */,
 				185679B31F298A2E005FC304 /* MGBookShelfTableViewCell.m in Sources */,
 				18584D7B1F33076800B120DF /* MGAddressBookHeaderView.m in Sources */,
 				184CD1961F3AAFBE00DDD1FA /* MGCollectionViewCell.m in Sources */,
@@ -671,7 +688,8 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: 2267240864@qq.com (86RF6F2KXW)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: 2267240864@qq.com (86RF6F2KXW)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -720,7 +738,8 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: 2267240864@qq.com (86RF6F2KXW)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: 2267240864@qq.com (86RF6F2KXW)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -746,16 +765,20 @@
 			baseConfigurationReference = 59D776BFA89EF9374F0C9E5D /* Pods-AddressBook.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 9XC34F9334;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 2DKS3W4WEK;
 				INFOPLIST_FILE = AddressBook/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/AddressBook",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = www.Apple.AddressBook;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dingjingzhen.addressBook;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Debug;
 		};
@@ -764,16 +787,20 @@
 			baseConfigurationReference = 38828997B62F2218A32A0BE3 /* Pods-AddressBook.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 9XC34F9334;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 2DKS3W4WEK;
 				INFOPLIST_FILE = AddressBook/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/AddressBook",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = www.Apple.AddressBook;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dingjingzhen.addressBook;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Release;
 		};

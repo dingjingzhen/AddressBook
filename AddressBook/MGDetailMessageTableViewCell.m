@@ -34,6 +34,7 @@
 - (void)refreshCell:(MGChatModel *)model
 {
     // 首先计算文本宽度和高度
+    self.contentView.backgroundColor = [UIColor colorWithRed:236.0/255 green:236.0/255 blue:236.0/255 alpha:1];
     CGRect rec = [model.msg boundingRectWithSize:CGSizeMake(200, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:17]} context:nil];
     // 气泡
     UIImage *image = nil;

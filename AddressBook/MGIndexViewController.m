@@ -10,6 +10,7 @@
 #import <WebKit/WebKit.h>
 #import <MBProgressHUD.h>
 #import "MGIndexViewController.h"
+#import <SwipeBack/SwipeBack.h>
 #import "MGBookshelfViewController.h"
 
 @interface MGIndexViewController ()<WKScriptMessageHandler,WKNavigationDelegate,WKUIDelegate,UIScrollViewDelegate>
@@ -63,6 +64,7 @@
 - (void)goback{
     if ([self.webView canGoBack]) {
         [self.webView goBack];
+        [self.webView reload];
         NSLog(@"back");
     }else{
         [self.navigationController popViewControllerAnimated:YES];
@@ -72,7 +74,6 @@
 
 //创建webView
 - (void)creatWebView{
-    
     WKWebViewConfiguration *config = [WKWebViewConfiguration new];
     //初始化偏好设置属性：preferences
     config.preferences = [WKPreferences new];
@@ -86,13 +87,13 @@
     config.userContentController = [WKUserContentController new];
     // 注入JS对象名称senderModel，当JS通过senderModel来调用时，我们可以在WKScriptMessageHandler代理中接收到
     [config.userContentController addScriptMessageHandler:self name:@"senderModel"];
-    self.webView = [[WKWebView alloc]initWithFrame:CGRectMake(0, 64, self.view.frame.size.width, self.view.frame.size.height - 64) configuration:config];
-//    NSString *urlStr =@"http://121.40.229.114/Contacts/page/index.html#/home/597d4b3c7f2bf60245e2c113";
-//    NSURL *url = [NSURL URLWithString:urlStr];
-//    [self.webView loadRequest:[NSURLRequest requestWithURL:url]];
-    //    [self.webView loadRequest:[NSURLRequest requestWithURL:path]];
+    self.webView = [[WKWebView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - 64) configuration:config];
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSString *myUserId = [userDefaults stringForKey:@"contactId"];
     NSString *urlStr = @"http://121.40.229.114/Contacts/page/index.html#/home/";
     urlStr = [urlStr stringByAppendingString:self.userId];
+    urlStr = [urlStr stringByAppendingString:@"/"];
+    urlStr = [urlStr stringByAppendingString:myUserId];
     // 设置访问的URL
     NSURL *url = [NSURL URLWithString:urlStr];
     // 根据URL创建请求
@@ -118,7 +119,7 @@
 #pragma mark - KVO监听函数
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context{
     if ([keyPath isEqualToString:@"title"]) {
-//        self.title = self.webView.title;
+        //        self.title = self.webView.title;
     }else if([keyPath isEqualToString:@"loading"]){
         NSLog(@"loading");
     }
@@ -148,7 +149,7 @@
                 bVC.mineOrhe = @"mine";
                 bVC.contactId = self.userId;
                 bVC.navigationItem.title = @"我的书库";
-//                BVC.contactId = self.userId;
+                //                BVC.contactId = self.userId;
                 [self.navigationController pushViewController:bVC animated:YES];
                 
             }else if ([message.body isEqualToString:@"bookShelf"]) {
@@ -190,7 +191,7 @@
 //页面加载完成之后调用
 - (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation{
     NSLog(@"title:%@",webView.title);
-     [_hu hideAnimated:YES];
+    [_hu hideAnimated:YES];
 }
 // 页面加载失败时调用
 - (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(WKNavigation *)navigation
@@ -206,6 +207,8 @@
 
 -(void)viewDidAppear:(BOOL)animated{
     self.tabBarController.tabBar.hidden = YES;
-    self.hidesBottomBarWhenPushed = YES;}
+    self.hidesBottomBarWhenPushed = YES;
+    self.navigationController.swipeBackEnabled = YES;
+}
 
 @end

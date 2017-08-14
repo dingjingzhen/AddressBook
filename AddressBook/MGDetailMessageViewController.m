@@ -13,7 +13,7 @@
 #import <MBProgressHUD.h>
 #import "MGTextView.h"
 
-@interface MGDetailMessageViewController () <UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate>
+@interface MGDetailMessageViewController () <UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate,UIScrollViewDelegate>
 @property (nonatomic,strong) UITableView *tableView;
 @property (nonatomic,strong) NSMutableArray *dataSouce;
 @property (nonatomic,strong) MGTextView *inputView;
@@ -34,11 +34,15 @@ static NSString *identify = @"MGDetailMessageTableViewCell";
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 66, self.view.bounds.size.width, self.view.bounds.size.height - 64 - 45) style:UITableViewStylePlain];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    //    self.tableView.scroll
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:self.tableView];
     [self.tableView registerClass:[MGDetailMessageTableViewCell class] forCellReuseIdentifier:identify];
     
     [self initData];
+    
+    
+    
     
     // 小技巧，用了之后不会出现多余的Cell
     UIView *view = [[UIView alloc] init];
@@ -111,27 +115,12 @@ static NSString *identify = @"MGDetailMessageTableViewCell";
         [MBProgressHUD hideHUDForView:self.view animated:YES];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         [MBProgressHUD hideHUDForView:self.view animated:YES];
-
+        
         NSString *errorStr = [NSString stringWithFormat:@"%@",error];
         UIAlertView *alertview = [[UIAlertView alloc] initWithTitle:nil message:errorStr delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alertview show];
     }];
-
     
-    
-    
-    
-    
-    
-//    if (![self.inputView.textField.text isEqualToString:@""])
-//    {
-//        MGChatModel *chatModel = [[MGChatModel alloc] init];
-//        chatModel.msg = self.inputView.textField.text;
-//        chatModel.isRight = arc4random() % 2; // 0 or 1
-//        [self.dataSouce addObject:chatModel];
-//    }
-//    [self.tableView reloadData];
-    // 滚到底部  scroll so row of interest is completely visible at top/center/bottom of view
     if (self.dataSouce.count != 0) {
         [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.dataSouce.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
     }
@@ -144,21 +133,45 @@ static NSString *identify = @"MGDetailMessageTableViewCell";
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     
+    return 1;
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return self.dataSouce.count;
+}
+
+
+//显示表头
+- (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 20)];
+    MGChatModel *model = self.dataSouce[section];
+    NSString *time =  [model.time substringWithRange:NSMakeRange(5, 11)];
+    
+    label.text = time;
+    label.font = [UIFont systemFontOfSize:13];
+    label.textColor = [UIColor colorWithRed:174.0/255 green:174.0/255 blue:174.0/255 alpha:1];
+    label.backgroundColor = [UIColor colorWithRed:236.0/255 green:236.0/255 blue:236.0/255 alpha:1];
+    label.textAlignment = NSTextAlignmentCenter;
+    return label;
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    
+    
+    return 20;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     MGDetailMessageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identify];
     //    self.dataSouce.count-1-indexPath.row
-    [cell refreshCell:self.dataSouce[indexPath.row]];
+    [cell refreshCell:self.dataSouce[indexPath.section]];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    MGChatModel *model = self.dataSouce[indexPath.row];
+    MGChatModel *model = self.dataSouce[indexPath.section];
     CGRect rec =  [model.msg boundingRectWithSize:CGSizeMake(200, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:17]} context:nil];
     return rec.size.height + 45;
 }
@@ -182,10 +195,6 @@ static NSString *identify = @"MGDetailMessageTableViewCell";
         for (NSInteger i = num-1; i>=0; i--) {
             [resultArr addObject:resultArr1[i]];
         }
-        //        NSArray *resultArr =
-        
-        
-        
         self.dataSouce = [NSMutableArray array];
         
         for (NSDictionary *dic in resultArr) {
@@ -194,8 +203,6 @@ static NSString *identify = @"MGDetailMessageTableViewCell";
                 [self.dataSouce addObject:message];
             }
         }
-        
-        //        NSLog(@"%@",responseObject);
         [self.tableView reloadData];
         [MBProgressHUD hideHUDForView:self.view animated:YES];
     }failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -213,5 +220,35 @@ static NSString *identify = @"MGDetailMessageTableViewCell";
     }
     return _dataSouce;
 }
+
+#pragma -mark 控制section不悬停
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+
+{
+    CGFloat sectionHeaderHeight = 20;
+    if (scrollView.contentOffset.y<=sectionHeaderHeight&&scrollView.contentOffset.y>=0) {
+        
+        scrollView.contentInset = UIEdgeInsetsMake(-scrollView.contentOffset.y, 0, 0, 0);
+        
+    }
+    else if (scrollView.contentOffset.y>=sectionHeaderHeight) {
+        
+        scrollView.contentInset = UIEdgeInsetsMake(-sectionHeaderHeight, 0, 0, 0);
+        
+    }
+    
+}
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    //    if (self.tableView.contentSize.height > self.tableView.frame.size.height)
+    //    {
+    //        CGPoint offset = CGPointMake(0, self.tableView.contentSize.height - self.tableView.frame.size.height);
+    //        [self.tableView setContentOffset:offset animated:YES];
+    //    }
+    
+    
+}
+
 
 @end

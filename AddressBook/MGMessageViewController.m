@@ -16,6 +16,7 @@
 #import "MGDetailMessageController.h"
 #import <MJRefresh.h>
 #import <MBProgressHUD.h>
+#import <SwipeBack/SwipeBack.h>
 
 #define naviHeight  (self.navigationController.navigationBar.frame.size.height)+([[UIApplication sharedApplication] statusBarFrame].size.height)
 
@@ -32,8 +33,9 @@
 @implementation MGMessageViewController
 
 -(void)initData{
+    
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-
+    self.tabBarController.tabBar.hidden = YES;
     _messageCentertime = [NSMutableArray arrayWithObjects:@"7月29日", nil];
     _messageCenter = [NSMutableArray arrayWithObjects:@"消息中心", nil];
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
@@ -62,26 +64,29 @@
         
         [self.messageTableview reloadData];
         [MBProgressHUD hideHUDForView:self.view animated:YES];
-
+        
     }failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"%@",error); //打印错误信息
         [MBProgressHUD hideHUDForView:self.view animated:YES];
-
+        
     }];
-
+    
 }
 
 
 - (void)viewDidLoad {
     [self initData];
-    
+//    self.navigationController.navigationBar.hidden = NO;
+    self.tabBarController.tabBar.hidden = YES;
     UIBarButtonItem *leftBtn = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"back"] style:UIBarButtonItemStylePlain target:self action:@selector(back)];
     self.navigationItem.leftBarButtonItem = leftBtn;
-
+    
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.title = @"消息";
     self.messageTableview.tableFooterView = [[UITableViewHeaderFooterView alloc]init];
+    self.messageTableview.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.messageTableview.rowHeight = 85;
+   [self.messageTableview registerNib:[UINib nibWithNibName:@"MGUpvoteTableViewCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"MGUpvoteTableViewCell"];
     self.messageTableview.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         [self initData];
         // 结束刷新
@@ -114,11 +119,8 @@
     NSString *tag1 = [userDefaults stringForKey:@"tag1"];
     NSString *tag2 = [userDefaults stringForKey:@"tag2"];
     NSString *tag3 = [userDefaults stringForKey:@"tag3"];
-    if (!cell)
-    {
-        NSArray *nibs = [[NSBundle mainBundle]loadNibNamed:ID owner:nil options:nil];
-        cell = [nibs lastObject];
-    }
+    
+ 
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
@@ -131,25 +133,18 @@
         }
         
         
-        cell.headImage.image = [UIImage imageNamed:@"message1"];
+        //        cell.headImage.image = [UIImage imageNamed:@"ic_email"];
+        cell.headImage.backgroundColor = [UIColor colorWithRed:0 green:196.0/255.0 blue:198.0/255.0 alpha:1];
         cell.commentLab.text = @"";
     }else{
-        
-        MGMessage *message = self.messageArray[indexPath.row];
-        
+        NSInteger num = [self.messageArray count];
+        MGMessage *message = self.messageArray[num - 1 - indexPath.row];
         NSString *imagePath = message.userAvatar;
         NSURL *imageUrl = [NSURL URLWithString:imagePath];
         [cell.headImage sd_setImageWithURL:imageUrl placeholderImage:[UIImage imageNamed:@"head"] options:SDWebImageCacheMemoryOnly];
         cell.nameLab.text = message.userName;
+        cell.emailIcon.hidden = YES;
         cell.commentLab.text = message.messageText;
-//        if ((indexPath.row != 0)&&(indexPath.row!=1)) {
-//            cell.numberView.hidden = YES;
-//        }else{
-//            cell.numberView.hidden = NO;
-//        }
-//        if (indexPath.row == 0) {
-//            cell.numberLab.text = @"3";
-//        }
         if (indexPath.row == 0) {
             if (![tag2 isEqual:@"0"]) {
                 cell.numberLab.text = tag2;
@@ -158,18 +153,18 @@
             }
         }else{
             if (indexPath.row == 1) {
-            if (![tag3 isEqual:@"0"]) {
-                cell.numberLab.text = tag3;
-            }else{
-                cell.numberView.hidden = YES;
-            }
+                if (![tag3 isEqual:@"0"]) {
+                    cell.numberLab.text = tag3;
+                }else{
+                    cell.numberView.hidden = YES;
+                }
             }else{
                 cell.numberView.hidden = YES;
             }
         }
     }
-        return cell;
-
+    return cell;
+    
 }
 
 
@@ -186,26 +181,32 @@
     }else{
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] ;
         MGDetailMessageController * DVC = [storyboard instantiateViewControllerWithIdentifier:@"MGDetailMessageController"];
+        
+        
         self.hidesBottomBarWhenPushed = YES;
-        MGMessage *message = self.messageArray[indexPath.row];
+        NSInteger num = [self.messageArray count];
+        MGMessage *message = self.messageArray[num - 1 - indexPath.row];
         DVC.userId = message.userId;
         DVC.row = indexPath.row;
         DVC.section = indexPath.section;
         DVC.delegate = self;
+        
         DVC.navigationItem.title = message.userName;
         [self.navigationController pushViewController:DVC animated:YES];
-       
+        self.hidesBottomBarWhenPushed = NO;
     }
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-//    if (section == 0) {
-//        return 3;
-//    }
+    //    if (section == 0) {
+    //        return 3;
+    //    }
     return 0;
 }
 
+
+
 -(void)moveTags{
-//    self.row = row;
+    //    self.row = row;
     [self.messageTableview reloadData];
 }
 
@@ -238,7 +239,7 @@
     NSDate *endDate = [strDate  dateByAddingTimeInterval: interval];
     //NSLog(@"endDate:%@",endDate);
     NSString *lastTime = [self compareDate:endDate];
-//    NSLog(@"lastTime = %@",lastTime);
+    //    NSLog(@"lastTime = %@",lastTime);
     return lastTime;
 }
 
@@ -294,7 +295,10 @@
     }
 }
 
-
+-(void)viewWillAppear:(BOOL)animated{
+    self.navigationController.swipeBackEnabled = YES;
+    self.tabBarController.tabBar.hidden = YES;
+}
 
 @end
 

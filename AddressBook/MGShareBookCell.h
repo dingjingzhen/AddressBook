@@ -9,5 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface MGShareBookCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UILabel *bookTitel;
+@property (weak, nonatomic) IBOutlet UILabel *bookDescription;
+@property (weak, nonatomic) IBOutlet UIImageView *bookLogo;
 
 @end

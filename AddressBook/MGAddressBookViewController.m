@@ -11,10 +11,12 @@
 #import <FSScrollContentView.h>
 #import <AFNetworking.h>
 #import "MGContact.h"
+#import "MGMessage.h"
 #import "MGMessageTableViewCell.h"
 #import <UIImageView+WebCache.h>
 #import "MGIndexViewController.h"
 #import <MBProgressHUD.h>
+#import <SwipeBack/SwipeBack.h>
 
 #define naviHeight  (self.navigationController.navigationBar.frame.size.height)+([[UIApplication sharedApplication] statusBarFrame].size.height)
 
@@ -29,6 +31,8 @@
 @property (nonatomic,strong) UITableView *searchTableView;//用了显示搜索到的数据
 //@property (weak, nonatomic) IBOutlet UILabel *promptLab;
 @property (nonatomic,strong) UILabel *promptLab;
+@property (nonatomic,strong) MGMessage *message;
+@property (nonatomic,strong) NSMutableArray *messageArray;
 @end
 
 @implementation MGAddressBookViewController
@@ -36,7 +40,7 @@
 //懒加载searchBar
 -(UISearchBar *)searchBar{
     if (!_searchBar) {
-        _searchBar = [[UISearchBar alloc]initWithFrame:CGRectMake(0, 0,[UIScreen mainScreen].bounds.size.width , 40)];
+        _searchBar = [[UISearchBar alloc]initWithFrame:CGRectMake(0, -64,[UIScreen mainScreen].bounds.size.width , 40)];
         _searchBar.backgroundColor = [UIColor whiteColor];
         _searchBar.placeholder = @"搜一搜~~";
         _searchBar.barTintColor = [UIColor whiteColor];
@@ -49,7 +53,7 @@
 }
 -(UITableView *)searchTableView{
     if (!_searchTableView) {
-        _searchTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 64 + 40, CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds)-40-64) style:UITableViewStylePlain];
+        _searchTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 40, CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds)-40) style:UITableViewStylePlain];
         [self.view addSubview:_searchTableView];
         _searchTableView.delegate = self;
         _searchTableView.dataSource = self;
@@ -59,17 +63,16 @@
     return _searchTableView;
 }
 
+
+
 - (void)viewDidLoad {
-    
+//    [self addCommonContact];
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     [userDefaults setObject:@"1" forKey:@"tag1"];
     [userDefaults setObject:@"3" forKey:@"tag2"];
     [userDefaults setObject:@"1" forKey:@"tag3"];
-    
-    
     self.navigationItem.hidesBackButton = true;
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    
     UIBarButtonItem * backButtonItem = [[UIBarButtonItem alloc] init];
     backButtonItem.title = @"";
     self.navigationItem.backBarButtonItem = backButtonItem;
@@ -77,22 +80,19 @@
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.title = @"通讯录";
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:17],NSForegroundColorAttributeName:[UIColor colorWithRed:50/255.0 green:50/255.0 blue:50/255.0 alpha:1]}];
-    
     self.promptLab = [[UILabel alloc]initWithFrame:CGRectMake(10, 120, self.view.bounds.size.width-20, 35)];
     self.promptLab.text = @"该用户不存在";
     self.promptLab.textColor = [UIColor grayColor];
     self.promptLab.textAlignment = NSTextAlignmentCenter;
     [self.promptLab setFont:[UIFont systemFontOfSize:16]];
     [self.view addSubview:self.promptLab];
-    
-    
-    //    self.promptLab.hidden = YES;
-    self.contentView = [[UIView alloc]initWithFrame:CGRectMake(0, 64, self.view.bounds.size.width, self.view.bounds.size.height - 64)];
+    self.contentView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
     self.contentView.backgroundColor = [UIColor colorWithRed:242/255.0 green:242/255.0 blue:242/255.0 alpha:242/255.0];
     [self.view addSubview:self.contentView];
     
     self.titleView = [[FSSegmentTitleView alloc]initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), 45) titles:@[@"常用联系人",@"企业通讯录"] delegate:self indicatorType:FSIndicatorTypeDefault];
-    self.titleView.titleSelectFont = [UIFont systemFontOfSize:17];
+    self.titleView.titleFont =[UIFont systemFontOfSize:16];
+    self.titleView.titleSelectFont = [UIFont systemFontOfSize:16];
     self.titleView.indicatorColor = [UIColor colorWithRed:18/255.0 green:191/255.0 blue:195/255.0 alpha:1];
     self.titleView.backgroundColor = [UIColor whiteColor];
     self.titleView.selectIndex = 0;
@@ -100,28 +100,38 @@
     self.titleView.titleSelectColor = [UIColor colorWithRed:18/255.0 green:191/255.0 blue:195/255.0 alpha:1];
     
     [self.contentView addSubview:_titleView];
+    
+    UIView *separeteView = [[UIView alloc]initWithFrame:CGRectMake(0, 45, CGRectGetWidth(self.view.bounds), 10)];
+//    separeteView.backgroundColor = [UIColor colorWithRed:248.0/255 green:248.0/255 blue:249.0/255 alpha:1];
+    [self.contentView addSubview:separeteView];
+    
     [self searchTableView];
     [self searchBar];
-    //    self.contentView.hidden = YES;
-    
     NSMutableArray *childVCs = [[NSMutableArray alloc]init];
     for (NSString *title in @[@"常用联系人",@"企业通讯录"]) {
         MGChildViewController *vc = [[MGChildViewController alloc]init];
         vc.title = title;
         [childVCs addObject:vc];
     }
-    self.pageContentView = [[FSPageContentView alloc]initWithFrame:CGRectMake(0,45, CGRectGetWidth(self.view.bounds), self.contentView.bounds.size.height - 45) childVCs:childVCs parentVC:self delegate:self];
+    self.pageContentView = [[FSPageContentView alloc]initWithFrame:CGRectMake(0,55, CGRectGetWidth(self.view.bounds), self.contentView.bounds.size.height - 55) childVCs:childVCs parentVC:self delegate:self];
     self.pageContentView.contentViewCurrentIndex = 0;
     self.pageContentView.backgroundColor = [UIColor whiteColor];
     self.pageContentView.contentViewCanScroll = NO;//设置滑动属性
     [self.contentView addSubview:_pageContentView];
     
-    //搜索按钮
-    UIBarButtonItem *searchBtn = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(search)];
-    self.navigationItem.rightBarButtonItem = searchBtn;
-    //返回按钮
     UIBarButtonItem *leftBtn = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"back"] style:UIBarButtonItemStylePlain target:self action:@selector(back)];
     self.navigationItem.leftBarButtonItem = leftBtn;
+    
+    
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [btn setImage:[UIImage imageNamed:@"ic_search"] forState:UIControlStateNormal];
+    btn.frame= CGRectMake(0, 0, 40, 44);
+    [btn addTarget:self action:@selector(search) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *btn_right = [[UIBarButtonItem alloc] initWithCustomView:btn];
+    UIBarButtonItem *negativeSpacer = [[UIBarButtonItem alloc]   initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace   target:nil action:nil];
+    negativeSpacer.width = -5;
+    self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:negativeSpacer, btn_right, nil];
+    
     
     
 }
@@ -144,12 +154,12 @@
             _searchTableView.hidden = YES;
             _contentView.hidden = NO;//点击收回搜索框，显示原始数据
             [_searchBar resignFirstResponder];
-            _searchBar.frame = CGRectMake(0, 0,[UIScreen mainScreen].bounds.size.width , 40);
-            _contentView.frame = CGRectMake(0, 64, CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds) - 64);
+            _searchBar.frame = CGRectMake(0, -64,[UIScreen mainScreen].bounds.size.width , 40);
+            _contentView.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds));
             _showSearchbar = NO;
         }else{
-            _searchBar.frame = CGRectMake(0, 64,[UIScreen mainScreen].bounds.size.width , 40);
-            _contentView.frame = CGRectMake(0, 64+40, CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds) -64- 40);
+            _searchBar.frame = CGRectMake(0, 0,[UIScreen mainScreen].bounds.size.width , 40);
+            _contentView.frame = CGRectMake(0, 40, CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds) - 40);
             _showSearchbar = YES;
         }
     } completion:^(BOOL finished) {
@@ -165,7 +175,7 @@
     
     if (![searchText  isEqual: @""]) {
         //  执行搜索操作
-        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+//        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         NSDictionary *parameters = @{@"key": searchText};
         AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
         manager.responseSerializer = [AFJSONResponseSerializer serializer];
@@ -192,13 +202,11 @@
                         [self.testArray addObject:contact];
                     }
                 }
-                [MBProgressHUD hideHUDForView:self.view animated:YES];
+//                [MBProgressHUD hideHUDForView:self.view animated:YES];
                 [self.searchTableView reloadData];
             }
-            
-            
         }failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-            [MBProgressHUD hideHUDForView:self.view animated:YES];                NSLog(@"%@",error); //打印错误信息
+//            [MBProgressHUD hideHUDForView:self.view animated:YES];                NSLog(@"%@",error); //打印错误信息
         }];
     }else{
         _contentView.hidden = NO;
@@ -261,6 +269,7 @@
 {
     [super viewWillAppear:animated];
     self.tabBarController.tabBar.hidden = YES;
+    self.navigationController.swipeBackEnabled = YES;
 }
 
 

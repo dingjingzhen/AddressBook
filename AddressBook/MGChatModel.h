@@ -11,6 +11,7 @@
 @interface MGChatModel : NSObject
 
 @property (nonatomic,copy) NSString *msg;
+@property (nonatomic,copy) NSString *time;
 @property (nonatomic,assign) BOOL isRight;
 @property (nonatomic,copy) NSString *toAvatar;
 @property (nonatomic,copy) NSString *fromAvatar;

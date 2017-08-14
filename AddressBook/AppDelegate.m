@@ -22,7 +22,7 @@
     
 
    
-    //存储用户的信息到nsuserdefault
+//    存储用户的信息到nsuserdefault
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     [userDefaults setObject:@"597d4b3c7f2bf60245e2c113" forKey:@"contactId"];
     [userDefaults setObject:@"应用开发部" forKey:@"groupName"];
@@ -45,6 +45,7 @@
 //    [userDefaults setObject:@"1" forKey:@"tag1"];
 //    [userDefaults setObject:@"3" forKey:@"tag2"];
 //    [userDefaults setObject:@"1" forKey:@"tag3"];
+    [userDefaults setObject:@"1" forKey:@"haveNewMessage"];
     
 //    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
 //    [userDefaults setObject:@"597d4b3c7f2bf60245e2c11d" forKey:@"contactId"];
