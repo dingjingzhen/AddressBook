@@ -37,10 +37,7 @@
 @property (nonatomic,strong) NSMutableArray *nameArray;
 @property (nonatomic,strong) NSMutableArray *useridArray;
 @property (nonatomic,strong) NSMutableArray *headImageArray;
-//@property (nonatomic,strong) NSMutableArray *<#object#>;
-
-
-//{"groupId":NSArray<Contact *>};
+@property (nonatomic,strong)  NSMutableArray *testArray;
 @property (nonatomic, strong) NSMutableDictionary *contactDictionary;
 
 @property (nonatomic,strong) MGPeople *people;
@@ -62,7 +59,8 @@
     } success:^(NSURLSessionDataTask * _Nonnull task, id _Nullable responseObject) {
         NSArray *resultArr = [responseObject objectForKey:@"contact_list"];
         self.nomalContactArray = [NSMutableArray array];
-        
+        self.testArray = [NSMutableArray array];
+        self.testArray = [responseObject objectForKey:@"contact_list"];
         for (NSDictionary *dic in resultArr) {
             MGContact *contact = [MGContact contactWithDict:dic];
             if (contact) {
@@ -118,15 +116,12 @@
         [MBProgressHUD hideHUDForView:self.view animated:YES];
         NSLog(@"%@",error); //打印错误信息
     }];
-    
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     [self getDataofCommonContact];
     [self getDataofCompanyContact];
-    
     self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - 45 -70) style:UITableViewStylePlain];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -414,7 +409,6 @@
 
 //展开收缩cell
 -(void)buttonAction:(UIButton*)sender{
-    
     if ([_selectedArray[sender.tag - 1000] isEqualToString:@"0"]) {
         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         id groupId = objc_getAssociatedObject(sender, "groupId");

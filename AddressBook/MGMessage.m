@@ -18,6 +18,13 @@
         message.userId = dictionary[@"user_id"];
         message.userName = dictionary[@"user_name"];
         message.userAvatar = dictionary[@"user_avatar"];
+        
+        
+        
+        
+        
+        
+        
         return message;
     }
     return nil;

@@ -12,11 +12,13 @@
 #import "MGIndexViewController.h"
 #import <SwipeBack/SwipeBack.h>
 #import "MGBookshelfViewController.h"
+#import <MJRefresh.h>
 
 @interface MGIndexViewController ()<WKScriptMessageHandler,WKNavigationDelegate,WKUIDelegate,UIScrollViewDelegate>
 //webView
 @property(nonatomic,strong)WKWebView *webView;
 @property (nonatomic,strong) MBProgressHUD *hu;
+@property (nonatomic,strong) UILabel *label;
 @end
 
 @implementation MGIndexViewController
@@ -55,6 +57,13 @@
     [super viewDidLoad];
     self.tabBarController.tabBar.hidden = YES;
     [self creatWebView];
+    
+    _label =  [[UILabel alloc]initWithFrame:CGRectMake(0, 160, [UIScreen mainScreen].bounds.size.width, 30)];
+    _label.text = @"加载失败！请下拉刷新";
+    _label.textAlignment = NSTextAlignmentCenter;
+    [self.view addSubview:_label];
+    _label.hidden = YES;
+    
     UIBarButtonItem *leftBtn = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"back"] style:UIBarButtonItemStylePlain target:self action:@selector(goback)];
     self.navigationItem.leftBarButtonItem = leftBtn;
 }
@@ -64,7 +73,7 @@
 - (void)goback{
     if ([self.webView canGoBack]) {
         [self.webView goBack];
-        [self.webView reload];
+        //        [self.webView reload];
         NSLog(@"back");
     }else{
         [self.navigationController popViewControllerAnimated:YES];
@@ -91,6 +100,7 @@
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSString *myUserId = [userDefaults stringForKey:@"contactId"];
     NSString *urlStr = @"http://121.40.229.114/Contacts/page/index.html#/home/";
+    
     urlStr = [urlStr stringByAppendingString:self.userId];
     urlStr = [urlStr stringByAppendingString:@"/"];
     urlStr = [urlStr stringByAppendingString:myUserId];
@@ -100,16 +110,25 @@
     NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:60];
     // WKWebView加载请求
     [self.webView loadRequest:request];
-    
+    self.webView.allowsBackForwardNavigationGestures = YES;
     self.webView.scrollView.delegate = self;
+    // 增加拉刷新
+    self.webView.scrollView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+         [self.webView reload];
+        //        [self getDataofCompanyContact];
+        // 结束刷新
+        [self.webView.scrollView.mj_header endRefreshing];
+    }];
+    
     
     [self.view addSubview:self.webView];
     
     self.webView.navigationDelegate = self;
     self.webView.UIDelegate = self;
 }
-
-
+//-(void)onHeader{
+//    [self.webView reloadFromOrigin];
+//}
 - (IBAction)pushTo:(UIButton *)sender
 {
     [self.navigationController pushViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"SecondViewController"] animated:YES];
@@ -126,12 +145,10 @@
     else if ([keyPath isEqualToString:@"estimatedProgress"]){
         
     }
-    
     if (!self.webView.loading) {
         [UIView animateWithDuration:0.5 animations:^{
         }];
     }
-    
 }
 
 #pragma mark - WKScriptMessageHandler
@@ -158,7 +175,7 @@
                 MGBookshelfViewController *bVC = [storyboard instantiateViewControllerWithIdentifier:@"MGBookshelfViewController"];
                 bVC.mineOrhe = @"his";
                 bVC.contactId = self.userId;
-                bVC.navigationItem.title = @"Ta的分享";
+                bVC.navigationItem.title = @"TA的分享";
                 [self.navigationController pushViewController:bVC animated:YES];
                 
             }
@@ -194,12 +211,11 @@
     [_hu hideAnimated:YES];
 }
 // 页面加载失败时调用
-- (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(WKNavigation *)navigation
+- (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(null_unspecified WKNavigation *)navigation withError:(NSError *)error
 {
     [_hu hideAnimated:YES];
-    
+    _label.hidden = NO;
 }
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

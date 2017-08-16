@@ -57,7 +57,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-//    //这两行比加
+    self.view.backgroundColor = [UIColor whiteColor];
     UIImage *colorImage = [self imageWithColor:[UIColor colorWithRed:248.0/255 green:248.0/255 blue:249.0/255 alpha:1] size:CGSizeMake(self.view.frame.size.width, 0.5)];
     [self.navigationController.navigationBar setBackgroundImage:colorImage forBarMetrics:UIBarMetricsDefault];
     
@@ -181,7 +181,7 @@
         if (indexPath.section == 2) {
             
             MGAddressBookViewController *addressbookVC = [storyboard instantiateViewControllerWithIdentifier:@"MGAddressBookViewController"];
-            self.hidesBottomBarWhenPushed = YES;
+            [self.navigationController setNavigationBarHidden: YES animated: YES];
             [self.navigationController pushViewController:addressbookVC animated:YES];
             self.hidesBottomBarWhenPushed = NO;
         }else{
@@ -215,8 +215,9 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden: YES animated: YES];
     //    self.navigationController.navigationBarHidden = YES;
-    [self.navigationController setNavigationBarHidden:YES];
+//    [self.navigationController setNavigationBarHidden:YES];
     self.tabBarController.tabBar.hidden = NO;
 }
 

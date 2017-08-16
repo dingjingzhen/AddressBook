@@ -66,7 +66,9 @@
 
 
 - (void)viewDidLoad {
-//    [self addCommonContact];
+    
+    
+    self.view.backgroundColor = [UIColor whiteColor];
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     [userDefaults setObject:@"1" forKey:@"tag1"];
     [userDefaults setObject:@"3" forKey:@"tag2"];

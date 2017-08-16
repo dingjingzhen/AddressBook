@@ -49,10 +49,13 @@
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSString *userId ;
+    NSString *url;
     if ([self.mineOrhe isEqualToString: @"mine"]||[self.mineOrhe isEqualToString: @"my"]) {
         userId = [userDefaults stringForKey:@"contactId"];
+        url = @"http://121.40.229.114/Contacts/user/shelf";
     }else if([self.mineOrhe isEqualToString: @"his"]){
         userId = self.contactId;
+        url = @"http://121.40.229.114/Contacts/user/share";
     }
     
     NSDictionary *parameters1 = @{@"userId": userId,@"count":@"10"};
@@ -61,7 +64,7 @@
     // 申明请求的数据是json类型
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     //获取常用联系人
-    [manager GET:@"http://121.40.229.114/Contacts/user/shelf" parameters:parameters1 progress:^(NSProgress * _Nonnull downloadProgress) {
+    [manager GET:url parameters:parameters1 progress:^(NSProgress * _Nonnull downloadProgress) {
         manager.requestSerializer.timeoutInterval = 2;
         
         
@@ -116,6 +119,10 @@
 #pragma mark -- UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     //我的书库，点击进行分享
+    
+    UIAlertView *alertview = [[UIAlertView alloc] initWithTitle:nil message:@"分享成功！" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+    [alertview show];
+    [self.navigationController popViewControllerAnimated:YES];
     if ([self.mineOrhe  isEqualToString: @"mine"]) {
         NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
         NSString *userId = [userDefaults stringForKey:@"contactId"];
@@ -124,9 +131,7 @@
         AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
         manager.responseSerializer = [AFHTTPResponseSerializer serializer];
         [manager POST:@"http://121.40.229.114/Contacts/share/add" parameters:parameters1 progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-            UIAlertView *alertview = [[UIAlertView alloc] initWithTitle:nil message:@"分享成功！" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-            [alertview show];
-            [self.navigationController popViewControllerAnimated:YES];
+            
             
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             NSString *errorStr = [NSString stringWithFormat:@"%@",error];

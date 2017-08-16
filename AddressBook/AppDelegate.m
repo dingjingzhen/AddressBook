@@ -33,7 +33,8 @@
     [userDefaults setObject:@"1" forKey:@"tag1"];
     [userDefaults setObject:@"3" forKey:@"tag2"];
     [userDefaults setObject:@"1" forKey:@"tag3"];
-////
+    [userDefaults setObject:@"1" forKey:@"haveNewMessage"];
+//
 //    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
 //    [userDefaults setObject:@"597d517f7f2bf60245e2c136" forKey:@"contactId"];
 //    [userDefaults setObject:@"应用开发部" forKey:@"groupName"];
@@ -41,11 +42,11 @@
 //    [userDefaults setObject:@"5982c05eded72d600238a059" forKey:@"groupId"];
 //    [userDefaults setObject:@"Bad Boy" forKey:@"contact_account_name"];
 //    [userDefaults setObject:@"https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=2487013681,3283313649&fm=117&gp=0.jpg" forKey:@"contactAvatar"];
-//    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+////    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
 //    [userDefaults setObject:@"1" forKey:@"tag1"];
 //    [userDefaults setObject:@"3" forKey:@"tag2"];
 //    [userDefaults setObject:@"1" forKey:@"tag3"];
-    [userDefaults setObject:@"1" forKey:@"haveNewMessage"];
+//    [userDefaults setObject:@"1" forKey:@"haveNewMessage"];
     
 //    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
 //    [userDefaults setObject:@"597d4b3c7f2bf60245e2c11d" forKey:@"contactId"];
@@ -54,6 +55,33 @@
 //    [userDefaults setObject:@"5982c05eded72d600238a053" forKey:@"groupId"];
 //    [userDefaults setObject:@"Gloria Tang Tsz-Kei" forKey:@"contact_account_name"];
 //    [userDefaults setObject:@"http://imgcache.qq.com/music/photo/mid_singer_150/F/N/001fNHEf1SFEFN.jpg" forKey:@"contactAvatar"];
+    
+    
+    
+//        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+//        [userDefaults setObject:@"597d4b3c7f2bf60245e2c116" forKey:@"contactId"];
+//        [userDefaults setObject:@"应用开发部" forKey:@"groupName"];
+//        [userDefaults setObject:@"林俊杰" forKey:@"contactName"];
+//        [userDefaults setObject:@"597d44097f2bf60245e2c0d2" forKey:@"groupId"];
+//        [userDefaults setObject:@"JJ Lin" forKey:@"contact_account_name"];
+//        [userDefaults setObject:@"http://imgcache.qq.com/music/photo/mid_singer_150/e/2/001BLpXF2DyJe2.jpg" forKey:@"contactAvatar"];
+//        [userDefaults setObject:@"1" forKey:@"tag1"];
+//        [userDefaults setObject:@"3" forKey:@"tag2"];
+//        [userDefaults setObject:@"1" forKey:@"tag3"];
+//        [userDefaults setObject:@"1" forKey:@"haveNewMessage"];
+    
+//            NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+//            [userDefaults setObject:@"597d4b3c7f2bf60245e2c114" forKey:@"contactId"];
+//            [userDefaults setObject:@"应用开发部" forKey:@"groupName"];
+//            [userDefaults setObject:@"陈奕迅" forKey:@"contactName"];
+//            [userDefaults setObject:@"597d44097f2bf60245e2c0d2" forKey:@"groupId"];
+//            [userDefaults setObject:@"Eason Chan" forKey:@"contact_account_name"];
+//            [userDefaults setObject:@"http://imgcache.qq.com/music/photo/mid_singer_150/e/k/003Nz2So3XXYek.jpg" forKey:@"contactAvatar"];
+//            [userDefaults setObject:@"1" forKey:@"tag1"];
+//            [userDefaults setObject:@"3" forKey:@"tag2"];
+//            [userDefaults setObject:@"1" forKey:@"tag3"];
+//            [userDefaults setObject:@"1" forKey:@"haveNewMessage"];
+
     
     return YES;
 }

@@ -26,7 +26,7 @@
 @property (nonatomic,strong) NSMutableArray *messageCenter;
 @property (nonatomic,strong) NSMutableArray *messageCentertime;
 @property (weak, nonatomic) IBOutlet UITableView *messageTableview;
-
+//@property (nonatomic,copy) NSMutableArray *testArray;
 
 @end
 
@@ -54,29 +54,25 @@
     } success:^(NSURLSessionDataTask * _Nonnull task, id _Nullable responseObject) {
         NSArray *resultArr = [responseObject objectForKey:@"message_list"];
         self.messageArray = [NSMutableArray array];
-        
         for (NSDictionary *dic in resultArr) {
             MGMessage *message = [MGMessage messageWithDict:dic];
             if (message) {
                 [self.messageArray addObject:message];
             }
         }
-        
+        NSArray *sortDescriptors = [NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"messageTime" ascending:NO]];
+        [self.messageArray sortUsingDescriptors:sortDescriptors];
         [self.messageTableview reloadData];
         [MBProgressHUD hideHUDForView:self.view animated:YES];
-        
     }failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"%@",error); //打印错误信息
         [MBProgressHUD hideHUDForView:self.view animated:YES];
         
     }];
-    
 }
-
 
 - (void)viewDidLoad {
     [self initData];
-//    self.navigationController.navigationBar.hidden = NO;
     self.tabBarController.tabBar.hidden = YES;
     UIBarButtonItem *leftBtn = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"back"] style:UIBarButtonItemStylePlain target:self action:@selector(back)];
     self.navigationItem.leftBarButtonItem = leftBtn;
@@ -137,8 +133,8 @@
         cell.headImage.backgroundColor = [UIColor colorWithRed:0 green:196.0/255.0 blue:198.0/255.0 alpha:1];
         cell.commentLab.text = @"";
     }else{
-        NSInteger num = [self.messageArray count];
-        MGMessage *message = self.messageArray[num - 1 - indexPath.row];
+//        NSInteger num = [self.messageArray count];
+        MGMessage *message = self.messageArray[indexPath.row];
         NSString *imagePath = message.userAvatar;
         NSURL *imageUrl = [NSURL URLWithString:imagePath];
         [cell.headImage sd_setImageWithURL:imageUrl placeholderImage:[UIImage imageNamed:@"head"] options:SDWebImageCacheMemoryOnly];
@@ -184,8 +180,8 @@
         
         
         self.hidesBottomBarWhenPushed = YES;
-        NSInteger num = [self.messageArray count];
-        MGMessage *message = self.messageArray[num - 1 - indexPath.row];
+//        NSInteger num = [self.messageArray count];
+        MGMessage *message = self.messageArray[indexPath.row];
         DVC.userId = message.userId;
         DVC.row = indexPath.row;
         DVC.section = indexPath.section;
